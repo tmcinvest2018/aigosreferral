@@ -1,7 +1,6 @@
 import Typewriter from 'typewriter-effect';
 
-export default function Section9()
-{
+export default function Section9() {
     return (
         <>
             <section id="section9" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/15.jpg')]">
@@ -11,7 +10,7 @@ export default function Section9()
                         <h4 className="lead text-white font-bold">
                             <Typewriter
                                 options={{
-                                    strings: ["NULLAM"],
+                                    strings: ["ROADMAP 2024/2025"],
                                     autoStart: true,
                                     loop: true,
                                     pauseFor: 600000
@@ -23,7 +22,7 @@ export default function Section9()
                                 <li className="mb-10 ml-4">
                                     <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                     <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        4th Quarter 202X
+                                        2nd Quarter 2024
                                     </time>
                                     <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                                         Suspendisse dignissim felis eget varius rhoncus.<br/>
@@ -36,7 +35,7 @@ export default function Section9()
                                 <li className="mb-10 ml-4">
                                     <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                     <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        1st Quarter 202X
+                                        3rd Quarter 2024
                                     </time>
                                     <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                                         Quisque consectetur justo in pellentesque scelerisque. <br/>
@@ -47,10 +46,54 @@ export default function Section9()
                                 <li className="mb-10 ml-4">
                                     <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                     <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        2nd Quarter 202X
+                                        4th Quarter 2024
                                     </time>
                                     <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                                         Coming soon
+                                    </p>
+                                </li>
+                                <li className="mb-10 ml-4">
+                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
+                                        1st Quarter 2025
+                                    </time>
+                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                        Coming soon
+                                    </p>
+                                </li>
+                                <li className="mb-10 ml-4">
+                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
+                                        2nd Quarter 2025
+                                    </time>
+                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                        Suspendisse dignissim felis eget varius rhoncus.<br/>
+                                        Pellentesque posuere eleifend lobortis.<br/>
+                                        Pellentesque interdum euismod rutrum. <br/>
+                                        Donec suscipit felis ut justo aliquet, <br/>
+                                        eget egestas mauris imperdiet.
+                                    </p>
+                                </li>
+                                <li className="mb-10 ml-4">
+                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
+                                        3rd Quarter 2025
+                                    </time>
+                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                        Coming soon
+                                    </p>
+                                </li>
+                                <li className="mb-10 ml-4">
+                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
+                                        4th Quarter 2025
+                                    </time>
+                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                        Suspendisse dignissim felis eget varius rhoncus.<br/>
+                                        Pellentesque posuere eleifend lobortis.<br/>
+                                        Pellentesque interdum euismod rutrum. <br/>
+                                        Donec suscipit felis ut justo aliquet, <br/>
+                                        eget egestas mauris imperdiet.
                                     </p>
                                 </li>
                             </ol>

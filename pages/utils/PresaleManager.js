@@ -339,14 +339,14 @@ export default function PresaleManager()
                                             {
                                                 waitForTransactionIsLoading ? 'Investment in progress...'
                                                     : waitForTransactionUsdtAllowanceIsLoading ? 'Awaiting USDT Allowance...'
-                                                        : 'Buy Praiza'
+                                                        : 'Buy Aigos'
                                             }
                                         </button>
                                         {waitForTransactionIsSuccess && (
                                             <div>
                                                 Successfully invested in Praiza! Congratulations!
                                                 <div>
-                                                    <a href={`https://etherscan.io/tx/${usdtAllowanceData?.hash}`}>Etherscan</a>
+                                                    <a href={`https://bscscantestnet.io/tx/${usdtAllowanceData?.hash}`}>Bscscan</a>
                                                 </div>
                                             </div>
                                         )}

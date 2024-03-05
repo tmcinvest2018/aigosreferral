@@ -1,7 +1,7 @@
 // Rainbow and Wagmi integration guide: https://billyjitsu.hashnode.dev/the-rainbowkit-wagmi-guide-i-wish-i-had
 
 import '@rainbow-me/rainbowkit/styles.css';
-import { ledgerWallet, metaMaskWallet, walletConnectWallet, trustWallet, coinbaseWallet, rainbowWallet } from '@rainbow-me/rainbowkit/wallets';
+import { ledgerWallet, metaMaskWallet, walletConnectWallet, trustWallet, coinbaseWallet,  rainbowWallet } from '@rainbow-me/rainbowkit/wallets';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import
 {

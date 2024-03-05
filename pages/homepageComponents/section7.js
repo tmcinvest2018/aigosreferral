@@ -7,11 +7,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 const data = {
-    labels: ['Vault', 'Liquidity Pool', 'Seed Sale', 'Presale', 'Presale 2', 'Presale 3', 'Joint Venture', 'Marketing', 'Team', 'Staff'],
+    labels: ['Vault', 'Liquidity Pool', 'Presale', 'Joint Venture', 'Marketing', 'Team', 'Staff'],
     datasets: [
         {
             label: '%',
-            data: [51.01, 17.45, 1, 3, 11, 13, 1, 1.29, 1, 0.25],
+            data: [40, 15, 35, 2, 2, 3, 3],
             backgroundColor: [
                 'rgba(3,22,52)',
                 'rgba(3,54,73)',
@@ -46,14 +46,14 @@ export default function Section7()
 {
     return (
         <>
-            <section id="section7" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')]">
+            <section id="TOKENOMICS" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')]">
                 <div className="text-center">
                     <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-gradient-to-r from-neutral-900 rounded-lg">
                         <h2 className="text-white font-bold">Nulla posuere tempus</h2>
                         <h4 className="lead text-white font-bold">
                             <Typewriter
                                 options={{
-                                    strings: ["MAGNA A PORTA"],
+                                    strings: ["TOKEN DISTRIBUTION"],
                                     autoStart: true,
                                     loop: true,
                                     pauseFor: 600000
@@ -67,7 +67,7 @@ export default function Section7()
                         <h5 className="ml-[3%] bg-slate-300 text-black hover:bg-slate-400 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                             Tokenomics<br />
                         </h5>
-                        <h5 className="uppercase text-red-300 font-bold">Total supply: 1,000,000
+                        <h5 className="uppercase text-red-300 font-bold">Total supply: 1,000,000,000
                         </h5>
                         <div className="tokenomicsDiv">
                             <Doughnut
