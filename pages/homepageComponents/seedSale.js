@@ -241,14 +241,14 @@ export default function SeedSale()
             <div className="text-center">
                 <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-neutral-900 rounded-lg">
                     <h7 className="text-white font-bold">
-                        ✅ 1st Dec 2022 to sell out (or 31 Jan 2023)<br />
-                        Seed Sale
+                        ✅ 1st MAY 2024 to 8th Aug 2024<br />
+                        Presale
                     </h7>
                     <h4 className="text-white font-bold text-4xl">
                         1 Token = {presaleDataParsed?.price?.toFixed(4)}$
                     </h4>
                     <p className="text-white mb-4">
-                        Hurry and buy before seed sale sells out
+                        Hurry and buy to guarantee your Aigos allocation
                     </p>
                     {displayPresaleData}
                     <div className="flex place-items-center justify-around">

@@ -46,10 +46,10 @@ export default function Section7()
 {
     return (
         <>
-            <section id="TOKENOMICS" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')]">
+            <section id="section7" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')]">
                 <div className="text-center">
                     <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-gradient-to-r from-neutral-900 rounded-lg">
-                        <h2 className="text-white font-bold">Nulla posuere tempus</h2>
+                        <h2 className="text-white font-bold">Transparant overview</h2>
                         <h4 className="lead text-white font-bold">
                             <Typewriter
                                 options={{
@@ -61,8 +61,8 @@ export default function Section7()
                             />
                         </h4>
                         <p className="text-white mb-10">
-                            Maecenas condimentum leo nec enim scelerisque, vel pellentesque nulla efficitur.<br />
-                            Cras vel neque vitae ante convallis vehicula ut sit amet enim.
+                            For a more comprehensive description of Aigos tokenomics<br />
+                            please read our whitepaper and other documentation .
                         </p>
                         <h5 className="ml-[3%] bg-slate-300 text-black hover:bg-slate-400 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                             Tokenomics<br />

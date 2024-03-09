@@ -10,15 +10,15 @@ export default function Section4()
                     <div className="text-left">
                         <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-gradient-to-r from-neutral-900 rounded-lg">
                             <h3 className="text-white font-bold">
-                                🚀 Vestibulum venenatis vel elit  <br />
-                                non congue.
+                                🚀 6 Steps to buy in to  <br />
+                                AIGOS Presale.
                             </h3>
-                            <p className="text-white"><strong>1) </strong> Pellentesque dapibus</p>
-                            <p className="text-white"><strong>2) </strong> Luctus lacus et pharetra</p>
-                            <p className="text-white"><strong>3) </strong> Curabitur laoreet</p>
-                            <p className="text-white"><strong>4) </strong> Sagittis iaculis.</p>
-                            <p className="text-white"><strong>5) </strong> Donec feugiat nunc nec volutpat gravida.</p>
-                            <p className="text-white mb-5"><strong>6) </strong> Integer luctus orci sed sem</p>
+                            <p className="text-white"><strong>1) </strong> Connect Wallet</p>
+                            <p className="text-white"><strong>2) </strong> Click buy with USDT and Enter AIGOS amount to buy</p>
+                            <p className="text-white"><strong>3) </strong> Click convert USDT and approve in wallet</p>
+                            <p className="text-white"><strong>4) </strong> Click convert USDT again to spend USDT </p>
+                            <p className="text-white"><strong>5) </strong> AIGOS will be credited to wallet when Presale ends</p>
+                            <p className="text-white mb-5"><strong>6) </strong> So you have to sign 2 tx 1 is for approve and one for spend</p>
                         </div>
                     </div>
                     <SeedSale />

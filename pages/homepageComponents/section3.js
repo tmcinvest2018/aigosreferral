@@ -10,7 +10,7 @@ export default function Whitepaper()
 {
     return (
         <>
-            <section id="WhitePaper" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/13.jpg')]">
+            <section id="section3" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/13.jpg')]">
                 <div className="text-center">
                     <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-gradient-to-r from-neutral-900 rounded-lg">
                         <h2 className="text-white font-bold">🌍 WHITEPAPER</h2>
@@ -24,8 +24,8 @@ export default function Whitepaper()
                             />
                         </h4>
                         <p className="text-white mb-10"> Click the link below for documentation <br/>
-                        please note due to fast developments in blockchain <br/>
-                        documentation is or can be subject to change<br/>
+                        please note that due to fast developments in blockchain <br/>
+                        documentation can be subject to change at any time<br/>
                         for up to date inquiries please contact team</p>
                         <a href="/whitepaper/whitepaper.pdf"
                             target="_blank"
