@@ -62,10 +62,10 @@ export default function PresaleData()
                         <p>Sale Token: {this.saleToken}</p>
                         <p>startTime: {this.startTime.toLocaleString("default")}</p>
                         <p>endTime: {this.endTime.toLocaleString("default")}</p>
-                        <p>price: {this.price.toFixed(3)}$ per Aigos</p>
-                        <p>tokensToSell: {new Intl.NumberFormat().format(this.tokensToSell)} Aigos</p>
-                        <p>inSale: {new Intl.NumberFormat().format(this.inSale)} Aigos</p>
-                        <p>tokensSold: {new Intl.NumberFormat().format(this.tokensSold)} Aigos</p>
+                        <p>price: {this.price.toFixed(3)}$ per Token</p>
+                        <p>tokensToSell: {new Intl.NumberFormat().format(this.tokensToSell)} Token</p>
+                        <p>inSale: {new Intl.NumberFormat().format(this.inSale)} Token</p>
+                        <p>tokensSold: {new Intl.NumberFormat().format(this.tokensSold)} Token</p>
                         <p>presaleGoal: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(this.presaleGoal)} $</p>
                         <p>baseDecimals: {this.baseDecimals}</p>
                         <p>vestingStartTime: {this.vestingStartTime.toLocaleString("default")}</p>

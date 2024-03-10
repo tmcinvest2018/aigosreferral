@@ -14,7 +14,7 @@ export default function HomeSection()
             {/* PARALLAX ONE START */}
             <section id="home" className="flex items-center justify-center h-fit min-h-screen bg-fixed bg-center bg-cover bg-[url('/images/bg/16.jpg')]">
                 <div className="container mx-auto text-center mt-[100px] md:mt-0">
-                    <h5 className="uppercase text-white font-bold">The Cross Chain revolution EVM from/to Bitcoin</h5>
+                    <h5 className="uppercase text-white font-bold">Cross Chain revolution connecting EVM Bitcoin</h5>
                     <h2 className="uppercase lead text-white font-bold">AIGOS 2024 PRESALE</h2>
                     <p className="text-orange-500 font-bold">Price increases 15% every 10 DAYS</p><br />
                     <p className="text-white"><strong>✓</strong>ARTIFFICIAL INTELLIGENCE <strong>✓</strong> GAMING

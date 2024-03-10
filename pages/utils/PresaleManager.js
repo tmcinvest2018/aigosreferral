@@ -63,10 +63,10 @@ export default function PresaleManager()
                         <p>Sale Token: {this.saleToken}</p>
                         <p>startTime: {this.startTime.toLocaleString("default")}</p>
                         <p>endTime: {this.endTime.toLocaleString("default")}</p>
-                        <p>price: {this.price.toFixed(3)}$ per Aigos</p>
-                        <p>tokensToSell: {new Intl.NumberFormat().format(this.tokensToSell)}Aigos</p>
-                        <p>inSale: {new Intl.NumberFormat().format(this.inSale)} Aigos</p>
-                        <p>tokensSold: {new Intl.NumberFormat().format(this.tokensSold)}Aigos</p>
+                        <p>price: {this.price.toFixed(3)}$ per Token</p>
+                        <p>tokensToSell: {new Intl.NumberFormat().format(this.tokensToSell)}Token</p>
+                        <p>inSale: {new Intl.NumberFormat().format(this.inSale)} Token</p>
+                        <p>tokensSold: {new Intl.NumberFormat().format(this.tokensSold)}Token</p>
                         <p>presaleGoal: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(this.presaleGoal)} $</p>
                         <p>baseDecimals: {this.baseDecimals}</p>
                         <p>vestingStartTime: {this.vestingStartTime.toLocaleString("default")}</p>
@@ -107,8 +107,8 @@ export default function PresaleManager()
             {
                 return (
                     <>
-                        <p>totalAmount: {new Intl.NumberFormat().format(this.totalAmount)} Aigos</p>
-                        <p>claimedAmount: {new Intl.NumberFormat().format(this.claimedAmount)} Aigos</p>
+                        <p>totalAmount: {new Intl.NumberFormat().format(this.totalAmount)} Token</p>
+                        <p>claimedAmount: {new Intl.NumberFormat().format(this.claimedAmount)} Token</p>
                         <p>claimStart: {this.claimStart.toLocaleString("default")}</p>
                         <p>claimEnd: {this.claimEnd.toLocaleString("default")}</p>
                     </>
@@ -316,7 +316,7 @@ export default function PresaleManager()
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="chooseUsContent home_page3">
-                                    <h3 className="magenta normal">Purchase Aigos Pre-Sale Tokens:</h3>
+                                    <h3 className="magenta normal">Purchase Aigos PreSale Token:</h3>
                                     <form
                                         onSubmit={(e) =>
                                         {
@@ -326,10 +326,10 @@ export default function PresaleManager()
                                             else
                                                 usdtAllowanceWrite?.()
                                         }}>
-                                        <label for="tokenId">Amount of Aigos Tokens</label>
+                                        <label for="tokenId">Amount of Token</label>
                                         <input
                                             type="number"
-                                            placeholder="Amount of Aigos Tokens"
+                                            placeholder="Amount of Token"
                                             className="exchange__textBox"
                                             value={tokens}
                                             onChange={(e) => setTokens(e.target.value)}
@@ -339,7 +339,7 @@ export default function PresaleManager()
                                             {
                                                 waitForTransactionIsLoading ? 'Investment in progress...'
                                                     : waitForTransactionUsdtAllowanceIsLoading ? 'Awaiting USDT Allowance...'
-                                                        : 'Buy Aigos'
+                                                        : 'Buy Token'
                                             }
                                         </button>
                                         {waitForTransactionIsSuccess && (

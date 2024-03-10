@@ -44,13 +44,13 @@ export default function Footer()
                                 <a href="https://twitter.com/xtmcswap/" className="hover:underline"><FontAwesomeIcon icon={faTwitter} className="mr-2" /> Twitter</a>
                             </li>
                             <li className="mb-4">
-                                <a href="https://github.com/tmcinvest2018" className="hover:underline"><FontAwesomeIcon icon={faGithub} className="mr-2" /> Github</a>
+                                <a href="https://aigos.gitbook.io/untitled/" className="hover:underline"><FontAwesomeIcon icon={faGithub} className="mr-2" /> Gitbook</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div className="py-6 px-4 bg-neutral-900 md:flex md:items-center md:justify-between">
-                    <span className="text-sm text-gray-300 sm:text-center">© 2024 <a href="#">AIRACER</a>. All Rights Reserved.
+                    <span className="text-sm text-gray-300 sm:text-center">© 2024 <a href="#">X-MAN</a>. All Rights Reserved.
                     </span>
                     <div className="flex mt-4 space-x-6 sm:justify-center md:mt-0">
                         <a href="https://t.me/Otje86" className="text-gray-400 hover:text-white">
@@ -65,9 +65,9 @@ export default function Footer()
                             <FontAwesomeIcon icon={faTwitter} className="mr-2" />
                             <span className="sr-only">Twitter page</span>
                         </a>
-                        <a href="https://github.com/tmcinvest2018" className="text-gray-400 hover:text-white">
+                        <a href="https://aigos.gitbook.io/untitled/" className="text-gray-400 hover:text-white">
                             <FontAwesomeIcon icon={faGithub} className="mr-2" />
-                            <span className="sr-only">Github page</span>
+                            <span className="sr-only">Gitbook page</span>
                         </a>
                     </div>
                 </div>

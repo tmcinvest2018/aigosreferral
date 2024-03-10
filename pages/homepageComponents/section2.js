@@ -27,7 +27,7 @@ export default function Section2()
                         <a href="https://t.me/Otje86"
                             target="_blank"
                             className="bg-slate-300 text-black hover:bg-red-600 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                            <span>PERSONAL GUIDANCE ASK ON TELEGRAM <FontAwesomeIcon icon={faTelegram} className="ml-2" /></span>
+                            <span>TELEGRAM SUPPORT <FontAwesomeIcon icon={faTelegram} className="ml-2" /></span>
                         </a>
                     </div>
                 </div>

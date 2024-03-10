@@ -27,10 +27,10 @@ export default function Whitepaper()
                         please note that due to fast developments in blockchain <br/>
                         documentation can be subject to change at any time<br/>
                         for up to date inquiries please contact team</p>
-                        <a href="/whitepaper/whitepaper.pdf"
+                        <a href="https://aigos.gitbook.io/untitled/whitepaper"
                             target="_blank"
                             className="bg-slate-300 text-black hover:bg-red-600 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                            <span>WHITEPAPER DOWNLOAD <FontAwesomeIcon icon={faCircleDown} className="ml-2" /></span>
+                            <span>WHITEPAPER<FontAwesomeIcon icon={faCircleDown} className="ml-2" /></span>
                         </a>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ export default function Section5()
                             Comprehensive guides and detailed tokenomics and whitpaper. <br/>
                             Details about the ongoing Aigos Presale .
                         </p>
-                        <a href="/whitepaper/whitepaper.pdf"
+                        <a href="https://aigos.gitbook.io/untitled/"
                             target="_blank"
                             className="bg-slate-300 text-black hover:bg-red-600 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                             <span>DOCS<FontAwesomeIcon icon={faCircleDown} className="ml-2" /></span>
