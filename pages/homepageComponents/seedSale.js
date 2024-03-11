@@ -59,7 +59,7 @@ export default function SeedSale()
                                     <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
                                 </g>
                             </svg>
-                            <div class="pl-4 text-sm font-normal">You own already {new Intl.NumberFormat().format(this.totalAmount)}Token<br />
+                            <div class="pl-4 text-sm font-normal">You own already {new Intl.NumberFormat().format(this.totalAmount)} Aigos<br />
                                 You're still on time to buy more!</div>
                         </div>
                     </>

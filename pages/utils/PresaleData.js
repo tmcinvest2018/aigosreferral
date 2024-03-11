@@ -1,7 +1,6 @@
 // Rainbow and Wagmi integration guide: https://billyjitsu.hashnode.dev/the-rainbowkit-wagmi-guide-i-wish-i-had
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import
-{
+import {
     useAccount,
     useContractRead,
     useContractWrite,
@@ -10,14 +9,14 @@ import
 } from "wagmi";
 import { useState, useEffect } from "react";
 
-export default function PresaleData()
-{
+export default function PresaleData() {
+    const [presaleDataParsed, setPresaleDataParsed] = useState({});
+
     /**
      * @fn Log
      * @brief Log to console
      */
-    function Log(stringToLog)
-    {
+    function Log(stringToLog) {
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
         console.log(today.toUTCString() + " | " + stringToLog);
@@ -27,13 +26,10 @@ export default function PresaleData()
     * @class Presale
     * @brief Presale Data
     */
-    class Presale
-    {
-        constructor(presaleData)
-        {
+    class Presale {
+        constructor(presaleData) {
             this.preSaleDataLocal = presaleData;
-            if (this.preSaleDataLocal)
-            {
+            if (this.preSaleDataLocal) {
                 var presaleSplit = presaleData.toString().split(",");
                 var counter = 0;
                 this.saleToken = presaleSplit[counter++];
@@ -53,10 +49,8 @@ export default function PresaleData()
             }
         }
 
-        get HtmlOutput()
-        {
-            if (this.preSaleDataLocal)
-            {
+        get HtmlOutput() {
+            if (this.preSaleDataLocal) {
                 return (
                     <>
                         <p>Sale Token: {this.saleToken}</p>
@@ -75,23 +69,20 @@ export default function PresaleData()
                         <p>enableBuyWithUsdt: {this.enableBuyWithUsdt.toString()}</p>
                     </>
                 )
-            }
-            else return (<></>);
+            } else return (<></>);
         }
     }
 
-    /*!
-    * @fn printPresaleData
-    * @brief Print Presale Data
-    */
-    function printPresaleData(presaleData)
-    {
+    /**
+     * @fn printPresaleData
+     * @brief Print Presale Data
+     */
+    function printPresaleData(presaleData) {
         var preSale = new Presale(presaleData);
         setPresaleDataParsed(preSale.HtmlOutput);
     }
 
     /* Presale Data */
-    const [presaleDataParsed, setPresaleDataParsed] = useState(0);
     const { data: presaleData,
         error: presaleDataError,
         isError: presaleIsError,
@@ -108,22 +99,23 @@ export default function PresaleData()
 
 
     /* Wallet Connected / Disconnected */
-    useEffect(() =>
-    {
+    useEffect(() => {
         Log("----------> presaleData: " + presaleData);
         Log("----------> presaleDataError: " + presaleDataError);
         Log("----------> presaleIsError: " + presaleIsError);
         Log("----------> presaleIsLoading: " + presaleIsLoading);
         Log("----------> presaleStatus: " + presaleStatus);
-        printPresaleData(presaleData);
+
+        if (presaleData) {
+            printPresaleData(presaleData);
+        }
     }, [presaleData, presaleDataError, presaleIsError, presaleIsLoading, presaleStatus]);
 
-    const renderContent = () =>
-    {
+    const renderContent = () => {
         return (
             <>
-                <h3 classNames="magenta normal">Presale Data:</h3>
-                <p>{presaleDataParsed}</p>
+                <h3 className="magenta normal">Presale Data:</h3>
+                <div>{presaleDataParsed}</div>
             </>
         );
     };
