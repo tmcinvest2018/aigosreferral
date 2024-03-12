@@ -1,4 +1,4 @@
-> 📜 Presale Dapp
+📜 Presale Dapp
 
 - [🤝 Need help for deployment?](#-need-help-for-deployment)
 - [🔎 Purpose](#-purpose)
@@ -27,4 +27,3 @@ In this specific example the smart contract has been deployed on Binance Smart C
 
 # 👓 Demo
 👉 [Click here for Demo](https://presale-dapp-six.vercel.app/)
-
