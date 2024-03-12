@@ -17,7 +17,7 @@ export default function Whitepaper()
                         <h4 className="lead text-white font-bold">
                             <Typewriter
                                 options={{
-                                    strings: ["AIGOS.", "A.I.", "GAMING", " OMNICHAIN"],
+                                    strings: ["AIGOS", "AI", "GAMING", " OMNICHAIN"],
                                     autoStart: true,
                                     loop: true,
                                 }}

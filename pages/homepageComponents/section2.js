@@ -18,7 +18,7 @@ export default function Section2()
                         <h5 className="uppercase text-white font-bold">CHECK OUT OUR YOUTUBE TUTORIAL</h5>
                         <div className="flex items-center justify-center mb-6 mt-5">
                         <iframe className="md:w-[350px] md:h-[350px] h-[250px] w-[250px]"
-                            src="https://www.youtube.com/embed/hP-Zpm7FeVk?rel=0"
+                            src="https://youtube.com/embed/0XSY4LVEIcc?rel=0"
                             title="AIGOS INVEST IN OMNICHAIN DEFI"
                             frame ="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
