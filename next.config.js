@@ -1,15 +1,16 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  env: {
-    NEXT_PUBLIC_ALCHEMY_ID: process.env.NEXT_PUBLIC_ALCHEMY_ID,
-    NEXT_PUBLIC_CONTRACT_ADDRESS: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-    NEXT_PUBLIC_PRESALE_ID: process.env.NEXT_PUBLIC_PRESALE_ID,
-    NEXT_PUBLIC_CHAIN_ID: process.env.NEXT_PUBLIC_CHAIN_ID,
-    NEXT_PUBLIC_CONTRACT_ABI: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-    NEXT_PUBLIC_STABLE_COIN_CONTRACT_ABI: process.env.NEXT_PUBLIC_STABLE_COIN_CONTRACT_ABI,
+  webpack(config, { dev, isServer }) {
+    // Use a suitable devtool configuration for development mode
+    if (dev) {
+      config.devtool = 'source-map'; // or any other suitable devtool option
+    }
+
+    // Add any other webpack configurations here if needed
+
+    return config;
   },
-  // Other configurations...
 };
 
 module.exports = nextConfig;
