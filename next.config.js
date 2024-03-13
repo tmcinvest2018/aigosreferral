@@ -1,7 +1,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  target: 'serverless', // Assuming you're deploying to a serverless environment
+  target: 'server', // Assuming you're deploying to a serverless environment
   env: {
     NEXT_PUBLIC_ALCHEMY_ID: process.env.NEXT_PUBLIC_ALCHEMY_ID,
     NEXT_PUBLIC_CONTRACT_ADDRESS: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
