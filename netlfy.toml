@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "npm run buildapp"
 [build.environment]
 NEXT_PUBLIC_ALCHEMY_ID= 'yVrqSHhrKjXZizuAoGbbaiHLA_YDW7TV'
 NEXT_PUBLIC_CONTRACT_ADDRESS = "0x33B6f94577747E7a859B5b66fB042c76BEe3A3CD"
