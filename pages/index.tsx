@@ -1,8 +1,8 @@
 import Menu from "./homepageComponents/menu.js";
 import HomeSection from "./homepageComponents/home.js";
-import Section4 from "./homepageComponents/section4.js";
 import Section2 from "./homepageComponents/section2.js";
 import Section3 from "./homepageComponents/section3.js";
+import Section4 from "./homepageComponents/section4.js";
 import Section5 from "./homepageComponents/section5.js";
 import Section6 from "./homepageComponents/section6.js";
 import Section7 from "./homepageComponents/section7.js";
@@ -24,9 +24,9 @@ export default function Home()
       <Menu />
       <main>
         <HomeSection />
-        <Section4 />
         <Section2 />
         <Section3 />
+        <Section4 />
         <Section5 />
         <Section6 />        
         <Section7 />
