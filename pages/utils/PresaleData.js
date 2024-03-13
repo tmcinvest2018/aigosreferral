@@ -1,4 +1,3 @@
-// Rainbow and Wagmi integration guide: https://billyjitsu.hashnode.dev/the-rainbowkit-wagmi-guide-i-wish-i-had
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
     useAccount,
@@ -10,7 +9,7 @@ import {
 import { useState, useEffect } from "react";
 
 export default function PresaleData() {
-    const [presaleDataParsed, setPresaleDataParsed] = useState({});
+    const [presaleDataParsed, setPresaleDataParsed] = useState(null);
 
     /**
      * @fn Log
@@ -22,10 +21,38 @@ export default function PresaleData() {
         console.log(today.toUTCString() + " | " + stringToLog);
     }
 
+    /* Presale Data */
+    const { data: presaleData,
+        error: presaleDataError,
+        isError: presaleIsError,
+        isLoading: presaleIsLoading,
+        status: presaleStatus } = useContractRead({
+            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
+            abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
+            functionName: "presale",
+            args: [process.env.NEXT_PUBLIC_PRESALE_ID],
+            watch: false,
+        });
+
+    /* Wallet Connected / Disconnected */
+    useEffect(() => {
+        Log("----------> Pre-render: Initializing...");
+
+        Log("----------> presaleData: " + presaleData);
+        Log("----------> presaleDataError: " + presaleDataError);
+        Log("----------> presaleIsError: " + presaleIsError);
+        Log("----------> presaleIsLoading: " + presaleIsLoading);
+        Log("----------> presaleStatus: " + presaleStatus);
+
+        if (presaleData) {
+            printPresaleData(presaleData);
+        }
+    }, [presaleData, presaleDataError, presaleIsError, presaleIsLoading, presaleStatus]);
+
     /**
-    * @class Presale
-    * @brief Presale Data
-    */
+     * @class Presale
+     * @brief Presale Data
+     */
     class Presale {
         constructor(presaleData) {
             this.preSaleDataLocal = presaleData;
@@ -81,35 +108,6 @@ export default function PresaleData() {
         var preSale = new Presale(presaleData);
         setPresaleDataParsed(preSale.HtmlOutput);
     }
-
-    /* Presale Data */
-    const { data: presaleData,
-        error: presaleDataError,
-        isError: presaleIsError,
-        isLoading: presaleIsLoading,
-        status: presaleStatus } = useContractRead({
-            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-            abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-            functionName: "presale",
-            args: [process.env.NEXT_PUBLIC_PRESALE_ID],
-            watch: false,
-        });
-
-    /* ------------------- */
-
-
-    /* Wallet Connected / Disconnected */
-    useEffect(() => {
-        Log("----------> presaleData: " + presaleData);
-        Log("----------> presaleDataError: " + presaleDataError);
-        Log("----------> presaleIsError: " + presaleIsError);
-        Log("----------> presaleIsLoading: " + presaleIsLoading);
-        Log("----------> presaleStatus: " + presaleStatus);
-
-        if (presaleData) {
-            printPresaleData(presaleData);
-        }
-    }, [presaleData, presaleDataError, presaleIsError, presaleIsLoading, presaleStatus]);
 
     const renderContent = () => {
         return (
