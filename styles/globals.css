@@ -223,3 +223,42 @@ blockquote p {
     line-height: 28px;
   }
 }
+/* Your existing CSS styles */
+
+/* Additional styles for countdown clock */
+.countdown-container {
+  margin-top: 10px; /* Adjust margin for countdown container */
+}
+
+.countdown-box {
+  background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
+  color: white;
+  padding: 20px; /* Increase padding */
+  border-radius: 5px;
+  width: fit-content; /* Adjust width to fit content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown-text {
+  font-size: 18px; /* Adjust font size */
+  margin-bottom: 5px; /* Adjust margin */
+}
+
+.countdown-clock {
+  display: flex;
+  justify-content: space-between;
+  width: 350px; /* Adjust width of the countdown clock */
+}
+
+.countdown-clock div {
+  text-align: center;
+  width: 90px; /* Fixed width for each countdown element */
+}
+
+.countdown-label {
+  font-size: 12px; /* Adjust font size */
+  text-transform: uppercase;
+}
