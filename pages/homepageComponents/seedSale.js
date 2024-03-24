@@ -353,7 +353,7 @@ export default function SeedSale() {
                             <p>Referral Dashboard</p>
                         <div className="text-center-white pl-4 text-sm font-normal">
                             <p>Your referral link is:</p>
-                            <p>http://localhost:3000/?ref={referralLink}</p>
+                            <p>http://aigos.app/?ref={referralLink}</p>
                             <p>You already have {referralCount} referrals</p>
                             <p>You already have {earnedRewards} rewards</p>
                         </div>
