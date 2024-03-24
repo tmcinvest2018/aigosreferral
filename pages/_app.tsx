@@ -1,5 +1,4 @@
-// Rainbow and Wagmi integration guide: https://billyjitsu.hashnode.dev/the-rainbowkit-wagmi-guide-i-wish-i-had
-
+import { appWithTranslation } from 'next-i18next';
 import '@rainbow-me/rainbowkit/styles.css';
 import {  ledgerWallet, metaMaskWallet, walletConnectWallet, trustWallet, coinbaseWallet,  rainbowWallet } from '@rainbow-me/rainbowkit/wallets';
 import { connectorsForWallets, lightTheme } from '@rainbow-me/rainbowkit';
@@ -54,6 +53,7 @@ const connectors = connectorsForWallets([
       metaMaskWallet({ chains }),
       ledgerWallet({ chains }),
       trustWallet({ chains }),
+      
     ],
   },
   {
@@ -78,9 +78,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 import type { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }: AppProps)
-{
-
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider coolMode chains={chains} theme={darkTheme(
@@ -97,3 +95,5 @@ export default function App({ Component, pageProps }: AppProps)
     </WagmiConfig>
   );
 }
+
+export default appWithTranslation(MyApp);

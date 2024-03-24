@@ -11,7 +11,7 @@ export default function Menu()
                 className="px-2 sm:px-4 py-2.5 bg-gradient-to-b from-neutral-900 to-neutral-800 fixed w-full z-20 top-0 left-0 border-b border-neutral-200 border-neutral-600"
             >
                 <Navbar.Brand href="#">
-                <img src="/images/logo1.png" style={{ width: '3.5rem' }} className="mr-3" alt="AIGOS LOGO" />
+                <img src="/images/logo1.png" style={{ width: '3.5rem' }} className="mr-2" alt="AIGOS LOGO" />
                 </Navbar.Brand>
                 <div className="flex md:order-2">
                     <a href="#section4">
