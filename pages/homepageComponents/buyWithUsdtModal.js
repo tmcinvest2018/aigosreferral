@@ -13,9 +13,12 @@ import
   useWaitForTransaction,
 } from "wagmi";
 
+
 const BuyWithUsdtModal = () =>
 {
   const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
+  
+
 
   /**
    * @fn Log

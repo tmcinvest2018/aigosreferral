@@ -11,47 +11,35 @@ import React from 'react';
 import BuyWithUsdtModal from "./buyWithUsdtModal";
 import axios from 'axios';
 
-export default function SeedSale() {
-    const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
-    const [referralLink, setReferralLink] = useState('');
-    const [referralCount, setReferralCount] = useState(0);
-    const [earnedRewards, setEarnedRewards] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const initialReferralData = {
-        referral_link: '',
-        referral_count: 0,
-        rewards: 0
-    };
     
+    export default function SeedSale({ usdtValue, waitForTransactionIsSuccess }) {
+        const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
+        const [loading, setLoading] = useState(true);
+        const [referralData, setReferralData] = useState({
+            referral_link: '',
+            referral_count: 0,
+            rewards: 0
+        });
+        
         useEffect(() => {
-            fetchData();
-        }, []);
-    
+            if (useAccountAddress) {
+                fetchData();
+            }
+        }, [useAccountAddress]);
+
         const fetchData = async () => {
             try {
-                // Fetch referral data from the server
+                const referralLink = `http://aigos.app/?ref=${useAccountAddress}`;
                 const response = await axios.get(`/.netlify/functions/referralData`, {
                     headers: {
-                        'useaccountadress': useAccountAddress
+                        'useaccountadress': referralLink // Use the generated referral link as the header value
                     }
                 });
                 const data = response.data;
-    
                 if (data) {
-                    setReferralLink(data.referral_link);
-                    setReferralCount(data.referral_count);
-                    setEarnedRewards(data.rewards);
+                    setReferralData(data);
                 } else {
-                    // If referral data doesn't exist, generate new referral link and save
-                    const generatedReferralLink = `/.netlify/functions/?ref=${useAccountAddress}`;
-                    setReferralLink(generatedReferralLink);
-                    setReferralCount(0);
-                    setEarnedRewards(0);
-                    await saveReferralData({
-                        referral_link: generatedReferralLink,
-                        referral_count: 0,
-                        rewards: 0
-                    });
+                    generateReferralData();
                 }
                 setLoading(false);
             } catch (error) {
@@ -59,19 +47,32 @@ export default function SeedSale() {
                 setLoading(false);
             }
         };
-    
+        
+        const generateReferralData = async () => {
+            try {
+                const generatedReferralLink = `http://aigos.app/?ref=${useAccountAddress}`;
+                const newData = {
+                    referral_link: generatedReferralLink,
+                    referral_count: 0,
+                    rewards: 0
+                };
+                setReferralData(newData);
+                await saveReferralData(newData);
+            } catch (error) {
+                console.error('Error generating referral data:', error);
+            }
+        };
+        
         const saveReferralData = async (newData) => {
             try {
-                // Save referral data to the server
-                const response = await axios.put( `/.netlify/functions/updateReferralData`, newData, {
+                const generatedReferralLink = `http://aigos.app/?ref=${useAccountAddress}`;
+                const response = await axios.put('/.netlify/functions/updateReferralData', newData, {
                     headers: {
-                        'useaccountadress': useAccountAddress
+                        'useaccountadress': generatedReferralLink // Use the generated referral link as the header value
                     }
                 });
                 if (response.status === 200) {
-                    setReferralLink(newData.referral_link);
-                    setReferralCount(newData.referral_count);
-                    setEarnedRewards(newData.rewards);
+                    console.log('Referral data saved successfully');
                 } else {
                     console.error('Error updating data:', response.statusText);
                 }
@@ -79,41 +80,35 @@ export default function SeedSale() {
                 console.error('Error updating data:', error);
             }
         };
-    
+
+        
         useEffect(() => {
-            // Check if the user landed on the app with a referral link
             const landingURL = window.location.href;
-            const urlParams = new URLSearchParams(landingURL);
-            const referralLinkParam = urlParams.get('referrallink');
-    
+            const referralLinkParam = landingURL; // Pass the whole URL
             if (referralLinkParam) {
-                // If user landed with a referral link, update referral data for the referrer
-                const earnedRewards = 5; // Fixed reward for the referrer
-                updateReferralData(referralLinkParam, earnedRewards);
-            } else {
-                // If no referral link parameter found, simply update user's referral data
-                saveReferralData({
-                    referral_link: referralLink, // Use the generated referral link
-                    referral_count: referralCount, // No change in count
-                    rewards: earnedRewards // No change in rewards
-                });
+                updateReferralData(referralLinkParam);
             }
-        }, [referralLink, referralCount, earnedRewards]);
-    
-        const updateReferralData = async (referralLinkParam, earnedRewards) => {
+        }, []);
+        
+        const updateReferralData = async (referrerLink) => {
             try {
-                // Update referral data for the referrer
-                const response = await axios.put(`/.netlify/functions//updateReferralData`, {
-                    referral_link: referralLinkParam,
-                    rewards: earnedRewards,
-                    referral_count: referralCount + 1
+                const referralReward = calculateReferralReward(); // Calculate referral reward
+                const updatedRewards = earnedRewards + referralReward;
+                const updatedCount = referralCount + 1;
+        
+                const response = await axios.put(`/.netlify/functions/updateReferralData`, newData, {
+                    referral_link: referrerLink,
+                    rewards: updatedRewards,
+                    referral_count: updatedCount
                 }, {
                     headers: {
-                        'useaccountadress': referralLinkParam
+                        'useaccountadress': referrerLink
                     }
                 });
+        
                 if (response.status === 200) {
-                    // Handle success if needed
+                    setEarnedRewards(updatedRewards); // Update earned rewards
+                    setReferralCount(updatedCount); // Update referral count
                 } else {
                     console.error('Error updating data:', response.statusText);
                 }
@@ -121,7 +116,15 @@ export default function SeedSale() {
                 console.error('Error updating data:', error);
             }
         };
-            
+        
+        const calculateReferralReward = () => {
+            // Assuming usdtValue and waitForTransactionIsSuccess come from the child component
+            const referralReward = usdtValue * 0.05; // Calculate referral reward
+            return waitForTransactionIsSuccess ? referralReward : 0;
+        };
+        
+
+
     
     /**
      * @fn Log
@@ -347,19 +350,16 @@ export default function SeedSale() {
                     <div className="flex place-items-center justify-around">
                         <ConnectButton />
                     </div>
-                    
-                    <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xl text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
-                    <div className="text-center-white pl-4 text-xl font-normal"></div>
-                            <p>Referral Dashboard</p>
+                    <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xs text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
                         <div className="text-center-white pl-4 text-sm font-normal">
-                            <p>Your referral link is:</p>
-                            <p>http://aigos.app/?ref={referralLink}</p>
-                            <p>You already have {referralCount} referrals</p>
-                            <p>You already have {earnedRewards} rewards</p>
+                        <p>Your referral link is:</p>
+                         <p>{referralData.referral_link}</p>
+                        <p>Referral Count: {referralData.referral_count}</p>
+                        <p>Earned Rewards: ${referralData.rewards}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </>
     )
-}
+    }
