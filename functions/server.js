@@ -57,7 +57,7 @@ function createServerAndStart() {
             console.log('Incoming request:', req.url, req.method);
 
             // Handle GET request for user's referral data
-            if (req.url.startsWith('/functions/referralData') && req.method === 'GET') {
+            if (req.url.startsWith('/.netlify/functions/referralData') && req.method === 'GET') {
                 const useAccountAddress = req.headers['useaccountadress']; // Retrieve account address from headers
                 if (useAccountAddress) {
                     // Fetch or create referral data for the user
@@ -71,7 +71,7 @@ function createServerAndStart() {
                 }
             } 
             // Handle PUT request to update referral data
-            else if (req.url === '/functions/updateReferralData' && req.method === 'PUT') {
+            else if (req.url === '/.netlify/functions/updateReferralData' && req.method === 'PUT') {
                 let body = '';
                 req.on('data', (chunk) => {
                     body += chunk.toString();
