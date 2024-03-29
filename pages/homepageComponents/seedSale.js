@@ -352,6 +352,7 @@ import axios from 'axios';
                     </div>
                     <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xs text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
                         <div className="text-center-white pl-4 text-sm font-normal">
+                        <p>Referral Dashboard</p>
                         <p>Your referral link is:</p>
                          <p>{referralData.referral_link}</p>
                         <p>Referral Count: {referralData.referral_count}</p>
