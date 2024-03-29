@@ -393,7 +393,7 @@ export default function PresaleManager()
 
     return (
         <>
-        <SeedSale setUsdt={usdtValue} waitForTransactionIsSuccess={waitForTransactionIsSuccess} />
+        <SeedSale usdt={usdt} waitForTransactionIsSuccess={waitForTransactionIsSuccess} />
             {renderContent()}
         </>
     )

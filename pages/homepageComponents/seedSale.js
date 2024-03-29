@@ -12,7 +12,7 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
 import axios from 'axios';
 
     
-    export default function SeedSale({setUsdt, waitForTransactionIsSuccess}) {
+    export default function SeedSale({usdt, waitForTransactionIsSuccess}) {
         const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
         const [loading, setLoading] = useState(true);
         const [referralData, setReferralData] = useState({
@@ -118,8 +118,8 @@ import axios from 'axios';
         };
         
         const calculateReferralReward = () => {
-            // Assuming usdtValue and waitForTransactionIsSuccess come from the child component
-            const referralReward = setUsdt * 0.05; // Calculate referral reward
+            // Assuming usdt and waitForTransactionIsSuccess come from the child component
+            const referralReward = usdt * 0.05; // Calculate referral reward
             return waitForTransactionIsSuccess ? referralReward : 0;
         };
         
