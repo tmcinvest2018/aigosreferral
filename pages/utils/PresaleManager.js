@@ -8,7 +8,7 @@ import
     useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import SeedSale from './SeedSale'; // Adjust the path according to the actual location of SeedSale.js
+import SeedSale from '../homepageComponents/SeedSale';
 
 export default function PresaleManager()
 {
