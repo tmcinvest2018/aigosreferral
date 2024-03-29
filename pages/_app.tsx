@@ -1,4 +1,3 @@
-import { appWithTranslation } from 'next-i18next';
 import '@rainbow-me/rainbowkit/styles.css';
 import {  ledgerWallet, metaMaskWallet, walletConnectWallet, trustWallet, coinbaseWallet,  rainbowWallet } from '@rainbow-me/rainbowkit/wallets';
 import { connectorsForWallets, lightTheme } from '@rainbow-me/rainbowkit';
@@ -78,7 +77,9 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 import type { AppProps } from 'next/app'
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps)
+{
+
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider coolMode chains={chains} theme={darkTheme(
@@ -95,5 +96,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </WagmiConfig>
   );
 }
-
-export default appWithTranslation(MyApp);
