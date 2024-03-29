@@ -8,7 +8,7 @@ import
     useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import SeedSale from '../homepageComponents/SeedSale';
+import SeedSale from '../homepageComponents/seedSale';
 
 export default function PresaleManager()
 {
