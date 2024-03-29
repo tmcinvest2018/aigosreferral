@@ -12,7 +12,7 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
 import axios from 'axios';
 
     
-    export default function SeedSale() {
+    export default function SeedSale({usdtValue, waitForTransactionIsSuccess}) {
         const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
         const [loading, setLoading] = useState(true);
         const [referralData, setReferralData] = useState({
