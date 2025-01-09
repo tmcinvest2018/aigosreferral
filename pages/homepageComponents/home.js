@@ -5,7 +5,7 @@ import { faTelegram } from "@fortawesome/free-brands-svg-icons";
 
 // Function to calculate the time remaining until the presale starts
 const calculateTimeLeft = () => {
-    const targetDate = new Date('2024-05-01');
+    const targetDate = new Date('2025-05-01');
     const currentDate = new Date();
     const difference = targetDate.getTime() - currentDate.getTime();
 
