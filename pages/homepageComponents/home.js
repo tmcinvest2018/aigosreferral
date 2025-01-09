@@ -55,7 +55,7 @@ export default function HomeSection() {
                 </h4>
                 <div className="countdown-container flex justify-center">
                     <div className="countdown-box">
-                        <p className="countdown-text">Presale starts on 1st May 2024</p>
+                        <p className="countdown-text">Presale starts on 1st May 2025</p>
                         <div className="countdown-clock">
                             <div>{days} <span className="countdown-label">Days</span></div>
                             <div>{hours} <span className="countdown-label">Hours</span></div>
