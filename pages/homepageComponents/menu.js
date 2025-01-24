@@ -7,7 +7,7 @@ export default function Menu() {
             <Navbar
                 fluid={true}
                 rounded={true}
-                className="px-4 sm:px-6 lg:px-8 py-3 bg-gradient-to-b from-neutral-900 to-neutral-800 fixed w-full z-20 top-0 left-0 border-b border-neutral-700 shadow-lg"
+                className="px-4 sm:px-6 lg:px-8 py-2.5 bg-gradient-to-b from-neutral-900 to-neutral-800 fixed w-full z-20 top-0 left-0 border-b border-neutral-700 shadow-lg"
             >
                 {/* Brand Logo */}
                 <Navbar.Brand href="#">
@@ -25,7 +25,7 @@ export default function Menu() {
                 </div>
 
                 {/* Navbar Links */}
-                <Navbar.Collapse className="flex flex-col p-4 mt-4 rounded-lg border border-neutral-700 md:flex-row md:space-x-6 md:mt-0 md:text-sm md:font-medium md:border-0 bg-neutral-900 md:bg-transparent">
+                <Navbar.Collapse className="flex flex-col p-4 mt-4 rounded-lg border border-neutral-700 md:flex-row md:space-x-6 md:mt-0 md:text-sm md:font-medium md:border-0 bg-neutral-900 md:bg-transparent max-h-[70vh] overflow-y-auto md:max-h-none md:overflow-y-visible">
                     <Navbar.Link
                         href="#home"
                         className="uppercase block py-2 px-4 text-white rounded hover:bg-neutral-700 md:hover:bg-transparent md:hover:text-red-500 md:p-0 transition-colors duration-300"
