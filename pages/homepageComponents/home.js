@@ -40,10 +40,15 @@ export default function HomeSection() {
     const { days, hours, minutes, seconds } = formatTime(timeLeft);
 
     return (
-        <section id="home" className="flex items-center justify-center h-screen bg-fixed bg-center bg-cover bg-[url('/images/bg/16.jpg')]">
-            <div className="container mx-auto text-center">
-                <h5 className="uppercase text-white font-bold">Cross Chain revolution connecting EVM and Bitcoin</h5>
-                <h4 className="lead text-white font-bold">
+        <section id="home" className="flex items-center justify-center h-screen bg-fixed bg-center bg-cover bg-[url('/images/bg/16.jpg')] relative overflow-hidden">
+            {/* Overlay for better readability */}
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+            <div className="container mx-auto text-center relative z-10 px-4">
+                <h5 className="uppercase text-white font-semibold text-lg md:text-xl mb-4 tracking-wider">
+                    Cross Chain revolution connecting EVM and Bitcoin
+                </h5>
+                <h4 className="text-white font-bold text-4xl md:text-5xl mb-8">
                     <Typewriter
                         options={{
                             strings: ["AIGOS", "PRESALE"],
@@ -53,24 +58,55 @@ export default function HomeSection() {
                         }}
                     />
                 </h4>
-                <div className="countdown-container flex justify-center">
-                    <div className="countdown-box">
-                        <p className="countdown-text">Presale starts on 1st May 2025</p>
-                        <div className="countdown-clock">
-                            <div>{days} <span className="countdown-label">Days</span></div>
-                            <div>{hours} <span className="countdown-label">Hours</span></div>
-                            <div>{minutes} <span className="countdown-label">Minutes</span></div>
-                            <div>{seconds} <span className="countdown-label">Seconds</span></div>
+
+                {/* Countdown Section */}
+                <div className="countdown-container bg-white/10 backdrop-blur-md rounded-lg p-6 inline-block">
+                    <p className="text-white text-sm mb-4">Presale starts on 1st May 2025</p>
+                    <div className="countdown-clock grid grid-cols-4 gap-4">
+                        <div className="text-center">
+                            <span className="text-3xl font-bold text-white">{days}</span>
+                            <span className="block text-sm text-white/80">Days</span>
+                        </div>
+                        <div className="text-center">
+                            <span className="text-3xl font-bold text-white">{hours}</span>
+                            <span className="block text-sm text-white/80">Hours</span>
+                        </div>
+                        <div className="text-center">
+                            <span className="text-3xl font-bold text-white">{minutes}</span>
+                            <span className="block text-sm text-white/80">Minutes</span>
+                        </div>
+                        <div className="text-center">
+                            <span className="text-3xl font-bold text-white">{seconds}</span>
+                            <span className="block text-sm text-white/80">Seconds</span>
                         </div>
                     </div>
                 </div>
-                <p className="text-orange-500 font-bold">Price increases 15% every 10 DAYS</p><br />
-                <p className="text-white"><strong>✓</strong> ARTIFICIAL INTELLIGENCE <strong>✓</strong> GAMING
-                    <strong>✓</strong> CROSS CHAIN SWAPS <strong>✓</strong> BITCOIN TO EVM SWAPS <strong>✓</strong> OMNICHAIN STAKING
-                    <strong>✓</strong> MUCH MORE</p>
-                <br />
-                <a href="https://t.me/Otje86" target="_blank" rel="noopener noreferrer" className="bg-neutral-900 text-white hover:bg-red-600 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                    <span>Join our telegram <FontAwesomeIcon icon={faTelegram} className="ml-2"/></span>
+
+                {/* Price Increase Notice */}
+                <p className="text-orange-400 font-semibold text-lg mt-8 animate-pulse">
+                    Price increases 15% every 10 DAYS
+                </p>
+
+                {/* Features List */}
+                <div className="mt-8 space-y-2">
+                    <p className="text-white text-lg">
+                        <strong className="text-green-400">✓</strong> ARTIFICIAL INTELLIGENCE{" "}
+                        <strong className="text-green-400">✓</strong> GAMING{" "}
+                        <strong className="text-green-400">✓</strong> CROSS CHAIN SWAPS{" "}
+                        <strong className="text-green-400">✓</strong> BITCOIN TO EVM SWAPS{" "}
+                        <strong className="text-green-400">✓</strong> OMNICHAIN STAKING{" "}
+                        <strong className="text-green-400">✓</strong> MUCH MORE
+                    </p>
+                </div>
+
+                {/* Telegram Button */}
+                <a
+                    href="https://t.me/Otje86"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                    <span>Join our telegram <FontAwesomeIcon icon={faTelegram} className="ml-2" /></span>
                 </a>
             </div>
         </section>
