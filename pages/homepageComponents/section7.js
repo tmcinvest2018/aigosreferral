@@ -1,10 +1,8 @@
-// Import the FontAwesomeIcon component
 import Typewriter from 'typewriter-effect';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
 
 const data = {
     labels: ['Vault', 'Liquidity Pool', 'Presale', 'Joint Venture', 'Marketing', 'Team', 'Staff'],
@@ -42,15 +40,17 @@ const data = {
     ],
 };
 
-export default function Section7()
-{
+export default function Section7() {
     return (
         <>
-            <section id="section7" className="flex place-items-center justify-around min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')]">
-                <div className="text-center">
-                    <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-gradient-to-r from-neutral-900 rounded-lg">
-                        <h2 className="text-white font-bold">Transparant overview</h2>
-                        <h4 className="lead text-white font-bold">
+            <section id="section7" className="flex items-center justify-center min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')] relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+                <div className="text-center relative z-10">
+                    <div className="box-cont h-fit w-fit max-w-[90%] mx-auto px-8 sm:px-14 py-8 shadow-lg bg-gradient-to-r from-neutral-900/90 to-neutral-800/90 rounded-xl border border-neutral-700">
+                        <h2 className="text-white font-bold text-3xl md:text-4xl mb-4">
+                            Transparent Overview
+                        </h2>
+                        <h4 className="text-white font-bold text-xl md:text-2xl mb-6">
                             <Typewriter
                                 options={{
                                     strings: ["TOKEN DISTRIBUTION"],
@@ -60,14 +60,15 @@ export default function Section7()
                                 }}
                             />
                         </h4>
-                        <p className="text-white mb-10">
+                        <p className="text-white text-sm md:text-base mb-8 max-w-[600px] mx-auto">
                             For a more comprehensive description of Aigos tokenomics<br />
-                            please read our whitepaper and other documentation .
+                            please read our whitepaper and other documentation.
                         </p>
-                        <h5 className="ml-[3%] bg-slate-300 text-black hover:bg-slate-400 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                            Tokenomics<br />
+                        <h5 className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mb-6">
+                            Tokenomics
                         </h5>
-                        <h5 className="uppercase text-red-300 font-bold">Total supply: 1,000,000,000
+                        <h5 className="uppercase text-red-300 font-bold text-lg md:text-xl mb-8">
+                            Total supply: 1,000,000,000
                         </h5>
                         <div className="tokenomicsDiv">
                             <Doughnut
@@ -95,5 +96,5 @@ export default function Section7()
                 </div>
             </section>
         </>
-    )
+    );
 }
