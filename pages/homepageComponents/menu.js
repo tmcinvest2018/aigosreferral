@@ -14,24 +14,15 @@ export default function Menu() {
                     <img src="/images/logo1.png" style={{ width: '2.5rem' }} className="mr-2 hover:opacity-80 transition-opacity" alt="AIGOS LOGO" />
                 </Navbar.Brand>
 
-                {/* Join Presale Button (Desktop) */}
-                <div className="hidden md:flex md:order-2 md:ml-auto">
+                {/* Join Presale Button and Menu Button */}
+                <div className="flex gap-2 order-2">
+                    {/* Join Presale Button */}
                     <a href="#section4">
                         <Button className="text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-4 py-2 text-center transition-all duration-300 hover:scale-105">
                             JOIN PRESALE
                         </Button>
                     </a>
-                </div>
-
-                {/* Mobile Menu Button and Join Presale Button */}
-                <div className="flex md:hidden md:order-2 gap-2">
-                    {/* Join Presale Button (Mobile) */}
-                    <a href="#section4">
-                        <Button className="text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-4 py-2 text-center transition-all duration-300 hover:scale-105">
-                            JOIN PRESALE
-                        </Button>
-                    </a>
-                    {/* Mobile Menu Button */}
+                    {/* Menu Button */}
                     <Navbar.Toggle />
                 </div>
 
