@@ -1,131 +1,15 @@
 import {
     useAccount,
     useContractRead,
-    useContractWrite,
-    usePrepareContractWrite,
-    useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
 import BuyWithUsdtModal from "./buyWithUsdtModal";
-import axios from 'axios';
 
-    
-    export default function SeedSale({usdt, waitForTransactionIsSuccess}) {
-        const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
-        const [loading, setLoading] = useState(true);
-        const [referralData, setReferralData] = useState({
-            referral_link: '',
-            referral_count: 0,
-            rewards: 0
-        });
-        
-        useEffect(() => {
-            if (useAccountAddress) {
-                fetchData();
-            }
-        }, [useAccountAddress]);
+export default function SeedSale({ usdt, waitForTransactionIsSuccess }) {
+    const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount();
 
-        const fetchData = async () => {
-            try {
-                const referralLink = `http://aigos.app/?ref=${useAccountAddress}`;
-                const response = await axios.get(`/.netlify/functions/referralData`, {
-                    headers: {
-                        'useaccountadress': referralLink // Use the generated referral link as the header value
-                    }
-                });
-                const data = response.data;
-                if (data) {
-                    setReferralData(data);
-                } else {
-                    generateReferralData();
-                }
-                setLoading(false);
-            } catch (error) {
-                console.error('Error reading referral data:', error);
-                setLoading(false);
-            }
-        };
-        
-        const generateReferralData = async () => {
-            try {
-                const generatedReferralLink = `http://aigos.app/?ref=${useAccountAddress}`;
-                const newData = {
-                    referral_link: generatedReferralLink,
-                    referral_count: 0,
-                    rewards: 0
-                };
-                setReferralData(newData);
-                await saveReferralData(newData);
-            } catch (error) {
-                console.error('Error generating referral data:', error);
-            }
-        };
-        
-        const saveReferralData = async (newData) => {
-            try {
-                const generatedReferralLink = `http://aigos.app/?ref=${useAccountAddress}`;
-                const response = await axios.put('/.netlify/functions/updateReferralData', newData, {
-                    headers: {
-                        'useaccountadress': generatedReferralLink // Use the generated referral link as the header value
-                    }
-                });
-                if (response.status === 200) {
-                    console.log('Referral data saved successfully');
-                } else {
-                    console.error('Error updating data:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error updating data:', error);
-            }
-        };
-
-        
-        useEffect(() => {
-            const landingURL = window.location.href;
-            const referralLinkParam = landingURL; // Pass the whole URL
-            if (referralLinkParam) {
-                updateReferralData(referralLinkParam);
-            }
-        }, []);
-        
-        const updateReferralData = async (referrerLink) => {
-            try {
-                const referralReward = calculateReferralReward(); // Calculate referral reward
-                const updatedRewards = earnedRewards + referralReward;
-                const updatedCount = referralCount + 1;
-        
-                const response = await axios.put(`/.netlify/functions/updateReferralData`, newData, {
-                    referral_link: referrerLink,
-                    rewards: updatedRewards,
-                    referral_count: updatedCount
-                }, {
-                    headers: {
-                        'useaccountadress': referrerLink
-                    }
-                });
-        
-                if (response.status === 200) {
-                    setEarnedRewards(updatedRewards); // Update earned rewards
-                    setReferralCount(updatedCount); // Update referral count
-                } else {
-                    console.error('Error updating data:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error updating data:', error);
-            }
-        };
-        
-        const calculateReferralReward = () => {
-            // Assuming usdt and waitForTransactionIsSuccess come from the child component
-            const referralReward = usdt * 0.05; // Calculate referral reward
-            return waitForTransactionIsSuccess ? referralReward : 0;
-        };
-        
-
-
-    
     /**
      * @fn Log
      * @brief Log to console
@@ -333,7 +217,7 @@ import axios from 'axios';
             <div className="text-center">
                 <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-neutral-900 rounded-lg">
                     <h7 className="text-white font-bold">
-                        ✅ 1st MAY 2024 to 8th Aug 2024<br />
+                        ✅ 1st MAY 2025 to 8th Aug 2025<br />
                         Presale
                     </h7>
                     <h4 className="text-white font-bold text-4xl">
@@ -350,17 +234,8 @@ import axios from 'axios';
                     <div className="flex place-items-center justify-around">
                         <ConnectButton />
                     </div>
-                    <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xl text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
-                        <div className="text-center-white pl-4 text-sm font-normal">
-                        <p>Referral Dashboard</p>
-                        <p>Your referral link is:</p>
-                         <p>{referralData.referral_link}</p>
-                        <p>Referral Count: {referralData.referral_count}</p>
-                        <p>Earned Rewards: ${referralData.rewards}</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </>
     )
-    }
+}
