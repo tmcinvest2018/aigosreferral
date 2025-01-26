@@ -1,15 +1,22 @@
 import {
     useAccount,
     useContractRead,
+    useContractWrite,
+    usePrepareContractWrite,
+    useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
 import BuyWithUsdtModal from "./buyWithUsdtModal";
 
-export default function SeedSale() {
-    const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount();
 
+    
+    export default function SeedSale() {
+        const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
+        
+       
+    
     /**
      * @fn Log
      * @brief Log to console
@@ -234,8 +241,17 @@ export default function SeedSale() {
                     <div className="flex place-items-center justify-around">
                         <ConnectButton />
                     </div>
+                    <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xl text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
+                        <div className="text-center-white pl-4 text-sm font-normal">
+                        <p>Referral Dashboard</p>
+                        <p>Your referral link is:</p>
+                         <p>{referralData.referral_link}</p>
+                        <p>Referral Count: {referralData.referral_count}</p>
+                        <p>Earned Rewards: ${referralData.rewards}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
     )
-}
+    }
