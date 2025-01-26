@@ -7,7 +7,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
 import BuyWithUsdtModal from "./buyWithUsdtModal";
 
-export default function SeedSale({ usdt, waitForTransactionIsSuccess }) {
+export default function SeedSale() {
     const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount();
 
     /**
@@ -217,7 +217,7 @@ export default function SeedSale({ usdt, waitForTransactionIsSuccess }) {
             <div className="text-center">
                 <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-neutral-900 rounded-lg">
                     <h7 className="text-white font-bold">
-                        ✅ 1st MAY 2025 to 8th Aug 2025<br />
+                        ✅ 1st MAY 2024 to 8th Aug 2024<br />
                         Presale
                     </h7>
                     <h4 className="text-white font-bold text-4xl">
