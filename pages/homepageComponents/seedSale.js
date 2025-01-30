@@ -9,11 +9,6 @@ import { useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
 import BuyWithUsdtModal from "./buyWithUsdtModal";
-//added eth handling
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEthereum } from "@fortawesome/free-brands-svg-icons";
-import BuyWithEthModal from "./buyWithEthModal";
-
     
     export default function SeedSale({usdt, waitForTransactionIsSuccess}) {
         const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
