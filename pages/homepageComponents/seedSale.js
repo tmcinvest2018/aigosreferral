@@ -20,15 +20,22 @@ export default function SeedSale() {
         console.log(today.toUTCString() + " | " + stringToLog);
     }
 
-    class UserVesting {
+   class UserVesting {
         constructor(userVestingData) {
             this.userVestingDataLocal = userVestingData;
-            if (userVestingData) {
-                const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData; // Destructuring
-                this.totalAmount = totalAmount / (10 ** 18);
-                this.claimedAmount = claimedAmount;
-                this.claimStart = new Date(claimStart * 1000);
-                this.claimEnd = new Date(claimEnd * 1000);
+            this.totalAmount = 0; // Initialize to default values
+            this.claimedAmount = 0;
+            this.claimStart = null;
+            this.claimEnd = null;
+
+            if (userVestingData && Array.isArray(userVestingData) && userVestingData.length === 4) {  // Check if data exists and is a valid array
+                const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
+                this.totalAmount = Number(totalAmount) / (10 ** 18); // Convert to number and handle potential errors
+                this.claimedAmount = Number(claimedAmount);
+                this.claimStart = new Date(Number(claimStart) * 1000); // Convert to number and handle potential errors
+                this.claimEnd = new Date(Number(claimEnd) * 1000); // Convert to number and handle potential errors
+            } else {
+              console.error("Invalid userVestingData:", userVestingData);
             }
         }
 
@@ -53,9 +60,7 @@ export default function SeedSale() {
     }
 
     const [userVestingInstance, setUserVestingInstance] = useState(null);
-    const [presaleDataParsed, setPresaleDataParsed] = useState(null);
 
-    /* User Vesting */
     const { data: userVestingData } = useContractRead({
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
         abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
@@ -72,7 +77,7 @@ export default function SeedSale() {
             setUserVestingInstance(null);
         }
     }, [userVestingData]);
-
+    
     /**
     * @class Presale
     * @brief Presale Data
