@@ -1,4 +1,5 @@
-import {
+import
+{
     useAccount,
     useContractRead,
     useContractWrite,
@@ -9,29 +10,33 @@ import { useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
 import BuyWithUsdtModal from "./buyWithUsdtModal";
-    
-    export default function SeedSale({usdt, waitForTransactionIsSuccess}) {
-        const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
-        const [loading, setLoading] = useState(true);
-    
+
+export default function SeedSale()
+{
+    const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
+
     /**
      * @fn Log
      * @brief Log to console
      */
-    function Log(stringToLog) {
+    function Log(stringToLog)
+    {
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
         console.log(today.toUTCString() + " | " + stringToLog);
     }
 
     /**
-     * @class UserVesting
-     * @brief User Vesting Data
-     */
-    class UserVesting {
-        constructor(userVestingData) {
+* @class UserVesting
+* @brief User Vesting Data
+*/
+    class UserVesting
+    {
+        constructor(userVestingData)
+        {
             this.userVestingDataLocal = userVestingData;
-            if (userVestingData) {
+            if (userVestingData)
+            {
                 var userVestingSplit = userVestingData.toString().split(",");
                 var counter = 0;
                 this.totalAmount = userVestingSplit[counter++] / (10 ** 18);
@@ -41,31 +46,35 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
             }
         }
 
-        get HtmlOutput() {
-            if (this.userVestingDataLocal) {
+        get HtmlOutput()
+        {
+            if (this.userVestingDataLocal)
+            {
                 return (
                     <>
-                        <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xs text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
+                        <div id="toast-simple" class="flex justify-center items-center p-4 space-x-4 w-full max-w-xs text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
                             <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
                                 <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#FFFFFF" stroke="none">
-                                    <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c-135 0 -281 -4 -325 -8z" />
+                                    <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
                                     <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
                                 </g>
                             </svg>
-                            <div className="pl-4 text-sm font-normal">You own already {new Intl.NumberFormat().format(this.totalAmount)} Aigos<br />
+                            <div class="pl-4 text-sm font-normal">You own already {new Intl.NumberFormat().format(this.totalAmount)} Token<br />
                                 You're still on time to buy more!</div>
                         </div>
                     </>
                 )
             }
-            else {
+            else
+            {
                 return (<></>);
             }
         }
     }
 
     /* User Vesting */
-    const { data: userVestingData } = useContractRead({
+    const { data: userVestingData
+    } = useContractRead({
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
         abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
         functionName: "userVesting",
@@ -74,13 +83,16 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
     });
 
     /**
-     * @class Presale
-     * @brief Presale Data
-     */
-    class Presale {
-        constructor(presaleData) {
+    * @class Presale
+    * @brief Presale Data
+    */
+    class Presale
+    {
+        constructor(presaleData)
+        {
             this.preSaleDataLocal = presaleData;
-            if (this.preSaleDataLocal) {
+            if (this.preSaleDataLocal)
+            {
                 var presaleSplit = presaleData.toString().split(",");
                 var counter = 0;
                 this.saleToken = presaleSplit[counter++];
@@ -107,8 +119,10 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
             }
         }
 
-        get HtmlOutput() {
-            if (this.preSaleDataLocal) {
+        get HtmlOutput()
+        {
+            if (this.preSaleDataLocal)
+            {
                 return (
                     <>
                         <p>Sale Token: {this.saleToken}</p>
@@ -133,10 +147,11 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
     }
 
     /*!
-     * @fn printPresaleData
-     * @brief Print Presale Data
-     */
-    function printPresaleData(presaleData) {
+    * @fn printPresaleData
+    * @brief Print Presale Data
+    */
+    function printPresaleData(presaleData)
+    {
         var preSale = new Presale(presaleData);
         setPresaleDataParsed(preSale);
     }
@@ -157,8 +172,10 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
 
     /* ------------------- */
 
+
     /* Presale Data */
-    useEffect(() => {
+    useEffect(() =>
+    {
         Log("----------> presaleData: " + presaleData);
         Log("----------> presaleDataError: " + presaleDataError);
         Log("----------> presaleIsError: " + presaleIsError);
@@ -171,8 +188,10 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
     const [displayPresaleData, setDisplayPresaleData] = useState(0);
     const [displayBuyData, setBuyData] = useState(0);
     const [displayUserVestingData, setDisplayUserVestingData] = useState(0);
-    useEffect(() => {
-        if (!useAccountAddress) {
+    useEffect(() =>
+    {
+        if (!useAccountAddress)
+        {
             setDisplayPresaleData(
                 <>
                     <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 mb-3">
@@ -196,7 +215,8 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
             setBuyData("");
             setDisplayUserVestingData("");
         }
-        else {
+        else
+        {
             setDisplayPresaleData("");
             var userVesting = new UserVesting(userVestingData);
             setDisplayUserVestingData(userVesting.HtmlOutput);
@@ -204,7 +224,7 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
                 <div className="flex items-center justify-center mb-6 mt-5">
                     <svg className="animate-bounce w-16 h-16" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
                         <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#FFFFFF" stroke="none">
-                            <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c-135 0 -281 -4 -325 -8z" />
+                            <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
                             <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
                         </g>
                     </svg>
@@ -221,14 +241,14 @@ import BuyWithUsdtModal from "./buyWithUsdtModal";
             <div className="text-center">
                 <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-neutral-900 rounded-lg">
                     <h7 className="text-white font-bold">
-                        ✅ 1st MAY 2024 to 8th Aug 2024<br />
-                        Presale
+                        ✅ 1st May 2024 to sell out (or 31 Jan 2023)<br />
+                        Seed Sale
                     </h7>
                     <h4 className="text-white font-bold text-4xl">
                         1 Token = {presaleDataParsed?.price?.toFixed(4)}$
                     </h4>
                     <p className="text-white mb-4">
-                        Hurry and buy to guarantee your Aigos allocation
+                        Hurry and buy before seed sale sells out
                     </p>
                     {displayPresaleData}
                     <div className="flex place-items-center justify-around">
