@@ -167,7 +167,7 @@ export default function SeedSale()
             abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
             functionName: "presale",
             args: [process.env.NEXT_PUBLIC_PRESALE_ID],
-            watch: false,
+            watch: true,
         });
 
     /* ------------------- */
