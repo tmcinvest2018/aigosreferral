@@ -244,3 +244,9 @@ export default function SeedSale() {
 
             <div className="flex justify-center">
                 <ConnectButton />
+                 </div>
+                </div>
+            </div>
+        </>
+    )
+}
