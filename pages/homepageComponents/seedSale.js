@@ -1,5 +1,4 @@
-import
-{
+import {
     useAccount,
     useContractRead,
     useContractWrite,
@@ -20,77 +19,58 @@ export default function SeedSale() {
         console.log(today.toUTCString() + " | " + stringToLog);
     }
 
-   class UserVesting {
+    class UserVesting {
         constructor(userVestingData) {
             this.userVestingDataLocal = userVestingData;
-            this.totalAmount = 0; // Initialize to default values
+            this.totalAmount = 0;
             this.claimedAmount = 0;
             this.claimStart = null;
             this.claimEnd = null;
 
-            if (userVestingData && Array.isArray(userVestingData) && userVestingData.length === 4) {  // Check if data exists and is a valid array
+            if (userVestingData && Array.isArray(userVestingData) && userVestingData.length === 4) {
                 const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
-                this.totalAmount = Number(totalAmount) / (10 ** 18); // Convert to number and handle potential errors
+                this.totalAmount = Number(totalAmount) / (10 ** 18);
                 this.claimedAmount = Number(claimedAmount);
-                this.claimStart = new Date(Number(claimStart) * 1000); // Convert to number and handle potential errors
-                this.claimEnd = new Date(Number(claimEnd) * 1000); // Convert to number and handle potential errors
+                this.claimStart = new Date(Number(claimStart) * 1000);
+                this.claimEnd = new Date(Number(claimEnd) * 1000);
             } else {
-              console.error("Invalid userVestingData:", userVestingData);
+                console.error("Invalid userVestingData:", userVestingData);
             }
         }
 
         get HtmlOutput() {
             if (this.userVestingDataLocal) {
                 return (
-                    <div id="toast-simple" className="flex justify-center items-center p-4 space-x-4 w-full max-w-xs text-white bg-neutral-800 rounded-lg divide-x divide-gray-200 shadow space-x" role="alert">
-                        <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
-                            <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#FFFFFF" stroke="none">
-                                <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                                <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
-                            </g>
-                        </svg>
-                        <div className="pl-4 text-sm font-normal">You own already {new Intl.NumberFormat().format(this.totalAmount)} Token<br />
-                            You're still on time to buy more!</div>
+                    <div className="flex items-center p-4 space-x-4 w-full text-white bg-black/40 rounded-lg shadow-lg backdrop-blur-sm border border-white/10 transform hover:scale-105 transition-all duration-300">
+                        <div className="bg-red-600/20 p-2 rounded-full">
+                            <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet">
+                                <g transform="translate(0,240) scale(0.1,-0.1)" fill="currentColor">
+                                    <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
+                                    <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
+                                </g>
+                            </svg>
+                        </div>
+                        <div className="flex-1">
+                            <p className="font-semibold text-lg">
+                                {new Intl.NumberFormat().format(this.totalAmount)} AIGOS
+                            </p>
+                            <p className="text-red-400 text-sm">
+                                Your current token balance
+                            </p>
+                        </div>
                     </div>
                 );
-            } else {
-                return <></>;
             }
+            return null;
         }
     }
 
-    const [userVestingInstance, setUserVestingInstance] = useState(null);
-
-    const { data: userVestingData } = useContractRead({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-        functionName: "userVesting",
-        args: [useAccountAddress, process.env.NEXT_PUBLIC_PRESALE_ID],
-        watch: true,
-    });
-
-    useEffect(() => {
-        console.log("userVestingData:", userVestingData); // Debugging point 1
-        if (userVestingData) {
-            setUserVestingInstance(new UserVesting(userVestingData));
-        } else {
-            setUserVestingInstance(null);
-        }
-    }, [userVestingData]);
-    
-    /**
-    * @class Presale
-    * @brief Presale Data
-    */
-    class Presale
-    {
-        constructor(presaleData)
-        {
+    class Presale {
+        constructor(presaleData) {
             this.preSaleDataLocal = presaleData;
-            if (this.preSaleDataLocal)
-            {
-                var presaleSplit = presaleData.toString().split(",");
-                var counter = 0;
+            if (this.preSaleDataLocal) {
+                const presaleSplit = presaleData.toString().split(",");
+                let counter = 0;
                 this.saleToken = presaleSplit[counter++];
                 this.startTime = new Date(presaleSplit[counter++] * 1000);
                 this.endTime = new Date(presaleSplit[counter++] * 1000);
@@ -114,148 +94,153 @@ export default function SeedSale() {
                 this.salePercentageParsed = this.salePercentage.toFixed(2) + "%";
             }
         }
+    }
 
-        get HtmlOutput()
-        {
-            if (this.preSaleDataLocal)
-            {
-                return (
-                    <>
-                        <p>Sale Token: {this.saleToken}</p>
-                        <p>startTime: {this.startTime.toLocaleString("default")}</p>
-                        <p>endTime: {this.endTime.toLocaleString("default")}</p>
-                        <p>price: {this.price.toFixed(3)}$ per Token</p>
-                        <p>tokensToSell: {new Intl.NumberFormat().format(this.tokensToSell)} Token</p>
-                        <p>inSale: {new Intl.NumberFormat().format(this.inSale)} Token</p>
-                        <p>tokensSold: {new Intl.NumberFormat().format(this.tokensSold)} Token</p>
-                        <p>presaleGoal: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(this.presaleGoal)} $</p>
-                        <p>baseDecimals: {this.baseDecimals}</p>
-                        <p>vestingStartTime: {this.vestingStartTime.toLocaleString("default")}</p>
-                        <p>vestingCliff: {this.vestingCliff}</p>
-                        <p>vestingPeriod: {this.vestingPeriod}</p>
-                        <p>enableBuyWithEth: {this.enableBuyWithEth.toString()}</p>
-                        <p>enableBuyWithUsdt: {this.enableBuyWithUsdt.toString()}</p>
-                    </>
-                )
-            }
-            else return (<></>);
+    const [userVestingInstance, setUserVestingInstance] = useState(null);
+    const [presaleDataParsed, setPresaleDataParsed] = useState(null);
+    const [displayPresaleData, setDisplayPresaleData] = useState(null);
+    const [displayBuyData, setBuyData] = useState(null);
+    const [displayUserVestingData, setDisplayUserVestingData] = useState(null);
+
+    const { data: userVestingData } = useContractRead({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
+        functionName: "userVesting",
+        args: [useAccountAddress, process.env.NEXT_PUBLIC_PRESALE_ID],
+        watch: true,
+    });
+
+    const { data: presaleData } = useContractRead({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
+        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
+        functionName: "presale",
+        args: [process.env.NEXT_PUBLIC_PRESALE_ID],
+        watch: true,
+    });
+
+    useEffect(() => {
+        if (userVestingData) {
+            setUserVestingInstance(new UserVesting(userVestingData));
+        } else {
+            setUserVestingInstance(null);
         }
-    }
+    }, [userVestingData]);
 
-    /*!
-    * @fn printPresaleData
-    * @brief Print Presale Data
-    */
-    function printPresaleData(presaleData)
-    {
-        var preSale = new Presale(presaleData);
-        setPresaleDataParsed(preSale);
-    }
+    useEffect(() => {
+        if (presaleData) {
+            const preSale = new Presale(presaleData);
+            setPresaleDataParsed(preSale);
+        }
+    }, [presaleData]);
 
-    /* Presale Data */
-    const [presaleDataParsed, setPresaleDataParsed] = useState(0);
-    const { data: presaleData,
-        error: presaleDataError,
-        isError: presaleIsError,
-        isLoading: presaleIsLoading,
-        status: presaleStatus } = useContractRead({
-            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-            abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-            functionName: "presale",
-            args: [process.env.NEXT_PUBLIC_PRESALE_ID],
-            watch: true,
-        });
-
-    /* ------------------- */
-
-
-    /* Presale Data */
-    useEffect(() =>
-    {
-        Log("----------> presaleData: " + presaleData);
-        Log("----------> presaleDataError: " + presaleDataError);
-        Log("----------> presaleIsError: " + presaleIsError);
-        Log("----------> presaleIsLoading: " + presaleIsLoading);
-        Log("----------> presaleStatus: " + presaleStatus);
-        printPresaleData(presaleData);
-    }, [presaleData, presaleDataError, presaleIsError, presaleIsLoading, presaleStatus]);
-
-    /* Wallet Connected / Disconnected */
-    const [displayPresaleData, setDisplayPresaleData] = useState(0);
-    const [displayBuyData, setBuyData] = useState(0);
-    const [displayUserVestingData, setDisplayUserVestingData] = useState(0);
-    useEffect(() =>
-    {
-        if (!useAccountAddress)
-        {
+    useEffect(() => {
+        if (!useAccountAddress) {
+            // Not connected state
             setDisplayPresaleData(
-                <>
-                    <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 mb-3">
-                        <div className="bg-red-600 text-xs font-medium font-bold text-neutral-900 text-center p-0.5 leading-none rounded-full"
-                            style={{ width: presaleDataParsed?.salePercentageParsed }}>
-                            {presaleDataParsed?.salePercentageParsed}
+                <div className="space-y-4">
+                    <div className="w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div 
+                            className="bg-red-600 text-xs font-medium text-white text-center p-1.5 rounded-full transition-all duration-500"
+                            style={{ width: presaleDataParsed?.salePercentageParsed || '0%' }}
+                        >
+                            {presaleDataParsed?.salePercentageParsed || '0%'}
                         </div>
                     </div>
-                    <p className="text-white">
-                        Sold — {presaleDataParsed?.tokensSoldParsed}
-                        /
-                        {presaleDataParsed?.tokensToSellParsed}
-                    </p>
-                    <p className="text-white mb-6">
-                        Sold — {presaleDataParsed?.presaleFundsRaisedParsed}
-                        /
-                        {presaleDataParsed?.preSaleGoalParsed}
-                    </p>
-                </>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white text-sm font-medium">Tokens Sold</p>
+                            <p className="text-red-400 text-lg font-bold">
+                                {presaleDataParsed?.tokensSoldParsed || 0} / {presaleDataParsed?.tokensToSellParsed || 0}
+                            </p>
+                        </div>
+                        <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white text-sm font-medium">Funds Raised</p>
+                            <p className="text-red-400 text-lg font-bold">
+                                {presaleDataParsed?.presaleFundsRaisedParsed || '$0'} / {presaleDataParsed?.preSaleGoalParsed || '$0'}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             );
-            setBuyData("");
-            setDisplayUserVestingData("");
-        }
-        else
-        {
-            setDisplayPresaleData("");
-            var userVesting = new UserVesting(userVestingData);
-            setDisplayUserVestingData(userVesting.HtmlOutput);
-            setBuyData(<>
-                <div className="flex items-center justify-center mb-6 mt-5">
-                    <svg className="animate-bounce w-16 h-16" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
-                        <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#FFFFFF" stroke="none">
-                            <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
-                        </g>
-                    </svg>
+            setBuyData(null);
+            setDisplayUserVestingData(null);
+        } else {
+            // Connected state
+            setDisplayPresaleData(null);
+            setDisplayUserVestingData(userVestingInstance?.HtmlOutput);
+            setBuyData(
+                <div className="space-y-6">
+                    {/* Token Purchase Card */}
+                    <div className="bg-black/30 p-6 rounded-xl backdrop-blur-sm border border-white/10">
+                        <div className="flex justify-between items-center mb-4">
+                            <div className="text-left">
+                                <p className="text-sm text-white/70">Current Price</p>
+                                <p className="text-xl font-bold text-white">
+                                    {presaleDataParsed?.price?.toFixed(4) || '0.0000'}$ per AIGOS
+                                </p>
+                            </div>
+                            <div className="bg-red-600/20 p-3 rounded-full">
+                                <svg className="w-8 h-8 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+                                    <g transform="translate(0,240) scale(0.1,-0.1)" fill="currentColor">
+                                        <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        {/* Buy button wrapped in a styled container */}
+                        <div className="mt-6">
+                            <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
+                                <BuyWithUsdtModal />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Additional stats */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white/70 text-sm">Available</p>
+                            <p className="text-white font-bold">
+                                {presaleDataParsed?.inSale ? new Intl.NumberFormat().format(presaleDataParsed.inSale) : '0'} AIGOS
+                            </p>
+                        </div>
+                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white/70 text-sm">Total Sold</p>
+                            <p className="text-white font-bold">
+                                {presaleDataParsed?.tokensSoldParsed || '0'} AIGOS
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex items-center justify-center mb-6 mt-5">
-                    <BuyWithUsdtModal />
-                </div>
-            </>);
+            );
         }
-    }, [useAccountAddress, presaleDataParsed, userVestingData]);
+    }, [useAccountAddress, presaleDataParsed, userVestingInstance]);
 
     return (
-        <>
-            <div className="text-center">
-                <div className="box-cont h-fit w-fit px-14 mb-10 py-8 shadow-md bg-neutral-900 rounded-lg">
-                    <h7 className="text-white font-bold">
-                        ✅ 1st May 2024 to sell out (or 31 Jan 2023)<br />
-                        Seed Sale
-                    </h7>
-                    <h4 className="text-white font-bold text-4xl">
-                        1 Token = {presaleDataParsed?.price?.toFixed(4)}$
-                    </h4>
-                    <p className="text-white mb-4">
+        <div className="text-center space-y-6">
+            <div className="space-y-4">
+                <div className="inline-block px-4 py-1 bg-red-600/20 rounded-full">
+                    <h2 className="text-white font-medium text-sm md:text-base">
+                        ✅ 1st May 2024 to sell out (or 31 Jan 2023)
+                    </h2>
+                </div>
+                
+                <div className="space-y-2">
+                    <h3 className="text-white font-bold text-xl md:text-3xl">
+                        AIGOS Seed Sale
+                    </h3>
+                    <p className="text-red-400 text-sm md:text-base animate-pulse">
                         Hurry and buy before seed sale sells out
                     </p>
-                    {displayPresaleData}
-                    <div className="flex place-items-center justify-around">
-                        {displayUserVestingData}
-                    </div>
-                    {displayBuyData}
-                    <div className="flex place-items-center justify-around">
-                        <ConnectButton />
-                    </div>
                 </div>
             </div>
-        </>
-    )
-}
+
+            {displayPresaleData}
+            
+            <div className="space-y-4">
+                {displayUserVestingData}
+                {displayBuyData}
+            </div>
+
+            <div className="flex justify-center">
+                <ConnectButton />
