@@ -224,7 +224,7 @@ export default function SeedSale() {
                         ✅ 1st May 2024 to sell out (or 31 Jan 2023)
                     </h2>
                 </div>
-                
+
                 <div className="space-y-2">
                     <h3 className="text-white font-bold text-xl md:text-3xl">
                         AIGOS Seed Sale
@@ -236,7 +236,7 @@ export default function SeedSale() {
             </div>
 
             {displayPresaleData}
-            
+
             <div className="space-y-4">
                 {displayUserVestingData}
                 {displayBuyData}
@@ -244,9 +244,7 @@ export default function SeedSale() {
 
             <div className="flex justify-center">
                 <ConnectButton />
-                 </div>
-                </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
