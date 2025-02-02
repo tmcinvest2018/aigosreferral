@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import
-{
-  faDollar
-} from "@fortawesome/free-solid-svg-icons";
-import
-{
+import { faDollar } from "@fortawesome/free-solid-svg-icons";
+import {
   useAccount,
   useContractRead,
   useContractWrite,
@@ -13,19 +9,14 @@ import
   useWaitForTransaction,
 } from "wagmi";
 
-
-const BuyWithUsdtModal = () =>
-{
+const BuyWithUsdtModal = () => {
   const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
-  
-
 
   /**
    * @fn Log
    * @brief Log to console
    */
-  function Log(stringToLog)
-  {
+  function Log(stringToLog) {
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     console.log(today.toUTCString() + " | " + stringToLog);
@@ -35,13 +26,10 @@ const BuyWithUsdtModal = () =>
    * @class Presale
    * @brief Presale Data
    */
-  class Presale
-  {
-    constructor(presaleData)
-    {
+  class Presale {
+    constructor(presaleData) {
       this.preSaleDataLocal = presaleData;
-      if (this.preSaleDataLocal)
-      {
+      if (this.preSaleDataLocal) {
         var presaleSplit = presaleData.toString().split(",");
         var counter = 0;
         this.saleToken = presaleSplit[counter++];
@@ -68,10 +56,8 @@ const BuyWithUsdtModal = () =>
       }
     }
 
-    get HtmlOutput()
-    {
-      if (this.preSaleDataLocal)
-      {
+    get HtmlOutput() {
+      if (this.preSaleDataLocal) {
         return (
           <>
             <p>Sale Token: {this.saleToken}</p>
@@ -99,8 +85,7 @@ const BuyWithUsdtModal = () =>
   * @fn printPresaleData
   * @brief Print Presale Data
   */
-  function printPresaleData(presaleData)
-  {
+  function printPresaleData(presaleData) {
     var preSale = new Presale(presaleData);
     setPresaleDataParsed(preSale);
   }
@@ -159,8 +144,7 @@ const BuyWithUsdtModal = () =>
       args: [useAccountAddress, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString()],
       watch: true,
     });
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (accountAllowance)
       setAccountAllowance(accountAllowance.toString());
   }, [accountAllowance]);
@@ -174,8 +158,7 @@ const BuyWithUsdtModal = () =>
       args: [useAccountAddress],
       watch: true,
     });
-  useEffect(() =>
-  {
+  useEffect(() => {
     var usdtBalanceParsed = usdtBalanceOfWalletData / (10 ** 6);
     Log("----> usdtBalanceParsed: " + usdtBalanceParsed);
     setUsdtBalanceOfWalletConnected(usdtBalanceParsed);
@@ -235,8 +218,7 @@ const BuyWithUsdtModal = () =>
   } = useWaitForTransaction({
     hash: buyWithUsdtData?.hash,
   });
-  useEffect(() =>
-  {
+  useEffect(() => {
     Log("---> isBuyWithUsdtLoading:" + isBuyWithUsdtLoading)
     Log("---> isBuyWithUsdtStarted:" + isBuyWithUsdtStarted)
     Log("---> isBuyWithUsdtError:" + isBuyWithUsdtError)
@@ -246,8 +228,7 @@ const BuyWithUsdtModal = () =>
     isBuyWithUsdtError,
     buyWithUsdtError]);
 
-  function setTokensFromUsdt(usdtSet)
-  {
+  function setTokensFromUsdt(usdtSet) {
     Log("Buy with USDT - Tokens: " + tokens + " - UsdtValue: " + usdtSet);
     if (!presaleData)
       return;
@@ -256,8 +237,7 @@ const BuyWithUsdtModal = () =>
     setTokens(tokens);
   }
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     Log("---> waitForTransactionUsdtAllowanceIsSuccess:" + waitForTransactionUsdtAllowanceIsSuccess)
     Log("---> waitForTransactionUsdtAllowanceIsError:" + waitForTransactionUsdtAllowanceIsError)
     Log("---> waitForTransactionUsdtAllowanceError:" + waitForTransactionUsdtAllowanceError)
@@ -268,23 +248,20 @@ const BuyWithUsdtModal = () =>
     waitForTransactionUsdtAllowanceIsError,
     waitForTransactionUsdtAllowanceError]);
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (!presaleData)
       return;
     var presale = new Presale(presaleData);
     var usdtValue = tokens * presale.price;
     Log("Buy with USDT - Tokens: " + tokens + " - UsdtValue: " + usdtValue + " - usdtBalanceOfWalletConnected: " + usdtBalanceOfWalletConnected);
     setUsdt(usdtValue);
-    if (usdtValue <= usdtBalanceOfWalletConnected)
-    {
-      setUsdtInputBoxClassName("rounded-none rounded-l-lg border bg-gray-300 border border-gray-300 text-gray-900 block cursor-not-allowed flex-1 min-w-0 w-full text-sm p-2.5 placeholder-gray-400 focus:ring-red-500");
+    if (usdtValue <= usdtBalanceOfWalletConnected) {
+      setUsdtInputBoxClassName("rounded-none rounded-l-lg border bg-gray-700 border border-gray-600 text-white block cursor-not-allowed flex-1 min-w-0 w-full text-sm p-2.5 placeholder-gray-400 focus:ring-red-500");
       setUsdtInputBoxError("");
-      setConvertToUsdtButtonClass("bg-red-600 text-white hover:text-white hover:bg-slate-300 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150");
+      setConvertToUsdtButtonClass("bg-red-600 text-white hover:text-white hover:bg-red-700 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150");
       setConvertToUsdtDisabled(false);
     }
-    else
-    {
+    else {
       setUsdtInputBoxClassName("rounded-none rounded-l-lg border bg-red-50 border border-red-500 text-red-900 block cursor-not-allowed flex-1 min-w-0 w-full text-sm p-2.5 placeholder-gray-400 focus:ring-red-500");
       setUsdtInputBoxError(
         <>
@@ -298,21 +275,17 @@ const BuyWithUsdtModal = () =>
       setConvertToUsdtDisabled(true);
     }
   }, [tokens, presaleData, usdtBalanceOfWalletConnected]);
-  useEffect(() =>
-  {
-    if (waitForTransactionIsLoading || usdtAllowanceIsLoading || isBuyWithUsdtLoading || waitForTransactionUsdtAllowanceIsLoading)
-    {
+  useEffect(() => {
+    if (waitForTransactionIsLoading || usdtAllowanceIsLoading || isBuyWithUsdtLoading || waitForTransactionUsdtAllowanceIsLoading) {
       setConvertToUsdtDisabled(true);
       setConvertToUsdtButtonClass("cursor-not-allowed bg-gray-300 text-neutral-900 text-white font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150");
     }
-    else
-    {
+    else {
       setConvertToUsdtDisabled(false);
-      setConvertToUsdtButtonClass("bg-red-600 text-white hover:text-white hover:bg-slate-300 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150");
+      setConvertToUsdtButtonClass("bg-red-600 text-white hover:text-white hover:bg-red-700 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150");
     }
 
-    if (usdtAllowanceIsLoading || waitForTransactionUsdtAllowanceIsLoading)
-    {
+    if (usdtAllowanceIsLoading || waitForTransactionUsdtAllowanceIsLoading) {
       Log("##### waitForTransactionIsLoading -> " + waitForTransactionIsLoading);
       setConvertToUsdtInProcessText(
         <>
@@ -328,8 +301,7 @@ const BuyWithUsdtModal = () =>
           </div>
         </>);
     }
-    else if (isBuyWithUsdtLoading || waitForTransactionIsLoading)
-    {
+    else if (isBuyWithUsdtLoading || waitForTransactionIsLoading) {
       Log("##### usdtAllowanceIsLoading -> " + usdtAllowanceIsLoading);
       setConvertToUsdtInProcessText(
         <>
@@ -345,8 +317,7 @@ const BuyWithUsdtModal = () =>
           </div>
         </>);
     }
-    else if (waitForTransactionIsSuccess)
-    {
+    else if (waitForTransactionIsSuccess) {
       Log("##### usdtAllowanceIsLoading -> " + usdtAllowanceIsLoading);
       setConvertToUsdtInProcessText(
         <>
@@ -356,8 +327,7 @@ const BuyWithUsdtModal = () =>
           </div>
         </>);
     }
-    else
-    {
+    else {
       Log("##### setConvertToUsdtInProcessText Empty");
       setConvertToUsdtInProcessText("");
     }
@@ -371,7 +341,7 @@ const BuyWithUsdtModal = () =>
   return (
     <>
       <button
-        className="bg-red-600 text-white hover:text-white hover:bg-slate-300 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-red-600 text-white hover:text-white hover:bg-red-700 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -381,8 +351,11 @@ const BuyWithUsdtModal = () =>
         <>
           <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-neutral-900 outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
+              {/* Modal Content Container */}
+              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-black/40 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
+
+                {/* Modal Header */}
+                <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
                   <h3 className="text-white text-3xl font=semibold uppercase">
                     Exchange
                   </h3>
@@ -395,11 +368,13 @@ const BuyWithUsdtModal = () =>
                     </span>
                   </button>
                 </div>
+
+                {/* Modal Body */}
                 <div className="relative p-6 flex-auto">
-                  <form className="bg-neutral-800 shadow-md rounded px-8 pt-6 pb-8 w-full">
-                    <div className="flex">
-                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-50 border text-gray-900 focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-red-500" />
-                      <span className="inline-flex items-center px-3 text-sm w-50 text-gray-900 bg-gray-200 rounded-r-md border border-r-0 border-gray-300">
+                  <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-8 w-full">
+<div className="flex mb-4">
+                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
+                      <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
                         <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
                           <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                             <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
@@ -419,19 +394,19 @@ const BuyWithUsdtModal = () =>
                       <input type="number" value={usdt.toFixed(6)} disabled readonly
                         className={`${usdtInputBoxClassName}`}
                       />
-                      <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-r-md border border-r-0 border-gray-300">
-                        <svg className="hover:animate-ping w-9 h-9 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
-                        <svg className="relative inline-flex rounded-full w-9 h-9" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
+                      <span className="inline-flex items-center px-3 text-sm text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
+                         <svg className="hover:animate-ping w-9 h-9 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
+                          <svg className="relative inline-flex rounded-full w-9 h-9" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
                         USDT<span className="text-gray-200">-</span>
                       </span>
                     </div>
                     {usdtInputBoxError}
                   </form>
                 </div>
-                <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
                   <button
                     className={`${convertToUsdtButtonClass}`}
-                    disabled={convertToUsdtDisabled}
+disabled={convertToUsdtDisabled}
                     onClick={(e) => {
                       e.preventDefault();
                       if (accountAllowancePublic >= usdtAllowanceHelper)
@@ -453,3 +428,5 @@ const BuyWithUsdtModal = () =>
                 };
 
                 export default BuyWithUsdtModal;
+
+
