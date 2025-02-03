@@ -7,101 +7,54 @@ export default function Section9() {
                 <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
                 <div className="text-center relative z-10">
                     <div className="box-cont h-fit w-fit max-w-[90%] mx-auto px-8 sm:px-14 py-8 shadow-lg bg-gradient-to-r from-neutral-900/90 to-neutral-800/90 rounded-xl border border-neutral-700">
+
+                        {/* Title & Typewriter Effect */}
                         <h2 className="text-white font-bold text-3xl md:text-4xl mb-4">
-                            The Road to the Moon is through the Sky
+                            Pioneering the Future of Blockchain & AI
                         </h2>
                         <h4 className="text-white font-bold text-xl md:text-2xl mb-6">
                             <Typewriter
                                 options={{
-                                    strings: ["ROADMAP 2024/2025"],
+                                    strings: ["Aigos Roadmap 2025/2026"],
                                     autoStart: true,
                                     loop: true,
                                     pauseFor: 600000
                                 }}
                             />
                         </h4>
+
+                        {/* Roadmap Timeline */}
                         <div className="container mx-auto w-fit">
                             <ol className="relative border-l border-gray-200 dark:border-gray-700">
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        2nd Quarter 2024
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        ✅ Launch of AIGOS PRESALE.<br/>
-                                        Finish off AIGOS OmniChain Swap.<br/>
-                                        Adding bitcoin to cross chain Swap. <br/>
-                                        Select Beta testers for the platform. <br/>
-                                        Implement suggested improvements.
-                                    </p>
-                                </li>
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        3rd Quarter 2024
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        Finish Aigos presale <br/>
-                                        Distribute Aigos token and NFT's <br/>
-                                        Public testing of Aigos OmniChain Swap
-                                    </p>
-                                </li>
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        4th Quarter 2024
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        Launch Aigos Omnichain Swap Mainnet<br/>
-                                        Selecting beta testers for Aigos Omnichain Staking pools<br/>
-                                        Implement suggested improvements
-                                    </p>
-                                </li>
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        1st Quarter 2025
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        Launch Aigos Omnichain Staking pools Mainnet<br/>
-                                        Continue development of Aigos Omnichain Games<br/>
-                                        Implement necessary improvements to games
-                                    </p>
-                                </li>
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        2nd Quarter 2025
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        Development of Aigos Omnichain AI strategy<br/>
-                                        Selecting beta testers for Aigos Omnichain AI strategy<br/>
-                                        Continue development of Aigos Omnichain Games<br/>
-                                        Implement necessary improvements to both
-                                    </p>
-                                </li>
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        3rd Quarter 2025
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        First Aigos Omnichain games public testing
-                                    </p>
-                                </li>
-                                <li className="mb-10 ml-4">
-                                    <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                    <time className="text-white text-lg font-semibold text-gray-900 dark:text-white">
-                                        4th Quarter 2025
-                                    </time>
-                                    <p className="text-white mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                        Launch Aigos Omnichain Game Mainnet<br/>
-                                        Much more in due time<br/>
-                                        !!Disclaimer Roadmap as well as any documentation are subject to changes in case Aigos team feels necessary!!
-                                    </p>
-                                </li>
+
+                                {/* Roadmap Items */}
+                                {[
+                                    { quarter: "Q2 2025", points: ["Aigos Presale Launch", "Development of Aigos Omnichain Swap", "Integrating Bitcoin (BTC) Cross-Chain Support", "Selecting Beta Testers", "Implementing Community-Driven Improvements"], completed: true },
+                                    { quarter: "Q3 2025", points: ["Completion of Aigos Presale", "Aigos Token & NFT Airdrop", "Launch of Aigos Omnichain Swap (Public Beta)"], completed: false },
+                                    { quarter: "Q3 2025", points: ["Aigos Omnichain Swap Mainnet Launch", "Launch of Aigos Omnichain Staking Pools (Beta)", "Security & Community Enhancements"], completed: false },
+                                    { quarter: "Q4 2025", points: ["Aigos Omnichain Staking Pools Mainnet", "Development of Aigos Omnichain Games", "Refining AI-Powered Smart Contract Automation"], completed: false },
+                                    { quarter: "Q4 2025", points: ["Development of Aigos AI Trading & Strategy Tools", "Expansion of Aigos Omnichain Gaming Ecosystem", "Beta Testing for AI & GameFi"], completed: false },
+                                    { quarter: "Q4 2025", points: ["Public Testing of Aigos Omnichain Games", "Expansion Across Multiple Blockchains"], completed: false },
+                                    { quarter: "Q4 2025", points: ["Launch of Aigos Omnichain Games Mainnet", "Strategic Partnerships & Ecosystem Growth", "New Features & Announcements"], completed: false }
+                                ].map((item, index) => (
+                                    <li key={index} className="mb-10 ml-4">
+                                        <div className="absolute w-6 h-6 -left-3 rounded-full border-2 flex items-center justify-center"
+                                            style={{
+                                                backgroundColor: item.completed ? '#22c55e' : '#d1d5db',
+                                                borderColor: item.completed ? '#22c55e' : '#6b7280'
+                                            }}>
+                                        </div>
+                                        <time className="text-white text-lg font-semibold block mb-2">{item.quarter}</time>
+                                        {item.points.map((point, i) => (
+                                            <p key={i} className="text-white mb-1 text-base font-normal pl-6">
+                                                {point}
+                                            </p>
+                                        ))}
+                                    </li>
+                                ))}
                             </ol>
                         </div>
+
                     </div>
                 </div>
             </section>

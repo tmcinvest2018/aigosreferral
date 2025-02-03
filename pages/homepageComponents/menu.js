@@ -18,7 +18,7 @@ export default function Menu() {
                 <div className="flex gap-2 order-2">
                     {/* Join Presale Button */}
                     <a href="#section4">
-                        <Button className="text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-4 py-2 text-center transition-all duration-300 hover:scale-105">
+                        <Button className="text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1 text-center transition-all duration-300 hover:scale-105">
                             JOIN PRESALE
                         </Button>
                     </a>

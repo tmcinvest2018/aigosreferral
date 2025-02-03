@@ -1,4 +1,6 @@
-import Typewriter from 'typewriter-effect';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTelegram, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import Typewriter from 'typewriter-effect'; // <-- Add this import
 
 export default function Section8() {
     return (
@@ -20,14 +22,60 @@ export default function Section8() {
                                 }}
                             />
                         </h4>
-                        <p className="text-white text-sm md:text-base mb-8 max-w-[800px] mx-auto">
-                            We have a core team of 5 members.<br />
-                            <strong>Morpheus</strong> is our Founder and the man with the plan, focusing on the big picture.<br />
-                            <strong>X-MAN</strong> is our lead developer with over 12 years of experience in IT. He is a full-stack blockchain developer since 2016, contributing to various projects.<br />
-                            <strong>HE-MAN</strong> is our front-end developer, focusing on the platform and game to come.<br />
-                            <strong>IP-MAN</strong> is our financial expert with over 5 years in executive functions at different major financial players, focusing on tokenomics and liquidity.<br />
-                            <strong>WONDER-WOMAN</strong> is our marketing specialist, focusing on blockchain marketing and social media community engagement.<br />
-                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <div className="team-member bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-700">
+                                <h5 className="text-red-500 font-bold text-lg mb-2">Founder</h5>
+                                <h6 className="text-white font-semibold text-xl mb-4">Alex</h6>
+                                <p className="text-white text-sm md:text-base">
+                                    Alex is the visionary behind Aigos, focusing on the big picture, strategic planning, and driving the project's long-term vision. With a background in blockchain, Alex aims to revolutionize the DeFi and GameFi ecosystems.
+                                </p>
+                            </div>
+
+                            <div className="team-member bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-700">
+                                <h5 className="text-red-500 font-bold text-lg mb-2">Lead Developer</h5>
+                                <h6 className="text-white font-semibold text-xl mb-4">Jamie</h6>
+                                <p className="text-white text-sm md:text-base">
+                                    Jamie brings over 12 years of IT experience and has been a full-stack blockchain developer since 2016. Jamie has contributed to several successful blockchain projects and is responsible for Aigos' technical development and infrastructure.
+                                </p>
+                            </div>
+
+                            <div className="team-member bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-700">
+                                <h5 className="text-red-500 font-bold text-lg mb-2">Front-End Developer</h5>
+                                <h6 className="text-white font-semibold text-xl mb-4">Taylor</h6>
+                                <p className="text-white text-sm md:text-base">
+                                    Taylor is the creative force behind Aigos' platform design and user experience. Taylor’s focus is on ensuring the platform’s interface is both user-friendly and visually appealing, with a strong emphasis on the upcoming gaming features.
+                                </p>
+                            </div>
+
+                            <div className="team-member bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-700">
+                                <h5 className="text-red-500 font-bold text-lg mb-2">Financial Strategist</h5>
+                                <h6 className="text-white font-semibold text-xl mb-4">Morgan</h6>
+                                <p className="text-white text-sm md:text-base">
+                                    With over 5 years of experience in executive roles at major financial institutions, Morgan is responsible for Aigos' tokenomics and liquidity strategies, ensuring sustainable growth and a strong financial foundation.
+                                </p>
+                            </div>
+
+                            <div className="team-member bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-700">
+                                <h5 className="text-red-500 font-bold text-lg mb-2">Marketing & Community Manager</h5>
+                                <h6 className="text-white font-semibold text-xl mb-4">Casey</h6>
+                                <p className="text-white text-sm md:text-base">
+                                    Casey is the voice of Aigos on social media and within the community. Focusing on blockchain marketing and community engagement, Casey’s mission is to spread the word about Aigos and foster a vibrant and active user base.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Telegram CTA */}
+                        <div className="flex justify-center gap-4">
+                            <a
+                                href="https://t.me/Otje86"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block bg-gradient-to-r from-teal-500 to-green-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                            >
+                                <span>Get to know us on Telegram <FontAwesomeIcon icon={faTelegram} className="ml-2" /></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

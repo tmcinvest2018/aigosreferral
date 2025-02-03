@@ -11,28 +11,22 @@ const data = {
             label: '%',
             data: [40, 15, 35, 2, 2, 3, 3],
             backgroundColor: [
-                'rgba(3,22,52)',
-                'rgba(3,54,73)',
-                'rgba(3,101,100)',
-                'rgba(205,179,128)',
-                'rgba(232,221,203)',
-                'rgba(138,155,15)',
-                'rgba(248,202,0)',
-                'rgba(233,127,2)',
-                'rgba(189,21,80)',
-                'rgba(73,10,61)',
+                'rgba(54, 162, 235)', // Vault
+                'rgba(255, 99, 132)', // Liquidity Pool
+                'rgba(75, 192, 192)', // Presale
+                'rgba(255, 159, 64)', // Joint Venture
+                'rgba(153, 102, 255)', // Marketing
+                'rgba(255, 205, 86)', // Team
+                'rgba(255, 99, 71)'    // Staff
             ],
             borderColor: [
-                'rgba(3,22,52)',
-                'rgba(3,54,73)',
-                'rgba(3,101,100)',
-                'rgba(205,179,128)',
-                'rgba(232,221,203)',
-                'rgba(138,155,15)',
-                'rgba(248,202,0)',
-                'rgba(233,127,2)',
-                'rgba(189,21,80)',
-                'rgba(73,10,61)',
+                'rgba(54, 162, 235)',
+                'rgba(255, 99, 132)',
+                'rgba(75, 192, 192)',
+                'rgba(255, 159, 64)',
+                'rgba(153, 102, 255)',
+                'rgba(255, 205, 86)',
+                'rgba(255, 99, 71)',
             ],
             hoverOffset: 4,
             borderWidth: 1,
@@ -91,6 +85,46 @@ export default function Section7() {
                                     }
                                 }}
                             />
+                        </div>
+                        
+                        {/* Displaying percentages below the pie chart */}
+                        <div className="mt-6 text-white">
+                            <div className="flex justify-between text-sm md:text-base">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(54, 162, 235)' }}></div>
+                                    <span>Vault: 40%</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(255, 99, 132)' }}></div>
+                                    <span>Liquidity Pool: 15%</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between text-sm md:text-base mt-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(75, 192, 192)' }}></div>
+                                    <span>Presale: 35%</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(255, 159, 64)' }}></div>
+                                    <span>Joint Venture: 2%</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between text-sm md:text-base mt-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(153, 102, 255)' }}></div>
+                                    <span>Marketing: 2%</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(255, 205, 86)' }}></div>
+                                    <span>Team: 3%</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between text-sm md:text-base mt-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(255, 99, 71)' }}></div>
+                                    <span>Staff: 3%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
