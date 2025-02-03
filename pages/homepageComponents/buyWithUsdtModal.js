@@ -350,12 +350,12 @@ const BuyWithUsdtModal = () => {
       {showModal ? (
         <>
           <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-4 mx-auto max-w-xl">
+            <div className="relative w-auto my-3 mx-auto max-w-md">
               {/* Modal Content Container */}
-              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-black/40 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
+              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray-700 outline-none focus:outline-none border border-white/10">
 
                 {/* Modal Header */}
-                <div className="flex items-start justify-between p-3 border-b border-white/10 rounded-t">
+                <div className="flex items-start justify-between p-2 border-b border-white/10 rounded-t">
                   <h3 className="text-white text-3xl font=semibold uppercase">
                     Exchange
                   </h3>
@@ -370,10 +370,10 @@ const BuyWithUsdtModal = () => {
                 </div>
 
                 {/* Modal Body */}
-                <div className="relative p-4 flex-auto">
-                  <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-4 w-full">
-<div className="flex mb-4">
-                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
+                <div className="relative p-2 flex-auto">
+                  <form className="bg-black/30 shadow-md rounded-xl px-6 pt-4 pb-3 w-full">
+                    <div className="flex mb-3">
+                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2 placeholder-gray-400 focus:ring-red-500" />
                       <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
                         <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
                           <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -403,7 +403,7 @@ const BuyWithUsdtModal = () => {
                     {usdtInputBoxError}
                   </form>
                 </div>
-                <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
+                <div className="flex items-center justify-center p-4 border-t border-white/10 rounded-b">
                   <button
                     className={`${convertToUsdtButtonClass}`}
                     disabled={convertToUsdtDisabled}
