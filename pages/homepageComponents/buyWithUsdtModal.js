@@ -348,14 +348,14 @@ const BuyWithUsdtModal = () => {
         BUY AIGOS WITH USDT <FontAwesomeIcon icon={faDollar} className="ml-2" />
       </button>
       {showModal ? (
-        
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 outline-none focus:outline-none w-[90%] md:w-[50%]">
-            <div className="relative w-auto my-3 mx-auto max-w-md">
+        <>
+          <div className="flex justify-center items-center overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/* Modal Content Container */}
-              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray-700 outline-none focus:outline-none border border-white/10">
+              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-black/40 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
 
                 {/* Modal Header */}
-                <div className="flex items-start justify-between p-2 border-b border-white/10 rounded-t">
+                <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
                   <h3 className="text-white text-3xl font=semibold uppercase">
                     Exchange
                   </h3>
@@ -370,15 +370,22 @@ const BuyWithUsdtModal = () => {
                 </div>
 
                 {/* Modal Body */}
-                <div className="relative p-2 flex-auto">
-                  <form className="bg-black/30 shadow-md rounded-xl px-6 pt-4 pb-3 w-full">
-                    <div className="flex mb-3">
-                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2 placeholder-gray-400 focus:ring-red-500" />
+                <div className="relative p-6 flex-auto">
+                  <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-8 w-full">
+<div className="flex mb-4">
+                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
                       <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
                         <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
                           <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                             <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />                          </g>
+                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
+                          </g>
+                        </svg>
+                        <svg className="relative inline-flex rounded-full h-8 w-8" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
+                          <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                            <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
+                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
+                          </g>
                         </svg>
                         TOKEN
                       </span>
@@ -396,10 +403,10 @@ const BuyWithUsdtModal = () => {
                     {usdtInputBoxError}
                   </form>
                 </div>
-                <div className="flex items-center justify-center p-4 border-t border-white/10 rounded-b">
+                <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
                   <button
                     className={`${convertToUsdtButtonClass}`}
-                    disabled={convertToUsdtDisabled}
+disabled={convertToUsdtDisabled}
                     onClick={(e) => {
                       e.preventDefault();
                       if (accountAllowancePublic >= usdtAllowanceHelper)
