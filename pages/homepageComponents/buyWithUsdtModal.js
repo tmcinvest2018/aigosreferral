@@ -341,7 +341,7 @@ const BuyWithUsdtModal = () => {
   return (
     <>
       <button
-        className="smaller-button bg-red-600 text-white hover:text-white hover:bg-red-700 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="smaller-button bg-red-400 text-white hover:text-white hover:bg-red-500 active:bg-red-700 font-bold uppercase text-base px-6 py-2 rounded-[18px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
     type="button"
     onClick={() => setShowModal(true)}
 >
@@ -350,29 +350,29 @@ const BuyWithUsdtModal = () => {
 {showModal ? (
     <>
         <div className="floating-modal overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-auto my-4 mx-auto max-w-3xl">
                 {/* Modal Content Container */}
-                <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray-800/90 outline-none focus:outline-none border border-white/10">
+                <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray-800 outline-none focus:outline-none border border-white/6">
 
                     {/* Modal Header */}
-                    <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
-                        <h3 className="text-white text-3xl font=semibold uppercase">
+                    <div className="flex items-start justify-between p-3 border-b border-white/6 rounded-t">
+                        <h3 className="text-white text-2xl font=semibold uppercase">
                             Exchange
                         </h3>
                         <button
                             className="bg-transparent border-0 text-white float-right"
                             onClick={() => setShowModal(false)}
                         >
-                            <span className="text-white hover:text-white hover:bg-slate-300 active:bg-red-900 text-white opacity-7 h-6 w-6 text-xl block bg-neutral-700 py-0 rounded-full">
+                            <span className="text-white hover:text-white hover:bg-slate-300 active:bg-red-600 text-white opacity-7 h-6 w-6 text-xl block bg-neutral-700 py-0 rounded-full">
                                 X
                             </span>
                         </button>
                     </div>
 
                     {/* Modal Body */}
-                    <div className="relative p-6 flex-auto">
-                        <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-8 w-full">
-                            <div className="flex mb-4">
+                    <div className="relative p-4 flex-auto">
+                        <form className="bg-black/30 shadow-md rounded-xl px-6 pt-6 pb-4 w-full">
+                            <div className="flex mb-3">
                                 <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
                                 <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
                                     <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
@@ -403,7 +403,7 @@ const BuyWithUsdtModal = () => {
                             {usdtInputBoxError}
                         </form>
                     </div>
-                    <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
+                    <div className="flex items-center justify-center p-4 border-t border-white/10 rounded-b">
                         <button
                             className={`${convertToUsdtButtonClass}`}
                             disabled={convertToUsdtDisabled}
