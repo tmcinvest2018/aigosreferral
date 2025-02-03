@@ -169,10 +169,10 @@ export default function SeedSale() {
             setDisplayPresaleData(null);
             setDisplayUserVestingData(userVestingInstance?.HtmlOutput);
             setBuyData(
-                <div className="space-y-4 min-h-0">
+                <div className="space-y-2 min-h-0">
                     {/* Token Purchase Card */}
-                    <div className="bg-black/10 p-5 rounded-xl backdrop-blur-sm border border-white/10 min-h-0">
-                        <div className="flex justify-between items-center mb-4">
+                    <div className="bg-black/10 p-3 rounded-xl backdrop-blur-sm border border-white/10 min-h-0">
+                        <div className="flex justify-between items-center mb-2">
                             <div className="text-left">
                                 <p className="text-sm text-white/70">Current Price</p>
                                 <p className="text-xl font-bold text-white">
@@ -189,7 +189,7 @@ export default function SeedSale() {
                         </div>
                        
                         {/* Buy button wrapped in a styled container */}
-                        <div className="mt-4">
+                        <div className="mt-3">
                             <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
                                 <BuyWithUsdtModal />
                             </div>
@@ -197,8 +197,8 @@ export default function SeedSale() {
                     </div>
 
                     {/* Additional stats */}
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-black/20 p-2 rounded-lg backdrop-blur-sm">
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-black/10 p-4 rounded-lg backdrop-blur-sm">
                             <p className="text-white/70 text-sm">Available</p>
                             <p className="text-white font-bold">
                                 {presaleDataParsed?.inSale ? new Intl.NumberFormat().format(presaleDataParsed.inSale) : '0'} AIGOS
