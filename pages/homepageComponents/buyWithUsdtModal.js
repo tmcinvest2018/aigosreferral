@@ -341,83 +341,84 @@ const BuyWithUsdtModal = () => {
   return (
     <>
       <button
-        className="bg-red-600 text-white hover:text-white hover:bg-red-700 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        BUY AIGOS WITH USDT <FontAwesomeIcon icon={faDollar} className="ml-2" />
-      </button>
-      {showModal ? (
-        <>
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        className="smaller-button bg-red-600 text-white hover:text-white hover:bg-red-700 active:bg-red-900 font-bold uppercase text-base px-8 py-3 rounded-[24px] shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+    type="button"
+    onClick={() => setShowModal(true)}
+>
+    BUY AIGOS WITH USDT <FontAwesomeIcon icon={faDollar} className="ml-2" />
+</button>
+{showModal ? (
+    <>
+        <div className="floating-modal overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/* Modal Content Container */}
-              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray/90 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
+                {/* Modal Content Container */}
+                <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray-800/90 outline-none focus:outline-none border border-white/10">
 
-                {/* Modal Header */}
-                <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
-                  <h3 className="text-white text-3xl font=semibold uppercase">
-                    Exchange
-                  </h3>
-                  <button
-                    className="bg-transparent border-0 text-white float-right"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="text-white hover:text-white hover:bg-slate-300 active:bg-red-900 text-white opacity-7 h-6 w-6 text-xl block bg-neutral-700 py-0 rounded-full">
-                      X
-                    </span>
-                  </button>
-                </div>
+                    {/* Modal Header */}
+                    <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
+                        <h3 className="text-white text-3xl font=semibold uppercase">
+                            Exchange
+                        </h3>
+                        <button
+                            className="bg-transparent border-0 text-white float-right"
+                            onClick={() => setShowModal(false)}
+                        >
+                            <span className="text-white hover:text-white hover:bg-slate-300 active:bg-red-900 text-white opacity-7 h-6 w-6 text-xl block bg-neutral-700 py-0 rounded-full">
+                                X
+                            </span>
+                        </button>
+                    </div>
 
-                {/* Modal Body */}
-                <div className="relative p-6 flex-auto">
-                  <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-8 w-full">
-<div className="flex mb-4">
-                      <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
-                      <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
-                        <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
-                          <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                            <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
-                          </g>
-                        </svg>
-                        <svg className="relative inline-flex rounded-full h-8 w-8" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
-                          <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                            <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
-                          </g>
-                        </svg>
-                        TOKEN
-                      </span>
+                    {/* Modal Body */}
+                    <div className="relative p-6 flex-auto">
+                        <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-8 w-full">
+                            <div className="flex mb-4">
+                                <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
+                                <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
+                                    <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                            <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
+                                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
+                                        </g>
+                                    </svg>
+                                    <svg className="relative inline-flex rounded-full h-8 w-8" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                            <path d="M320 1225 l0 -895 95 0 95 0 0 -112 0 -113 113 113 112 112 688 0 687 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
+                                            <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
+                                        </g>
+                                    </svg>
+                                    TOKEN
+                                </span>
+                            </div>
+                            <div className="reduced-spacing flex mb-2">
+                                <input type="number" value={usdt.toFixed(6)} disabled readonly
+                                    className={`${usdtInputBoxClassName}`}
+                                />
+                                <span className="inline-flex items-center px-3 text-sm text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
+                                    <svg className="hover:animate-ping w-9 h-9 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
+                                    <svg className="relative inline-flex rounded-full w-9 h-9" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
+                                    USDT<span className="text-gray-200">-</span>
+                                </span>
+                            </div>
+                            {usdtInputBoxError}
+                        </form>
                     </div>
-                    <div className="flex">
-                      <input type="number" value={usdt.toFixed(6)} disabled readonly
-                        className={`${usdtInputBoxClassName}`}
-                      />
-                      <span className="inline-flex items-center px-3 text-sm text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
-                         <svg className="hover:animate-ping w-9 h-9 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
-                          <svg className="relative inline-flex rounded-full w-9 h-9" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
-                        USDT<span className="text-gray-200">-</span>
-                      </span>
+                    <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
+                        <button
+                            className={`${convertToUsdtButtonClass}`}
+                            disabled={convertToUsdtDisabled}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (accountAllowancePublic >= usdtAllowanceHelper)
+                                    buyWithUsdt?.();
+                                else
+                                    usdtAllowanceWrite?.()
+                            }}>
+                            {accountAllowancePublic >= usdtAllowanceHelper ? 'BUY WITH USDT' : 'APPROVE SPENDING USDT'}
+                        </button>
                     </div>
-                    {usdtInputBoxError}
-                  </form>
-                </div>
-                <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
-                  <button
-                    className={`${convertToUsdtButtonClass}`}
-disabled={convertToUsdtDisabled}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (accountAllowancePublic >= usdtAllowanceHelper)
-                        buyWithUsdt?.();
-                      else
-                        usdtAllowanceWrite?.()
-                    }}>
-                    {accountAllowancePublic >= usdtAllowanceHelper ? 'BUY WITH USDT' : 'APPROVE SPENDING USDT'}
-                  </button>
-                </div>
-                {convertToUsdtInProcessText}
+                    {convertToUsdtInProcessText}
+
                               </div>
                             </div>
                           </div>
