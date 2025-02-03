@@ -350,12 +350,12 @@ const BuyWithUsdtModal = () => {
       {showModal ? (
         <>
           <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-auto my-4 mx-auto max-w-xl">
               {/* Modal Content Container */}
               <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-black/40 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
 
                 {/* Modal Header */}
-                <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
+                <div className="flex items-start justify-between p-3 border-b border-white/10 rounded-t">
                   <h3 className="text-white text-3xl font=semibold uppercase">
                     Exchange
                   </h3>
@@ -370,8 +370,8 @@ const BuyWithUsdtModal = () => {
                 </div>
 
                 {/* Modal Body */}
-                <div className="relative p-6 flex-auto">
-                  <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-8 w-full">
+                <div className="relative p-4 flex-auto">
+                  <form className="bg-black/30 shadow-md rounded-xl px-8 pt-6 pb-4 w-full">
 <div className="flex mb-4">
                       <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
                       <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
@@ -406,7 +406,7 @@ const BuyWithUsdtModal = () => {
                 <div className="flex items-center justify-center p-6 border-t border-white/10 rounded-b">
                   <button
                     className={`${convertToUsdtButtonClass}`}
-disabled={convertToUsdtDisabled}
+                    disabled={convertToUsdtDisabled}
                     onClick={(e) => {
                       e.preventDefault();
                       if (accountAllowancePublic >= usdtAllowanceHelper)
