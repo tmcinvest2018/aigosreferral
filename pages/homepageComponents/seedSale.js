@@ -171,7 +171,7 @@ export default function SeedSale() {
             setBuyData(
                 <div className="space-y-6">
                     {/* Token Purchase Card */}
-                    <div className="bg-black/30 p-10 rounded-xl backdrop-blur-sm border border-white/10">
+                    <div className="bg-black/30 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                         <div className="flex justify-between items-center mb-4">
                             <div className="text-left">
                                 <p className="text-sm text-white/70">Current Price</p>
