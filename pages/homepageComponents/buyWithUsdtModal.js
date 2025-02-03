@@ -352,27 +352,27 @@ const BuyWithUsdtModal = () => {
         <div className="floating-modal overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-4 mx-auto max-w-3xl">
                 {/* Modal Content Container */}
-                <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray-800 outline-none focus:outline-none border border-white/6">
+                <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-gray-800 outline-none focus:outline-none border border-white/6">
 
                     {/* Modal Header */}
-                    <div className="flex items-start justify-between p-3 border-b border-white/6 rounded-t">
-                        <h3 className="text-white text-2xl font=semibold uppercase">
+                    <div className="flex items-start justify-between p-2 border-b border-white/4 rounded-t">
+                        <h3 className="text-white text-1xl font=semibold uppercase">
                             Exchange
                         </h3>
                         <button
                             className="bg-transparent border-0 text-white float-right"
                             onClick={() => setShowModal(false)}
                         >
-                            <span className="text-white hover:text-white hover:bg-slate-300 active:bg-red-600 text-white opacity-7 h-6 w-6 text-xl block bg-neutral-700 py-0 rounded-full">
+                            <span className="text-white hover:text-white hover:bg-slate-200 active:bg-red-400 text-white opacity-7 h-4 w-4 text-sm block bg-neutral-500 py-0 rounded-full">
                                 X
                             </span>
                         </button>
                     </div>
 
                     {/* Modal Body */}
-                    <div className="relative p-4 flex-auto">
-                        <form className="bg-black/30 shadow-md rounded-xl px-6 pt-6 pb-4 w-full">
-                            <div className="flex mb-3">
+                    <div className="relative p-2 flex-auto">
+                        <form className="bg-black/30 shadow-md rounded-xl px-4 pt-4 pb-2 w-full">
+                            <div className="flex mb-2">
                                 <input type="number" value={tokens} onChange={(e) => setTokens(e.target.value)} className="rounded-none rounded-l-lg bg-gray-700 border text-white focus:border-red-500 block flex-1 min-w-0 w-full text-sm border-gray-600 p-2.5 placeholder-gray-400 focus:ring-red-500" />
                                 <span className="inline-flex items-center px-3 text-sm w-50 text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
                                     <svg className="hover:animate-ping w-8 h-8 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" version="1.0" width="240.000000pt" height="240.000000pt" viewBox="0 0 240.000000 240.000000" preserveAspectRatio="xMidYMid meet">
@@ -394,9 +394,9 @@ const BuyWithUsdtModal = () => {
                                 <input type="number" value={usdt.toFixed(6)} disabled readonly
                                     className={`${usdtInputBoxClassName}`}
                                 />
-                                <span className="inline-flex items-center px-3 text-sm text-white bg-gray-700 rounded-r-md border border-r-0 border-gray-600">
-                                    <svg className="hover:animate-ping w-9 h-9 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
-                                    <svg className="relative inline-flex rounded-full w-9 h-9" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
+                                <span className="inline-flex items-center px-3 text-sm text-white bg-gray-500 rounded-r-md border border-r-0 border-gray-400">
+                                    <svg className="hover:animate-ping w-7 h-7 absolute inline-flex h-full w-full rounded-full opacity-75" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
+                                    <svg className="relative inline-flex rounded-full w-7 h-7" xmlns="http://www.w3.org/2000/svg" width="2000" height="1750" viewBox="0 0 2000 1750"><path fill="#53ae94" d="M1632.3 0 367.7 0 0 785.98 1000 1750 2000 785.98 1632.3 0z" /><path d="M1138.88,626.12V473.58H1487.7V241.17H537.87V473.58H886.72V626C603.2,639,390,695.17,390,762.43S603.3,885.85,886.72,899v488.59H1139V898.91c283-13.06,495.75-69.17,495.75-136.38S1422,639.22,1139,626.16m0,231.37v-.13c-7.11.45-43.68,2.65-125.09,2.65-65.09,0-110.89-1.85-127-2.69v.21C636.36,846.47,449.4,802.85,449.4,750.66s187-95.75,437.44-106.86V814.11c16.41,1.13,63.33,3.9,128.09,3.9,77.79,0,116.9-3.24,124.07-3.9V643.8c250,11.13,436.53,54.79,436.53,106.8S1388.91,846.29,1139,857.42" fill="#fff" /></svg>
                                     USDT<span className="text-gray-200">-</span>
                                 </span>
                             </div>
