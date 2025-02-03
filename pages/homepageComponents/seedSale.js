@@ -169,9 +169,9 @@ export default function SeedSale() {
             setDisplayPresaleData(null);
             setDisplayUserVestingData(userVestingInstance?.HtmlOutput);
             setBuyData(
-                <div className="space-y-6">
+                <div className="space-y-4">
                     {/* Token Purchase Card */}
-                    <div className="bg-gray/10 p-18 rounded-xl backdrop-blur-sm border border-white/10">
+                    <div className="bg-black/10 p-5 rounded-xl backdrop-blur-sm border border-white/10">
                         <div className="flex justify-between items-center mb-4">
                             <div className="text-left">
                                 <p className="text-sm text-white/70">Current Price</p>
@@ -179,7 +179,7 @@ export default function SeedSale() {
                                     {presaleDataParsed?.price?.toFixed(4) || '0.0000'}$ per AIGOS
                                 </p>
                             </div>
-                            <div className="bg-red-600/20 p-3 rounded-full">
+                            <div className="bg-red-600/20 p-2 rounded-full">
                                 <svg className="w-8 h-8 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
                                     <g transform="translate(0,240) scale(0.1,-0.1)" fill="currentColor">
                                         <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
@@ -189,7 +189,7 @@ export default function SeedSale() {
                         </div>
                         
                         {/* Buy button wrapped in a styled container */}
-                        <div className="mt-6">
+                        <div className="mt-4">
                             <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
                                 <BuyWithUsdtModal />
                             </div>
@@ -198,7 +198,7 @@ export default function SeedSale() {
 
                     {/* Additional stats */}
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
+                        <div className="bg-black/20 p-2 rounded-lg backdrop-blur-sm">
                             <p className="text-white/70 text-sm">Available</p>
                             <p className="text-white font-bold">
                                 {presaleDataParsed?.inSale ? new Intl.NumberFormat().format(presaleDataParsed.inSale) : '0'} AIGOS
@@ -221,7 +221,7 @@ export default function SeedSale() {
             <div className="space-y-4">
                 <div className="inline-block px-4 py-1 bg-red-600/20 rounded-full">
                     <h2 className="text-white font-medium text-sm md:text-base">
-                        ✅ 1st May 2024 to sell out (or 31 Jan 2023)
+                        ✅ 1st March 2025 to sell out (or 31st May 2025)
                     </h2>
                 </div>
 
