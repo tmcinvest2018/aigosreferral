@@ -138,7 +138,7 @@ export default function SeedSale() {
             // Not connected state
             setDisplayPresaleData(
                 <div className="space-y-6">
-                    <div className="w-full bg-gray-700 rounded-full overflow-hidden">
+                    <div className="w-full bg-gray-700 rounded-full">
                         <div 
                             className="bg-red-600 text-xs font-medium text-white text-center p-1.5 rounded-full transition-all duration-500"
                             style={{ width: presaleDataParsed?.salePercentageParsed || '0%' }}
