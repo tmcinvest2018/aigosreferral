@@ -137,7 +137,7 @@ export default function SeedSale() {
         if (!useAccountAddress) {
             // Not connected state
             setDisplayPresaleData(
-                <div className="space-y-4">
+                <div className="space-y-6">
                     <div className="w-full bg-gray-700 rounded-full overflow-hidden">
                         <div 
                             className="bg-red-600 text-xs font-medium text-white text-center p-1.5 rounded-full transition-all duration-500"
