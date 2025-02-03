@@ -349,7 +349,7 @@ const BuyWithUsdtModal = () => {
       </button>
       {showModal ? (
         <>
-          <div className="flex justify-center items-center fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/* Modal Content Container */}
               <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray/90 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
