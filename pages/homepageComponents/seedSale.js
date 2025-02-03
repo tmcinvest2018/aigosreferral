@@ -169,9 +169,9 @@ export default function SeedSale() {
             setDisplayPresaleData(null);
             setDisplayUserVestingData(userVestingInstance?.HtmlOutput);
             setBuyData(
-                <div className="space-y-4">
+                <div className="space-y-4 min-h-0">
                     {/* Token Purchase Card */}
-                    <div className="bg-black/10 p-5 rounded-xl backdrop-blur-sm border border-white/10">
+                    <div className="bg-black/10 p-5 rounded-xl backdrop-blur-sm border border-white/10 min-h-0">
                         <div className="flex justify-between items-center mb-4">
                             <div className="text-left">
                                 <p className="text-sm text-white/70">Current Price</p>
@@ -187,7 +187,7 @@ export default function SeedSale() {
                                 </svg>
                             </div>
                         </div>
-                        
+                       
                         {/* Buy button wrapped in a styled container */}
                         <div className="mt-4">
                             <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
