@@ -349,10 +349,10 @@ const BuyWithUsdtModal = () => {
       </button>
       {showModal ? (
         <>
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] md:w-[50%]">
+          <div className="fixed z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/* Modal Content Container */}
-              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray outline-none focus:outline-none backdrop-blur-sm border border-white/10">
+              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-gray/90 outline-none focus:outline-none backdrop-blur-sm border border-white/10">
 
                 {/* Modal Header */}
                 <div className="flex items-start justify-between p-5 border-b border-white/10 rounded-t">
