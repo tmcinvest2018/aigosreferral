@@ -11,7 +11,7 @@ export default function Menu() {
             >
                 {/* Brand Logo */}
                 <Navbar.Brand href="#">
-                    <img src="/images/logo1.png" style={{ width: '2.5rem' }} className="mr-2 hover:opacity-80 transition-opacity" alt="AIGOS LOGO" />
+                    <img src="/logo1.png" style={{ width: '2.5rem' }} className="mr-2 hover:opacity-80 transition-opacity" alt="AIGOS LOGO" />
                 </Navbar.Brand>
 
                 {/* Join Presale Button and Menu Button */}

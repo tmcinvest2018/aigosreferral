@@ -18,27 +18,27 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { Analytics } from '@vercel/analytics/react';
 
-const binanceChainTestNet: Chain = {
-  id: 97,
-  name: 'BNB Smart Chain Testnet',
-  network: 'bsc-testnet',
+const binanceSmartChain: Chain = {
+  id: 56,
+  name: 'BNB Smart Chain',
+  network: 'bsc',
   nativeCurrency: {
     decimals: 18,
     name: 'Binance Chain Native Token',
-    symbol: 'tBNB',
+    symbol: 'BNB',
   },
   rpcUrls: {
-    public: 'https://data-seed-prebsc-1-s2.binance.org:8545/',
-    default: 'https://data-seed-prebsc-1-s2.binance.org:8545/',
+    public: 'https://bsc-dataseed.binance.org/',
+    default: 'https://bsc-dataseed.binance.org/',
   },
   blockExplorers: {
-    default: { name: 'BscScan', url: 'https://testnet.bscscan.com' },
+    default: { name: 'BscScan', url: 'https://bscscan.com' },
   },
-  testnet: true,
+  testnet: false,
 };
 
 const { chains, provider } = configureChains(
-  [binanceChainTestNet],
+  [binanceSmartChain],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
     publicProvider()

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Typewriter from "typewriter-effect";
 
 const calculateTimeLeft = () => {
-  const targetDate = new Date("2025-05-01");
+  const targetDate = new Date("2025-03-03");
   const currentDate = new Date();
   const difference = targetDate - currentDate;
   return difference > 0 ? Math.floor(difference / 1000) : 0;
@@ -38,7 +38,9 @@ export default function HomeSection() {
       {/* Content */}
       <div className="relative z-10 max-w-2xl">
         <h5 className="uppercase text-lg md:text-xl mb-4 tracking-wider font-semibold">
+        <p className="text-orange-400 font-semibold text-lg mt-6 animate-pulse">
           Cross Chain revolution connecting EVM and Bitcoin
+          </p>
         </h5>
         <h4 className="text-4xl md:text-5xl font-bold mb-8">
           <Typewriter
@@ -68,8 +70,7 @@ export default function HomeSection() {
 
         {/* Notice */}
         <p className="text-orange-400 font-semibold text-lg mt-6 animate-pulse">
-          Price increases 15% every 10 DAYS
-        </p>
+          </p>
 
         {/* Features */}
         <div className="mt-6 space-y-2 text-lg">
@@ -85,7 +86,7 @@ export default function HomeSection() {
 
         {/* Telegram Button */}
         <a
-          href="https://t.me/Otje86"
+          href="https://t.me/AIGOS2025"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-6 inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-transform duration-300 hover:scale-105"

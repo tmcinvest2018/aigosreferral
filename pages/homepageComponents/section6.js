@@ -26,15 +26,15 @@ export default function Section6() {
                             <strong>Why Aigos?</strong><br />
                             🚀 **Revolutionary Blockchain Technology:** Aigos is building the future of **cross-chain finance and AI-powered trading**.<br />
                             🎮 **GameFi & NFTs:** Aigos integrates **Metaverse gaming** and NFT ecosystems for next-level Web3 experiences.<br />
-                            🔥 **Presale is LIVE!** Join the **Aigos presale** today and invest early before the price pumps.<br /><br />
-                            Whether you’re looking to <strong>buy Aigos tokens</strong>, explore our **roadmap**, or check our latest **whitepaper**, 
-                            Aigos is the ultimate **crypto investment opportunity** in 2024.
+                            🔥 **Presale is LIVE!** Join the **Aigos presale** today.<br /><br />
+                            Whether you’re looking to <strong>buy AGS tokens</strong>, explore our **roadmap**, or check our latest **whitepaper**, 
+                            Aigos is the ultimate **crypto investment opportunity** in 2025.
                         </p>
 
                         {/* Call-to-Actions */}
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <a
-                                href="https://twitter.com/xtmcswap/"
+                                href="https://twitter.com/aigos2024/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -43,7 +43,7 @@ export default function Section6() {
                             </a>
 
                             <a
-                                href="https://t.me/Otje86"
+                                href="https://t.me/AIGOS2025"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-gradient-to-r from-teal-500 to-green-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"

@@ -26,7 +26,7 @@ export default function Section2() {
 
         {/* Telegram Support Button */}
         <a
-          href="https://t.me/Otje86"
+          href="https://t.me/AIGOS2025"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-transform duration-300 hover:scale-105"

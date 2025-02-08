@@ -43,19 +43,14 @@ export default function SeedSale() {
                 return (
                     <div className="flex items-center p-4 space-x-4 w-full text-white bg-black/40 rounded-lg shadow-lg backdrop-blur-sm border border-white/10 transform hover:scale-105 transition-all duration-300">
                         <div className="bg-red-600/20 p-2 rounded-full">
-                            <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0,240) scale(0.1,-0.1)" fill="currentColor">
-                                    <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                                    <path d="M1047 1551 c-3 -9 -48 -137 -101 -286 -53 -148 -96 -277 -96 -285 0 -8 46 31 103 87 58 58 118 109 140 118 30 12 78 15 247 15 235 -1 259 4 307 67 20 26 28 50 31 93 5 72 -16 121 -70 161 -48 34 -76 37 -350 42 -180 3 -207 1 -211 -12z" />
-                                </g>
-                            </svg>
+                        <img src="/logo1.png" alt="AIGOS LOGO" className="w-12 h-12" />
                         </div>
                         <div className="flex-1">
                             <p className="font-semibold text-lg">
-                                {new Intl.NumberFormat().format(this.totalAmount)} AIGOS
+                            {new Intl.NumberFormat().format(this.totalAmount)} AGS
                             </p>
                             <p className="text-red-400 text-sm">
-                                Your current token balance
+                            Your current token balance
                             </p>
                         </div>
                     </div>
@@ -176,15 +171,14 @@ export default function SeedSale() {
                             <div className="text-left">
                                 <p className="text-sm text-white/70">Current Price</p>
                                 <p className="text-xl font-bold text-white">
-                                    {presaleDataParsed?.price?.toFixed(4) || '0.0000'}$ per AIGOS
+                                    {presaleDataParsed?.price?.toFixed(4) || '0.0000'}$ per AGS
                                 </p>
                             </div>
                             <div className="bg-red-600/20 p-3 rounded-full">
-                                <svg className="w-8 h-8 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+                <img src="/logo1.png" alt="AIGOS LOGO" className="w-8 h-8" />
                                     <g transform="translate(0,240) scale(0.1,-0.1)" fill="currentColor">
                                         <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
                                     </g>
-                                </svg>
                             </div>
                         </div>
                         
@@ -201,13 +195,13 @@ export default function SeedSale() {
                         <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
                             <p className="text-white/70 text-sm">Available</p>
                             <p className="text-white font-bold">
-                                {presaleDataParsed?.inSale ? new Intl.NumberFormat().format(presaleDataParsed.inSale) : '0'} AIGOS
+                                {presaleDataParsed?.inSale ? new Intl.NumberFormat().format(presaleDataParsed.inSale) : '0'} AGS
                             </p>
                         </div>
                         <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
                             <p className="text-white/70 text-sm">Total Sold</p>
                             <p className="text-white font-bold">
-                                {presaleDataParsed?.tokensSoldParsed || '0'} AIGOS
+                                {presaleDataParsed?.tokensSoldParsed || '0'} AGS
                             </p>
                         </div>
                     </div>
@@ -221,16 +215,16 @@ export default function SeedSale() {
             <div className="space-y-4">
                 <div className="inline-block px-4 py-1 bg-red-600/20 rounded-full">
                     <h2 className="text-white font-medium text-sm md:text-base">
-                        ✅ 1st May 2024 to sell out (or 31 Jan 2023)
+                        ✅ 3rd March 2025 until sold out ✅
                     </h2>
                 </div>
 
                 <div className="space-y-2">
                     <h3 className="text-white font-bold text-xl md:text-3xl">
-                        AIGOS Seed Sale
+                        AIGOS Presale
                     </h3>
                     <p className="text-red-400 text-sm md:text-base animate-pulse">
-                        Hurry and buy before seed sale sells out
+                        Hurry and buy before Aigos sells out
                     </p>
                 </div>
             </div>

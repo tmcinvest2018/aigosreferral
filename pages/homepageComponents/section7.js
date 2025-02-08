@@ -58,9 +58,15 @@ export default function Section7() {
                             For a more comprehensive description of Aigos tokenomics<br />
                             please read our whitepaper and other documentation.
                         </p>
-                        <h5 className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mb-6">
-                            Tokenomics
-                        </h5>
+                        <a 
+  href="https://app.gitbook.com/o/yqUbOel7cKSc7nG27CmG/s/3yVxGJYkHQNdFGrgrg4y/tokenomics" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <h5 className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mb-6">
+    Tokenomics
+  </h5>
+</a>
                         <h5 className="uppercase text-red-300 font-bold text-lg md:text-xl mb-8">
                             Total supply: 1,000,000,000
                         </h5>
