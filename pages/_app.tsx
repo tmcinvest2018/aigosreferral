@@ -19,7 +19,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import { Analytics } from '@vercel/analytics/react';
 
 const binanceSmartChain: Chain = {
-  id: 56,
+  id: 97,
   name: 'BNB Smart Chain',
   network: 'bsc',
   nativeCurrency: {
@@ -34,7 +34,7 @@ const binanceSmartChain: Chain = {
   blockExplorers: {
     default: { name: 'BscScan', url: 'https://bscscan.com' },
   },
-  testnet: false,
+  testnet: true,
 };
 
 const { chains, provider } = configureChains(
