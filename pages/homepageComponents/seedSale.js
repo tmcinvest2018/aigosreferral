@@ -1,20 +1,20 @@
-// pages/homepageComponents/SeedSale.js
-import {
+ // pages/homepageComponents/SeedSale.js
+ import {
     useAccount,
     useContractRead,
-} from "wagmi";
-import { useState, useEffect } from "react";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import React from 'react';
-import BuyWithUsdtModal from "./buyWithUsdtModal"; // Correct relative import
-import { formatUnits } from 'ethers/lib/utils';
-
-// Import ABIs
-import presaleABI from '../../contracts/presaleABI.json'; // Path from SeedSale.js
-
-export default function SeedSale() {
+    } from "wagmi";
+    import { useState, useEffect } from "react";
+    import { ConnectButton } from '@rainbow-me/rainbowkit';
+    import React from 'react';
+    import BuyWithUsdtModal from "./buyWithUsdtModal"; // Correct relative import
+    import { formatUnits } from 'ethers/lib/utils';
+    
+    // Import ABIs
+    import presaleABI from '../../contracts/presaleABI.json'; // Path from SeedSale.js
+    
+    export default function SeedSale() {
     const { address, isConnected } = useAccount();
-
+    
     const { data: userVestingData, isLoading: userVestingIsLoading, isError: userVestingIsError, error: userVestingError } = useContractRead({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: presaleABI, // Use the imported ABI
@@ -23,14 +23,14 @@ export default function SeedSale() {
       watch: true,
       enabled: Boolean(address), // Only fetch if connected
     });
-
+    
     //Error handling
     useEffect(() => {
       if (userVestingIsError) {
           console.error("userVestingData error", userVestingError)
       }
     }, [userVestingIsError, userVestingError]);
-
+    
     const { data: presaleData, isLoading: presaleIsLoading, isError: presaleDataIsError, error: presaleDataError } = useContractRead({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: presaleABI, // Use the imported ABI
@@ -44,30 +44,29 @@ export default function SeedSale() {
             console.error("Presale data read error:", presaleDataError);
         }
     }, [presaleDataIsError, presaleDataError]);
-
+    
     // --- State ---
     const [presale, setPresale] = useState(null);
     const [userVesting, setUserVesting] = useState(null);
-
-
-  useEffect(() => {
+     
+    useEffect(() => {
     if (presaleData && Array.isArray(presaleData) && presaleData.length === 12) {
-        const [
-            saleToken,
-            startTime,
-            endTime,
-            price,
-            tokensToSell,
-            baseDecimals,
-            inSale,
-            vestingStartTime,
-            vestingCliff,
-            vestingPeriod,
-            enableBuyWithEth,
-            enableBuyWithUsdt
-        ] = presaleData;
-
-        const newPresale = {
+    const [
+    saleToken,
+    startTime,
+    endTime,
+    price,
+    tokensToSell,
+    baseDecimals,
+    inSale,
+    vestingStartTime,
+    vestingCliff,
+    vestingPeriod,
+    enableBuyWithEth,
+    enableBuyWithUsdt
+    ] = presaleData;
+    
+    const newPresale = {
             saleToken: String(saleToken),
             startTime: new Date(Number(startTime) * 1000),
             endTime: new Date(Number(endTime) * 1000),
@@ -90,29 +89,30 @@ export default function SeedSale() {
             salePercentage: Number((BigInt(tokensToSell) - BigInt(inSale)) * 100n / BigInt(tokensToSell)),
             salePercentageParsed:  ((Number((BigInt(tokensToSell) - BigInt(inSale)) * 100n / BigInt(tokensToSell))).toFixed(2)) + "%",
         };
-
+    
         setPresale(newPresale);
     }  else if (!presaleData) {
       setPresale(null)
     }
-}, [presaleData]);
-
-useEffect(() => {
+     
+    }, [presaleData]);
+    
+    useEffect(() => {
     if (userVestingData && Array.isArray(userVestingData) && userVestingData.length === 4)
     {
-      const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
-        const newUserVesting = {
-            totalAmount: Number(formatUnits(BigInt(totalAmount), 18)),  // Format: Convert BigInt to number
-            claimedAmount: Number(claimedAmount),
-            claimStart: new Date(Number(claimStart) * 1000),
-            claimEnd: new Date(Number(claimEnd) * 1000),
-        };
-        setUserVesting(newUserVesting);
+    const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
+    const newUserVesting = {
+    totalAmount: Number(formatUnits(BigInt(totalAmount), 18)),  // Format: Convert BigInt to number
+    claimedAmount: Number(claimedAmount),
+    claimStart: new Date(Number(claimStart) * 1000),
+    claimEnd: new Date(Number(claimEnd) * 1000),
+    };
+    setUserVesting(newUserVesting);
     } else if (!userVestingData){
-      setUserVesting(null);
+    setUserVesting(null);
     }
-}, [userVestingData]);
-
+    }, [userVestingData]);
+    
     return (
         <div className="text-center space-y-6">
             <div className="space-y-4">
@@ -129,7 +129,7 @@ useEffect(() => {
                     </p>
                 </div>
             </div>
-
+    
             {/* Display presale data when not connected */}
             {!isConnected && presale && (
                 <div className="space-y-4">
@@ -186,7 +186,7 @@ useEffect(() => {
                 <img src="/logo1.png" alt="AIGOS LOGO" className="w-8 h-8" />
                             
                         </div>
-
+    
                         <div className="mt-6">
                             <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
                                 <BuyWithUsdtModal />
@@ -212,10 +212,11 @@ useEffect(() => {
                     ) : null}
                 </div>
             )}
-
+    
             <div className="flex justify-center">
                 <ConnectButton />
             </div>
         </div>
     );
-}
+     
+    }
