@@ -1,3 +1,4 @@
+import React from 'react';
 import Menu from "./homepageComponents/menu.js";
 import HomeSection from "./homepageComponents/home.js";
 import Section4 from "./homepageComponents/section4.js";

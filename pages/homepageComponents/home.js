@@ -53,7 +53,11 @@ export default function HomeSection() {
           />
         </h4>
 
+       
+       {/* Title */}
+       <h2 className="text-lg text-white font-bold mb-4">PRESALE STARTS IN:</h2>
         {/* Countdown */}
+        <div className="flex flex-col items-center text-white">
         <div className="flex justify-center gap-4 text-center bg-white/10 backdrop-blur-md rounded-lg p-6">
           {[
             { label: "Days", value: days },
@@ -66,6 +70,7 @@ export default function HomeSection() {
               <span className="text-sm text-gray-300">{unit.label}</span>
             </div>
           ))}
+        </div>
         </div>
 
         {/* Notice */}

@@ -1,6 +1,5 @@
-// Rainbow and Wagmi integration guide: https://billyjitsu.hashnode.dev/the-rainbowkit-wagmi-guide-i-wish-i-had
-import
-{
+// pages/utils/PresaleManager.js
+import {
     useAccount,
     useContractRead,
     useContractWrite,
@@ -9,392 +8,350 @@ import
 } from "wagmi";
 import { useState, useEffect } from "react";
 import SeedSale from '../homepageComponents/seedSale';
+import { parseUnits, formatUnits } from 'ethers/lib/utils';
+import presaleABI from '../../contracts/presaleABI.json';
+import StableCoinABI from '../../contracts/StableCoinABI.json';
 
-export default function PresaleManager()
-{
-    const { address: useAccountAddress, connector: useAccountActiveConnector, isConnected: useAccountIsConnected } = useAccount()
 
-    /**
-     * @fn Log
-     * @brief Log to console
-     */
-    function Log(stringToLog)
-    {
-        const timeElapsed = Date.now();
-        const today = new Date(timeElapsed);
-        console.log(today.toUTCString() + " | " + stringToLog);
-    }
+export default function PresaleManager() {
+    const { address, isConnected } = useAccount();
 
-    /**
-    * @class Presale
-    * @brief Presale Data
-    */
-    class Presale
-    {
-        constructor(presaleData)
-        {
-            this.preSaleDataLocal = presaleData;
-            if (this.preSaleDataLocal)
-            {
-                var presaleSplit = presaleData.toString().split(",");
-                var counter = 0;
-                this.saleToken = presaleSplit[counter++];
-                this.startTime = new Date(presaleSplit[counter++] * 1000);
-                this.endTime = new Date(presaleSplit[counter++] * 1000);
-                this.price = (presaleSplit[counter++] / (10 ** 18));
-                this.tokensToSell = presaleSplit[counter++];
-                this.presaleGoal = this.tokensToSell * this.price;
-                this.baseDecimals = presaleSplit[counter++];
-                this.inSale = presaleSplit[counter++];
-                this.tokensSold = this.tokensToSell - this.inSale;
-                this.vestingStartTime = new Date(presaleSplit[counter++] * 1000);
-                this.vestingCliff = presaleSplit[counter++];
-                this.vestingPeriod = presaleSplit[counter++];
-                this.enableBuyWithEth = Boolean(parseInt(presaleSplit[counter++]));
-                this.enableBuyWithUsdt = Boolean(parseInt(presaleSplit[counter++]));
-            }
-        }
-
-        get HtmlOutput()
-        {
-            if (this.preSaleDataLocal)
-            {
-                return (
-                    <>
-                        <p>Sale Token: {this.saleToken}</p>
-                        <p>startTime: {this.startTime.toLocaleString("default")}</p>
-                        <p>endTime: {this.endTime.toLocaleString("default")}</p>
-                        <p>price: {this.price.toFixed(3)}$ per Token</p>
-                        <p>tokensToSell: {new Intl.NumberFormat().format(this.tokensToSell)}Token</p>
-                        <p>inSale: {new Intl.NumberFormat().format(this.inSale)} Token</p>
-                        <p>tokensSold: {new Intl.NumberFormat().format(this.tokensSold)}Token</p>
-                        <p>presaleGoal: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(this.presaleGoal)} $</p>
-                        <p>baseDecimals: {this.baseDecimals}</p>
-                        <p>vestingStartTime: {this.vestingStartTime.toLocaleString("default")}</p>
-                        <p>vestingCliff: {this.vestingCliff}</p>
-                        <p>vestingPeriod: {this.vestingPeriod}</p>
-                        <p>enableBuyWithEth: {this.enableBuyWithEth.toString()}</p>
-                        <p>enableBuyWithUsdt: {this.enableBuyWithUsdt.toString()}</p>
-                    </>
-                )
-            }
-            else return (<></>);
-        }
-    }
-
-    /**
-* @class UserVesting
-* @brief User Vesting Data
-*/
-    class UserVesting
-    {
-        constructor(userVestingData)
-        {
-            this.userVestingDataLocal = userVestingData;
-            if (userVestingData)
-            {
-                var userVestingSplit = userVestingData.toString().split(",");
-                var counter = 0;
-                this.totalAmount = userVestingSplit[counter++] / (10 ** 18);
-                this.claimedAmount = userVestingSplit[counter++];
-                this.claimStart = new Date(userVestingSplit[counter++] * 1000);
-                this.claimEnd = new Date(userVestingSplit[counter++] * 1000);
-            }
-        }
-
-        get HtmlOutput()
-        {
-            if (this.userVestingDataLocal)
-            {
-                return (
-                    <>
-                        <p>totalAmount: {new Intl.NumberFormat().format(this.totalAmount)} Token</p>
-                        <p>claimedAmount: {new Intl.NumberFormat().format(this.claimedAmount)} Token</p>
-                        <p>claimStart: {this.claimStart.toLocaleString("default")}</p>
-                        <p>claimEnd: {this.claimEnd.toLocaleString("default")}</p>
-                    </>
-                )
-            }
-            else
-            {
-                return (<></>);
-            }
-        }
-    }
-
-    /*!
-    * @fn printPresaleData
-    * @brief Print Presale Data
-    */
-    function printPresaleData(presaleData)
-    {
-        var preSale = new Presale(presaleData);
-        setPresaleDataParsed(preSale.HtmlOutput);
-    }
-
-    /*!
-    * @fn printUserVestingData
-    * @brief Print User Vesting Data
-    */
-    function printUserVestingData(userVestingData)
-    {
-        var userVesting = new UserVesting(userVestingData);
-        setUserVestingParsed(userVesting.HtmlOutput);
-    }
-
-    /* User Vesting */
-    const [userVestingParsed, setUserVestingParsed] = useState(0);
-    const { data: userVestingData,
-        error: userVestingDataError,
-        isError: userVestingDataIsError,
-        isLoading: userVestingDataIsLoading
+    // --- Presale Data ---
+    const {
+        data: presaleData,
+        isLoading: presaleIsLoading,
+        isError: presaleIsError,
+        error: presaleError
     } = useContractRead({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: presaleABI, // Use imported ABI
+        functionName: "presale",
+        args: [process.env.NEXT_PUBLIC_PRESALE_ID],
+        watch: true,
+        enabled: Boolean(address), // Only run when connected
+    });
+     useEffect(() => {
+    if (presaleIsError) {
+      console.error("Presale Data Read Error:", presaleError);
+    }
+  }, [presaleIsError, presaleError]);
+
+    // --- User Vesting Data ---
+    const {
+        data: userVestingData,
+        isLoading: userVestingIsLoading,
+        isError: userVestingIsError,
+        error: userVestingError
+    } = useContractRead({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: presaleABI, // Use imported ABI
         functionName: "userVesting",
-        args: [useAccountAddress, process.env.NEXT_PUBLIC_PRESALE_ID],
-        watch: false,
+        args: [address, process.env.NEXT_PUBLIC_PRESALE_ID],
+        watch: true,
+        enabled: Boolean(address), // Only run when connected
     });
+      useEffect(() => {
+        if (userVestingIsError) {
+            console.error("userVestingData error", userVestingError)
+        }
+    }, [userVestingIsError, userVestingError]);
 
-    /* Presale Data */
-    const [presaleDataParsed, setPresaleDataParsed] = useState(0);
-    const { data: presaleData,
-        error: presesaleDataError,
-        isError: presesaleIsError,
-        isLoading: presesaleIsLoading,
-        status: presesaleStatus } = useContractRead({
-            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-            abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-            functionName: "presale",
-            args: [process.env.NEXT_PUBLIC_PRESALE_ID],
-            watch: false,
-        });
-
-    /* ------------------- */
-
-    /* USDT Interface Contract Address */
-    const { data: usdtContractAddress } = useContractRead({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
+    // --- USDT Contract Address ---
+    const { data: usdtContractAddress, error: usdtAddressError } = useContractRead({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: presaleABI, // Use imported ABI.  Same ABI as presale, since it's a function *on* the presale contract.
         functionName: "USDTInterface",
-        watch: false,
+        watch: false, // No need to watch the contract address itself
+        enabled: Boolean(address) // Only fetch if connected
     });
-    /* ------------------- */
-
-    /* Wallet Connected / Disconnected */
-    useEffect(() =>
-    {
-        Log("---> useAccountIsConnected: " + useAccountIsConnected);
-        Log("---> presaleData: " + presaleData);
-        Log("---> presesaleDataError: " + presesaleDataError);
-        Log("---> presesaleIsError: " + presesaleIsError);
-        Log("---> userVestingData: " + userVestingData);
-        Log("---> process.env.NEXT_PUBLIC_PRESALE_ID: " + process.env.NEXT_PUBLIC_PRESALE_ID);
-        if (useAccountIsConnected)
-        {
-            printPresaleData(presaleData);
-            printUserVestingData(userVestingData);
+    useEffect(() => {
+        if (usdtAddressError) {
+            console.error("USDT address error:", usdtAddressError)
         }
-        else
-        {
-            setPresaleDataParsed("");
-        }
-    }, [useAccountActiveConnector,
-        useAccountIsConnected,
-        presaleData,
-        presesaleDataError,
-        presesaleIsError,
-        userVestingData]);
+    }, [usdtAddressError]);
 
-    /* ------------------- */
-    /* Buy with USDT */
-    const [tokens = 10000, setTokens] = useState();
+
+    // --- Buy with USDT ---
+    const [tokens, setTokens] = useState("10000"); // Default to a string, for input handling
     const [usdt, setUsdt] = useState(0);
-    const { data: buyWithUsdtConfig,
-        error: buyWithUsdtPrepareError,
-        isError: buyWithUsdtIsPrepareError,
-        status: buyWithUsdtPrepareStatus } = usePrepareContractWrite({
-            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-            abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-            functionName: 'buyWithUSDT',
-            args: [process.env.NEXT_PUBLIC_PRESALE_ID, tokens],
-            enabled: useAccountIsConnected,
-        });
+
+    // Calculate USDT equivalent
+    useEffect(() => {
+        if (!presaleData || !tokens) {
+            setUsdt(0);
+            return;
+        }
+        // Handle potential errors during calculation
+        try {
+            // Ensure presaleData is available and has the expected structure.
+            // The presale data is returned as an array.  The price is at index 3.
+            const price = BigInt(presaleData[3]);  // Get price (as a BigInt)
+            const tokenAmount = BigInt(parseUnits(tokens, 18)); // Convert input to BigInt
+            const usdtValue = Number(formatUnits(tokenAmount * price, 18)); // Calculate and format for display
+            setUsdt(usdtValue);
+
+        } catch (error) {
+            console.error("Error calculating USDT value:", error);
+            setUsdt(0);  // Set to 0 on error
+        }
+    }, [presaleData, tokens]);
+
+    // --- USDT Allowance ---
+      const {
+        data: accountAllowance,
+        isLoading: accountAllowanceIsLoading,
+        isError: accountAllowanceIsError,
+        error: accountAllowanceError
+    } = useContractRead({
+        address: usdtContractAddress,  // Correct address: the USDT contract
+        abi: StableCoinABIABI, // Use imported ABI
+        functionName: "allowance",
+        args: [address, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS],
+        watch: true,
+        enabled: Boolean(address && usdtContractAddress), // Only run when connected AND we have the USDT address
+    });
+    useEffect(() => {
+        if (accountAllowanceError) {
+          console.error("allowance error: ", accountAllowanceError)
+        }
+    }, [accountAllowanceError]);
+
+    // --- USDT Buy Helper (for required allowance) ---
+      const { data: usdtAllowanceNeeded, error: usdtAllowanceNeededError } = useContractRead({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: presaleABI, // Use imported ABI
+        functionName: "usdtBuyHelper",
+        args: [process.env.NEXT_PUBLIC_PRESALE_ID, tokens ? parseUnits(tokens, 18) : "0"],  // IMPORTANT: Convert to wei, handle empty string
+        watch: true,
+        enabled: Boolean(address),
+    });
+    useEffect(() => {
+        if (usdtAllowanceNeededError) {
+            console.error("usdtAllowanceNeededError error: ", usdtAllowanceNeededError)
+        }
+    }, [usdtAllowanceNeededError])
+
+    // --- Approve USDT ---
+    const { config: approveConfig } = usePrepareContractWrite({
+        address: usdtContractAddress, // Correct address: the USDT contract
+        abi: StableCoinABI,  // Use the imported USDT ABI
+        functionName: 'approve',
+        args: [process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, usdtAllowanceNeeded ? String(usdtAllowanceNeeded) : "0"], // Convert to BigInt
+        enabled: Boolean(address && usdtContractAddress && usdtAllowanceNeeded && BigInt(accountAllowance?.toString() || 0) < BigInt(usdtAllowanceNeeded || 0)),
+    });
+    const {
+        data: approveData,
+        isLoading: approveIsLoading,
+        isSuccess: approveIsSuccess,
+        isError: approveIsError,
+        write: approveWrite,
+        error: approveError,
+        reset: approveReset // Add reset function
+    } = useContractWrite(approveConfig || {}); // Add || {} for safety
+
+
+    // --- Buy With USDT (Prepared) ---
+    const { config: buyWithUsdtConfig, error: buyWithUsdtPrepareError,
+        isError: buyWithUsdtIsPrepareError, } = usePrepareContractWrite({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: presaleABI,
+        functionName: 'buyWithUSDT',
+        args: [process.env.NEXT_PUBLIC_PRESALE_ID, tokens ? parseUnits(tokens, 18): "0"], // Convert input to correct units
+        enabled: Boolean(address && tokens && BigInt(accountAllowance?.toString() || 0) >= BigInt(usdtAllowanceNeeded || 0)), // Only enabled if connected AND allowance is sufficient
+    });
+    useEffect(() => {
+        if (buyWithUsdtPrepareError) {
+            console.error("usdt buy prepare error: ", buyWithUsdtPrepareError)
+        }
+    }, [buyWithUsdtPrepareError])
+
     const {
         data: buyWithUsdtData,
-        write: buyWithUsdt,
-        isLoading: isBuyWithUsdtLoading,
-        isSuccess: isBuyWithUsdtStarted,
-        isError: isBuyWithUsdtError,
+        isLoading: buyWithUsdtIsLoading,
+        isSuccess: buyWithUsdtIsSuccess,
+        isError: buyWithUsdtIsError,
         error: buyWithUsdtError,
-    } = useContractWrite(buyWithUsdtConfig);
-    const {
-        isLoading: waitForTransactionIsLoading,
-        isSuccess: waitForTransactionIsSuccess
-    } = useWaitForTransaction({
+        write: buyWithUsdtWrite,
+        reset: buyWithUsdtReset // Add reset
+    } = useContractWrite(buyWithUsdtConfig || {}); // Add || {} for safety.
+
+    // --- Wait for Transactions ---
+    const { isLoading: approveWaitLoading, isSuccess: approveWaitSuccess, error: approveWaitError } = useWaitForTransaction({
+        hash: approveData?.hash,
+    });
+
+    const { isLoading: buyWaitLoading, isSuccess: buyWaitSuccess, error: buyWaitError } = useWaitForTransaction({
         hash: buyWithUsdtData?.hash,
     });
-    useEffect(() =>
-    {
-        if (!presaleData)
-            return;
-        var presale = new Presale(presaleData);
-        var usdtValue = tokens * presale.price;
-        Log("Buy with USDT - Tokens: " + tokens + " - UsdtValue: " + usdtValue);
-        setUsdt(usdtValue);
-    }, [tokens, presaleData]);
-    /* --------- */
+      // --- Effects ---
+    // Reset on success and error
+    useEffect(() => {
+        if (approveWaitSuccess) {
+            approveReset(); // Clear approval data
+        }
+    },[approveWaitSuccess, approveReset])
 
-    /* USDT Buy Helper */
-    const { data: usdtAllowanceHelper } = useContractRead({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-        functionName: "usdtBuyHelper",
-        args: [process.env.NEXT_PUBLIC_PRESALE_ID, tokens],
-        watch: false,
-    });
-    /* USDT Allowance */
-    const [accountAllowancePublic, setAccountAllowance] = useState();
-    const {
-        data: accountAllowance,
-        error: accountAllowanceError,
-        isError: accountAllowanceIsError,
-        isLoading: accountAllowanceIsLoading } = useContractRead({
-            address: usdtContractAddress,
-            abi: process.env.NEXT_PUBLIC_STABLE_COIN_CONTRACT_ABI,
-            functionName: "allowance",
-            args: [useAccountAddress, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString()],
-            watch: false,
-        });
+    useEffect(() => {
+        if (buyWaitSuccess) {
+            buyWithUsdtReset();
+            setTokens(''); // Clear the input
+        }
+    }, [buyWaitSuccess, buyWithUsdtReset]);
 
-    useEffect(() =>
+    //Render helper for the presale data.
+    function renderPresaleData()
     {
-        Log("----> accountAllowance: " + accountAllowance);
-        Log("----> accountAllowanceError: " + accountAllowanceError);
-        Log("----> accountAllowanceIsError: " + accountAllowanceIsError);
-        Log("----> process.env.NEXT_PUBLIC_CHAIN_ID: " + process.env.NEXT_PUBLIC_CHAIN_ID);
-        if (accountAllowance)
-            setAccountAllowance(accountAllowance.toString());
-    }, [accountAllowance, accountAllowanceError, accountAllowanceIsError]);
+        if(!presaleData) return null;
+        const [
+            saleToken,
+            startTime,
+            endTime,
+            price,
+            tokensToSell,
+            baseDecimals,
+            inSale,
+            vestingStartTime,
+            vestingCliff,
+            vestingPeriod,
+            enableBuyWithEth,
+            enableBuyWithUsdt
+        ] = presaleData;
 
-    const { data: usdtAllowanceConfig,
-        error: usdtAllowancePrepareError,
-        isError: usdtAllowanceIsPrepareError, } = usePrepareContractWrite({
-            address: usdtContractAddress,
-            abi: process.env.NEXT_PUBLIC_STABLE_COIN_CONTRACT_ABI,
-            functionName: 'approve',
-            chainId: parseInt(process.env.NEXT_PUBLIC_CHAIN_ID),
-            // USDT has 6 decimals
-            args: [process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(), usdtAllowanceHelper],
-            enabled: useAccountIsConnected,
-        });
-    const {
-        data: usdtAllowanceData,
-        write: usdtAllowanceWrite,
-        isLoading: usdtAllowanceIsLoading,
-        isSuccess: usdtAllowanceIsSuccess,
-        error: usdtAllowanceError,
-    } = useContractWrite(usdtAllowanceConfig);
-    const {
-        isLoading: waitForTransactionUsdtAllowanceIsLoading,
-        isSuccess: waitForTransactionUsdtAllowanceIsSuccess
-    } = useWaitForTransaction({
-        hash: usdtAllowanceData?.hash,
-    });
-    useEffect(() =>
-    {
-        Log("---> waitForTransactionUsdtAllowanceIsSuccess:" + waitForTransactionUsdtAllowanceIsSuccess)
-        // Once allowance has been confirmed, buy tokens with USDT
-        buyWithUsdt?.()
-    }, [waitForTransactionUsdtAllowanceIsSuccess]);
+            return (
+                <>
+                    <p>Sale Token: {saleToken}</p>
+                    <p>startTime: {new Date(Number(startTime) * 1000).toLocaleString("default")}</p>
+                    <p>endTime: {new Date(Number(endTime) * 1000).toLocaleString("default")}</p>
+                    <p>price: {Number(formatUnits(BigInt(price), 18)).toFixed(3)}$ per Token</p>
+                    <p>tokensToSell: {Number(formatUnits(BigInt(tokensToSell),0)).toLocaleString()} Token</p>
+                    <p>inSale: {Number(formatUnits(BigInt(inSale),0)).toLocaleString()} Token</p>
+                    <p>tokensSold: {Number(formatUnits((BigInt(tokensToSell) - BigInt(inSale)),0)).toLocaleString()} Token</p>
+                    <p>presaleGoal: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Number(formatUnits(BigInt(tokensToSell) * BigInt(price), 18)))} $</p>
+                    <p>baseDecimals: {baseDecimals}</p>
+                    <p>vestingStartTime: {new Date(Number(vestingStartTime) * 1000).toLocaleString("default")}</p>
+                    <p>vestingCliff: {vestingCliff}</p>
+                    <p>vestingPeriod: {vestingPeriod}</p>
+                    <p>enableBuyWithEth: {enableBuyWithEth.toString()}</p>
+                    <p>enableBuyWithUsdt: {enableBuyWithUsdt.toString()}</p>
+                </>
+            )
+    }
 
-    const renderContent = () =>
+    //Render helper for the user vesting data.
+    function renderUserVestingData()
     {
+        if(!userVestingData) return null;
+        const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
         return (
             <>
-                <section className="parallaxOne" data-parallax="scroll" data-image-src="images/bg/20.jpg" data-bleed="10">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-4">
-                                <div className="chooseUsContent home_page3">
-                                    <h3 className="magenta normal">Purchase Aigos PreSale Token:</h3>
-                                    <form
-                                        onSubmit={(e) =>
-                                        {
-                                            e.preventDefault();
-                                            if (accountAllowancePublic >= usdtAllowanceHelper)
-                                                buyWithUsdt?.();
-                                            else
-                                                usdtAllowanceWrite?.()
-                                        }}>
-                                        <label for="tokenId">Amount of Token</label>
-                                        <input
-                                            type="number"
-                                            placeholder="Amount of Token"
-                                            className="exchange__textBox"
-                                            value={tokens}
-                                            onChange={(e) => setTokens(e.target.value)}
-                                        />
-                                        <div>USDT equivalent: {usdt.toFixed(2)}</div>
-                                        <button disabled={waitForTransactionIsLoading || usdtAllowanceIsLoading}>
-                                            {
-                                                waitForTransactionIsLoading ? 'Investment in progress...'
-                                                    : waitForTransactionUsdtAllowanceIsLoading ? 'Awaiting USDT Allowance...'
-                                                        : 'Buy Token'
-                                            }
-                                        </button>
-                                        {waitForTransactionIsSuccess && (
+                <p>totalAmount: {Number(formatUnits(BigInt(totalAmount), 18)).toLocaleString()} Token</p>
+                <p>claimedAmount: {Number(formatUnits(BigInt(claimedAmount),18)).toLocaleString()} Token</p>
+                <p>claimStart: {new Date(Number(claimStart) * 1000).toLocaleString("default")}</p>
+                <p>claimEnd: {new Date(Number(claimEnd) * 1000).toLocaleString("default")}</p>
+            </>
+        )
+    }
+
+    const renderContent = () => {
+    return (
+        <>
+            <section className="parallaxOne" data-parallax="scroll" data-image-src="images/bg/20.jpg" data-bleed="10">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-4">
+                            <div className="chooseUsContent home_page3">
+                                <h3 className="magenta normal">Purchase Aigos PreSale Token:</h3>
+                                <form
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        if (BigInt(accountAllowance?.toString() || 0) >= BigInt(usdtAllowanceNeeded || 0)) {
+                                          buyWithUsdtWrite?.();
+                                      } else {
+                                        approveWrite?.();
+                                      }
+                                    }}>
+                                    <label htmlFor="tokenId">Amount of Token</label>
+                                    <input
+                                        type="text" // Use text input!
+                                        placeholder="Amount of Token"
+                                        className="exchange__textBox"
+                                        value={tokens}
+                                        onChange={(e) => setTokens(e.target.value)}
+                                    />
+                                    <div>USDT equivalent: {usdt.toFixed(2)}</div>
+                                    <button disabled={approveIsLoading || buyWithUsdtIsLoading || approveWaitLoading || buyWaitLoading}>
+                                    {approveIsLoading || approveWaitLoading
+                                      ? 'Approving USDT...'
+                                      : buyWithUsdtIsLoading || buyWaitLoading
+                                        ? 'Buying Tokens...'
+                                        : BigInt(accountAllowance?.toString() || 0) >= BigInt(usdtAllowanceNeeded || 0) ? 'Buy Tokens' : 'Approve USDT'}
+                                    </button>
+                                    {approveIsSuccess && (
+                                      <div>
+                                        USDT Approved!
+                                      </div>
+                                    )}
+                                    {buyWithUsdtIsSuccess && (
+                                        <div>
+                                            Successfully bought AIGOS!
                                             <div>
-                                                Successfully invested in Aigos! Congratulations!
-                                                <div>
-                                                    <a href={`https://bscscantestnet.io/tx/${usdtAllowanceData?.hash}`}>Bscscan</a>
-                                                </div>
+                                                <a href={`https://testnet.bscscan.com/tx/${buyWithUsdtData?.hash}`}>Bscscan</a>
                                             </div>
-                                        )}
-                                        {<>
-                                            <p><b>buyWithUsdtPrepareStatus: </b>{buyWithUsdtPrepareStatus}</p>
-                                            <p><b>accountAllowancePublic: </b>{accountAllowancePublic}</p>
-                                        </>}
-                                        {(usdtAllowanceIsPrepareError || usdtAllowanceError) && (
-                                            <>
-                                                <div><b>USDT Allowance Error:</b> {(usdtAllowancePrepareError || usdtAllowanceError)?.message}</div><br /><br />
-                                            </>
-                                        )}
-                                        {(buyWithUsdtIsPrepareError) && (
-                                            <div><b>buyWithUsdtIsPrepareError</b> {buyWithUsdtPrepareError?.message}</div>
-                                        )}
-                                        {(isBuyWithUsdtError) && (
-                                            <div><b>isBuyWithUsdtError:</b> {buyWithUsdtError?.message}</div>
-                                        )}
-                                        {(accountAllowanceIsError) && (
-                                            <div><b>accountAllowanceIsError:</b> {accountAllowanceError?.message}</div>
-                                        )}
-                                    </form>
-                                </div>
+                                        </div>
+                                    )}
+                                     {approveIsError && (
+                                      <div><b>Approve Error:</b> {approveError?.message}</div>
+                                     )}
+                                     {buyWithUsdtIsError && (
+                                          <div><b>Buy Error:</b> {buyWithUsdtError?.message}</div>
+                                     )}
+                                    {presaleIsError && (
+                                      <div className="text-red-500">Error loading presale data: {presaleError?.message}</div>
+                                    )}
+                                    {userVestingIsError && (
+                                      <div className="text-red-500">Error loading user vesting data: {userVestingError?.message}</div>
+                                    )}
+                                      {usdtBalanceIsError && (
+                                        <div className="text-red-500">Error loading user usdt balance: {usdtBalanceError?.message}</div>
+                                    )}
+                                    {accountAllowanceIsError && (
+                                         <div><b>Allowance Error:</b> {accountAllowanceError?.message}</div>
+                                    )}
+
+                                </form>
                             </div>
-                            <div className="col-lg-4">
-                                <div className="chooseUsContent home_page3">
-                                    <h3 className="magenta normal">User Vesting Data:</h3>
-                                    <p>{userVestingParsed}</p>
-                                </div>
+                        </div>
+                        <div className="col-lg-4">
+                            <div className="chooseUsContent home_page3">
+                                <h3 className="magenta normal">User Vesting Data:</h3>
+                                        {userVestingIsLoading ? (
+                                    <p>Loading user vesting data...</p>
+                                ) : (
+                                  renderUserVestingData()
+                                )}
                             </div>
-                            <div className="col-lg-3">
-                                <div className="chooseUsContent home_page3">
-                                    <h3 className="magenta normal">Presale Data:</h3>
-                                    <p>{presaleDataParsed}</p>
-                                </div>
+                        </div>
+                        <div className="col-lg-3">
+                            <div className="chooseUsContent home_page3">
+                                <h3 className="magenta normal">Presale Data:</h3>
+                                {presaleIsLoading ? (
+                                    <p>Loading presale data...</p>
+                                ) : (
+                                  renderPresaleData()
+                                )}
                             </div>
                         </div>
                     </div>
-                </section>
-            </>
-        );
-    };
-
-    return (
-        <>
-        <SeedSale usdt={usdt} waitForTransactionIsSuccess={waitForTransactionIsSuccess} />
-            {renderContent()}
+                </div>
+            </section>
         </>
-    )
+    );
+};
+
+return (
+    <>
+    <SeedSale usdt={usdt} waitForTransactionIsSuccess={buyWaitSuccess} />
+        {renderContent()}
+    </>
+)
 }

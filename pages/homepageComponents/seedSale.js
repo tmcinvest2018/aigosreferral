@@ -1,224 +1,125 @@
+// pages/homepageComponents/SeedSale.js
 import {
     useAccount,
     useContractRead,
-    useContractWrite,
-    usePrepareContractWrite,
-    useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
-import BuyWithUsdtModal from "./buyWithUsdtModal";
+import BuyWithUsdtModal from "./buyWithUsdtModal"; // Correct relative import
+import { formatUnits } from 'ethers/lib/utils';
+
+// Import ABIs
+import presaleABI from '../../contracts/presaleABI.json'; // Path from SeedSale.js
 
 export default function SeedSale() {
-    const { address: useAccountAddress, isConnected: useAccountIsConnected } = useAccount();
+    const { address, isConnected } = useAccount();
 
-    function Log(stringToLog) {
-        const timeElapsed = Date.now();
-        const today = new Date(timeElapsed);
-        console.log(today.toUTCString() + " | " + stringToLog);
-    }
-
-    class UserVesting {
-        constructor(userVestingData) {
-            this.userVestingDataLocal = userVestingData;
-            this.totalAmount = 0;
-            this.claimedAmount = 0;
-            this.claimStart = null;
-            this.claimEnd = null;
-
-            if (userVestingData && Array.isArray(userVestingData) && userVestingData.length === 4) {
-                const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
-                this.totalAmount = Number(totalAmount) / (10 ** 18);
-                this.claimedAmount = Number(claimedAmount);
-                this.claimStart = new Date(Number(claimStart) * 1000);
-                this.claimEnd = new Date(Number(claimEnd) * 1000);
-            } else {
-                console.error("Invalid userVestingData:", userVestingData);
-            }
-        }
-
-        get HtmlOutput() {
-            if (this.userVestingDataLocal) {
-                return (
-                    <div className="flex items-center p-4 space-x-4 w-full text-white bg-black/40 rounded-lg shadow-lg backdrop-blur-sm border border-white/10 transform hover:scale-105 transition-all duration-300">
-                        <div className="bg-red-600/20 p-2 rounded-full">
-                        <img src="/logo1.png" alt="AIGOS LOGO" className="w-12 h-12" />
-                        </div>
-                        <div className="flex-1">
-                            <p className="font-semibold text-lg">
-                            {new Intl.NumberFormat().format(this.totalAmount)} AGS
-                            </p>
-                            <p className="text-red-400 text-sm">
-                            Your current token balance
-                            </p>
-                        </div>
-                    </div>
-                );
-            }
-            return null;
-        }
-    }
-
-    class Presale {
-        constructor(presaleData) {
-            this.preSaleDataLocal = presaleData;
-            if (this.preSaleDataLocal) {
-                const presaleSplit = presaleData.toString().split(",");
-                let counter = 0;
-                this.saleToken = presaleSplit[counter++];
-                this.startTime = new Date(presaleSplit[counter++] * 1000);
-                this.endTime = new Date(presaleSplit[counter++] * 1000);
-                this.price = (presaleSplit[counter++] / (10 ** 18));
-                this.tokensToSell = presaleSplit[counter++];
-                this.tokensToSellParsed = new Intl.NumberFormat().format(this.tokensToSell);
-                this.presaleGoal = this.tokensToSell * this.price;
-                this.preSaleGoalParsed = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(this.presaleGoal);
-                this.baseDecimals = presaleSplit[counter++];
-                this.inSale = presaleSplit[counter++];
-                this.tokensSold = this.tokensToSell - this.inSale;
-                this.presaleFundsRaised = this.tokensSold * this.price;
-                this.presaleFundsRaisedParsed = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(this.presaleFundsRaised);
-                this.tokensSoldParsed = new Intl.NumberFormat().format(this.tokensSold);
-                this.vestingStartTime = new Date(presaleSplit[counter++] * 1000);
-                this.vestingCliff = presaleSplit[counter++];
-                this.vestingPeriod = presaleSplit[counter++];
-                this.enableBuyWithEth = Boolean(parseInt(presaleSplit[counter++]));
-                this.enableBuyWithUsdt = Boolean(parseInt(presaleSplit[counter++]));
-                this.salePercentage = this.tokensSold * 100 / this.tokensToSell;
-                this.salePercentageParsed = this.salePercentage.toFixed(2) + "%";
-            }
-        }
-    }
-
-    const [userVestingInstance, setUserVestingInstance] = useState(null);
-    const [presaleDataParsed, setPresaleDataParsed] = useState(null);
-    const [displayPresaleData, setDisplayPresaleData] = useState(null);
-    const [displayBuyData, setBuyData] = useState(null);
-    const [displayUserVestingData, setDisplayUserVestingData] = useState(null);
-
-    const { data: userVestingData } = useContractRead({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-        functionName: "userVesting",
-        args: [useAccountAddress, process.env.NEXT_PUBLIC_PRESALE_ID],
-        watch: true,
+    const { data: userVestingData, isLoading: userVestingIsLoading, isError: userVestingIsError, error: userVestingError } = useContractRead({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      abi: presaleABI, // Use the imported ABI
+      functionName: "userVesting",
+      args: [address, process.env.NEXT_PUBLIC_PRESALE_ID],
+      watch: true,
+      enabled: Boolean(address), // Only fetch if connected
     });
 
-    const { data: presaleData } = useContractRead({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS.toString(),
-        abi: process.env.NEXT_PUBLIC_CONTRACT_ABI,
-        functionName: "presale",
-        args: [process.env.NEXT_PUBLIC_PRESALE_ID],
-        watch: true,
+    //Error handling
+    useEffect(() => {
+      if (userVestingIsError) {
+          console.error("userVestingData error", userVestingError)
+      }
+    }, [userVestingIsError, userVestingError]);
+
+    const { data: presaleData, isLoading: presaleIsLoading, isError: presaleDataIsError, error: presaleDataError } = useContractRead({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      abi: presaleABI, // Use the imported ABI
+      functionName: "presale",
+      args: [process.env.NEXT_PUBLIC_PRESALE_ID],
+      watch: true, // Re-fetch on changes.
+      enabled: true,  // Always fetch presale data (even if not connected)
     });
-
     useEffect(() => {
-        if (userVestingData) {
-            setUserVestingInstance(new UserVesting(userVestingData));
-        } else {
-            setUserVestingInstance(null);
+        if (presaleDataIsError) {
+            console.error("Presale data read error:", presaleDataError);
         }
-    }, [userVestingData]);
+    }, [presaleDataIsError, presaleDataError]);
 
-    useEffect(() => {
-        if (presaleData) {
-            const preSale = new Presale(presaleData);
-            setPresaleDataParsed(preSale);
-        }
-    }, [presaleData]);
+    // --- State ---
+    const [presale, setPresale] = useState(null);
+    const [userVesting, setUserVesting] = useState(null);
 
-    useEffect(() => {
-        if (!useAccountAddress) {
-            // Not connected state
-            setDisplayPresaleData(
-                <div className="space-y-4">
-                    <div className="w-full bg-gray-700 rounded-full overflow-hidden">
-                        <div 
-                            className="bg-red-600 text-xs font-medium text-white text-center p-1.5 rounded-full transition-all duration-500"
-                            style={{ width: presaleDataParsed?.salePercentageParsed || '0%' }}
-                        >
-                            {presaleDataParsed?.salePercentageParsed || '0%'}
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
-                            <p className="text-white text-sm font-medium">Tokens Sold</p>
-                            <p className="text-red-400 text-lg font-bold">
-                                {presaleDataParsed?.tokensSoldParsed || 0} / {presaleDataParsed?.tokensToSellParsed || 0}
-                            </p>
-                        </div>
-                        <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
-                            <p className="text-white text-sm font-medium">Funds Raised</p>
-                            <p className="text-red-400 text-lg font-bold">
-                                {presaleDataParsed?.presaleFundsRaisedParsed || '$0'} / {presaleDataParsed?.preSaleGoalParsed || '$0'}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
-            setBuyData(null);
-            setDisplayUserVestingData(null);
-        } else {
-            // Connected state
-            setDisplayPresaleData(null);
-            setDisplayUserVestingData(userVestingInstance?.HtmlOutput);
-            setBuyData(
-                <div className="space-y-6">
-                    {/* Token Purchase Card */}
-                    <div className="bg-black/30 p-16 rounded-xl backdrop-blur-sm border border-white/10">
-                        <div className="flex justify-between items-center mb-4">
-                            <div className="text-left">
-                                <p className="text-sm text-white/70">Current Price</p>
-                                <p className="text-xl font-bold text-white">
-                                    {presaleDataParsed?.price?.toFixed(4) || '0.0000'}$ per AGS
-                                </p>
-                            </div>
-                            <div className="bg-red-600/20 p-3 rounded-full">
-                <img src="/logo1.png" alt="AIGOS LOGO" className="w-8 h-8" />
-                                    <g transform="translate(0,240) scale(0.1,-0.1)" fill="currentColor">
-                                        <path d="M320 1225 l0 -895 95 0 95 0 0 -117 0 -118 118 118 117 117 683 0 682 0 0 895 0 895 -895 0 -895 0 0 -895z m1195 476 c134 -13 227 -72 280 -177 27 -52 30 -69 30 -149 0 -75 -4 -98 -24 -140 -32 -63 -93 -124 -156 -156 -48 -23 -60 -24 -274 -27 l-224 -3 -169 -165 -169 -164 -106 0 c-80 0 -104 3 -101 13 3 6 81 229 174 494 l169 483 245 -1 c135 0 281 -4 325 -8z" />
-                                    </g>
-                            </div>
-                        </div>
-                        
-                        {/* Buy button wrapped in a styled container */}
-                        <div className="mt-6">
-                            <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
-                                <BuyWithUsdtModal />
-                            </div>
-                        </div>
-                    </div>
 
-                    {/* Additional stats */}
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
-                            <p className="text-white/70 text-sm">Available</p>
-                            <p className="text-white font-bold">
-                                {presaleDataParsed?.inSale ? new Intl.NumberFormat().format(presaleDataParsed.inSale) : '0'} AGS
-                            </p>
-                        </div>
-                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
-                            <p className="text-white/70 text-sm">Total Sold</p>
-                            <p className="text-white font-bold">
-                                {presaleDataParsed?.tokensSoldParsed || '0'} AGS
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-    }, [useAccountAddress, presaleDataParsed, userVestingInstance]);
+  useEffect(() => {
+    if (presaleData && Array.isArray(presaleData) && presaleData.length === 12) {
+        const [
+            saleToken,
+            startTime,
+            endTime,
+            price,
+            tokensToSell,
+            baseDecimals,
+            inSale,
+            vestingStartTime,
+            vestingCliff,
+            vestingPeriod,
+            enableBuyWithEth,
+            enableBuyWithUsdt
+        ] = presaleData;
+
+        const newPresale = {
+            saleToken: String(saleToken),
+            startTime: new Date(Number(startTime) * 1000),
+            endTime: new Date(Number(endTime) * 1000),
+            price: Number(formatUnits(BigInt(price), 18)), // Format price
+            tokensToSell: BigInt(tokensToSell),
+            tokensToSellParsed: Number(formatUnits(BigInt(tokensToSell),0)).toLocaleString(),
+            presaleGoal: Number(formatUnits(BigInt(tokensToSell) * BigInt(price), 18)),
+            preSaleGoalParsed: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Number(formatUnits(BigInt(tokensToSell) * BigInt(price), 18))),
+            baseDecimals: String(baseDecimals),
+            inSale: BigInt(inSale),
+            tokensSold: BigInt(tokensToSell) - BigInt(inSale),
+            presaleFundsRaised: Number(formatUnits((BigInt(tokensToSell) - BigInt(inSale)) * BigInt(price),18)),
+            presaleFundsRaisedParsed:  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Number(formatUnits((BigInt(tokensToSell) - BigInt(inSale)) * BigInt(price),18))),
+            tokensSoldParsed:  Number(formatUnits((BigInt(tokensToSell) - BigInt(inSale)),0)).toLocaleString(),
+            vestingStartTime: new Date(Number(vestingStartTime) * 1000),
+            vestingCliff: String(vestingCliff),
+            vestingPeriod: String(vestingPeriod),
+            enableBuyWithEth: Boolean(enableBuyWithEth),
+            enableBuyWithUsdt: Boolean(enableBuyWithUsdt),
+            salePercentage: Number((BigInt(tokensToSell) - BigInt(inSale)) * 100n / BigInt(tokensToSell)),
+            salePercentageParsed:  ((Number((BigInt(tokensToSell) - BigInt(inSale)) * 100n / BigInt(tokensToSell))).toFixed(2)) + "%",
+        };
+
+        setPresale(newPresale);
+    }  else if (!presaleData) {
+      setPresale(null)
+    }
+}, [presaleData]);
+
+useEffect(() => {
+    if (userVestingData && Array.isArray(userVestingData) && userVestingData.length === 4)
+    {
+      const [totalAmount, claimedAmount, claimStart, claimEnd] = userVestingData;
+        const newUserVesting = {
+            totalAmount: Number(formatUnits(BigInt(totalAmount), 18)),  // Format: Convert BigInt to number
+            claimedAmount: Number(claimedAmount),
+            claimStart: new Date(Number(claimStart) * 1000),
+            claimEnd: new Date(Number(claimEnd) * 1000),
+        };
+        setUserVesting(newUserVesting);
+    } else if (!userVestingData){
+      setUserVesting(null);
+    }
+}, [userVestingData]);
 
     return (
         <div className="text-center space-y-6">
             <div className="space-y-4">
-                <div className="inline-block px-4 py-1 bg-red-600/20 rounded-full">
                     <h2 className="text-white font-medium text-sm md:text-base">
                         ✅ 3rd March 2025 until sold out ✅
                     </h2>
-                </div>
-
+                
                 <div className="space-y-2">
                     <h3 className="text-white font-bold text-xl md:text-3xl">
                         AIGOS Presale
@@ -229,12 +130,88 @@ export default function SeedSale() {
                 </div>
             </div>
 
-            {displayPresaleData}
+            {/* Display presale data when not connected */}
+            {!isConnected && presale && (
+                <div className="space-y-4">
+                    <div className="w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                            className="bg-red-600 text-xs font-medium text-white text-center p-1.5 rounded-full transition-all duration-500"
+                            style={{ width: presale.salePercentageParsed }}
+                        >
+                            {presale.salePercentageParsed}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white text-sm font-medium">Tokens Sold</p>
+                            <p className="text-red-400 text-lg font-bold">
+                                {presale.tokensSoldParsed} / {presale.tokensToSellParsed}
+                            </p>
+                        </div>
+                        <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white text-sm font-medium">Funds Raised</p>
+                            <p className="text-red-400 text-lg font-bold">
+                                {presale.presaleFundsRaisedParsed} / {presale.preSaleGoalParsed}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Display User Vesting and Buy Data */}
+            {isConnected && (
+                <div className="space-y-6">
+                    {userVesting && (
+                    <div className="flex items-center p-4 space-x-2 w-full text-white bg-black/40 rounded-lg shadow-lg backdrop-blur-sm border border-white/10 transform hover:scale-105 transition-all duration-300">
+                          <img src="/logo1.png" alt="AIGOS LOGO" className="w-12 h-12" />
+                        <div className="flex-1">
+                            <p className="font-semibold text-lg">
+                            {new Intl.NumberFormat().format(userVesting.totalAmount)} AGS
+                            </p>
+                            <p className="text-red-400 text-sm">
+                            Your current token balance
+                            </p>
+                        </div>
+                    </div>
+                    )}
+                    {/* Token Purchase Card */}
+                    <div className="bg-black/30 p-16 rounded-xl backdrop-blur-sm border border-white/10">
+                        <div className="flex justify-between items-center mb-4">
+                            <div className="text-left">
+                                <p className="text-sm text-white/70">Current Price</p>
+                                <p className="text-xl font-bold text-white">
+                                    {presale? presale.price.toFixed(4) : '0.0000'}$ per AGS
+                                </p>
+                            </div>
+                            
+                <img src="/logo1.png" alt="AIGOS LOGO" className="w-8 h-8" />
+                            
+                        </div>
 
-            <div className="space-y-4">
-                {displayUserVestingData}
-                {displayBuyData}
-            </div>
+                        <div className="mt-6">
+                            <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 p-1 rounded-lg">
+                                <BuyWithUsdtModal />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Additional stats */}
+                  {presale ? (
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white/70 text-sm">Available</p>
+                            <p className="text-white font-bold">
+                                {presale.inSale ? new Intl.NumberFormat().format(Number(presale.inSale)) : '0'} AGS
+                            </p>
+                        </div>
+                        <div className="bg-black/20 p-4 rounded-lg backdrop-blur-sm">
+                            <p className="text-white/70 text-sm">Total Sold</p>
+                            <p className="text-white font-bold">
+                                {presale.tokensSoldParsed || '0'} AGS
+                            </p>
+                        </div>
+                    </div>
+                    ) : null}
+                </div>
+            )}
 
             <div className="flex justify-center">
                 <ConnectButton />

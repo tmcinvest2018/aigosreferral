@@ -1,98 +1,73 @@
-import '@rainbow-me/rainbowkit/styles.css';
-import {  ledgerWallet, metaMaskWallet, walletConnectWallet, trustWallet, coinbaseWallet,  rainbowWallet } from '@rainbow-me/rainbowkit/wallets';
-import { connectorsForWallets, lightTheme } from '@rainbow-me/rainbowkit';
-import
-{
-  RainbowKitProvider,
-  darkTheme
+// pages/_app.tsx
+import React from 'react';
+import '../styles/globals.css';
+import '@fortawesome/fontawesome-svg-core/styles.css'; // Keep this
+import { config } from "@fortawesome/fontawesome-svg-core"; // Keep this
+config.autoAddCss = false; // Keep this
+import type { AppProps } from 'next/app';
+
+import { useState, useEffect } from 'react';
+import {
+    getDefaultWallets,
+    RainbowKitProvider,
+    darkTheme
 } from '@rainbow-me/rainbowkit';
-import
-{
-  chain,
-  configureChains,
-  createClient,
-  WagmiConfig,
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+    configureChains,
+    createConfig,
+    WagmiConfig
 } from 'wagmi';
-import { Chain } from "wagmi";
-import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { bscTestnet } from 'wagmi/chains'; // Import bscTestnet directly
 import { publicProvider } from 'wagmi/providers/public';
 import { Analytics } from '@vercel/analytics/react';
 
-const binanceSmartChain: Chain = {
-  id: 97,
-  name: 'BNB Smart Chain',
-  network: 'bsc',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'Binance Chain Native Token',
-    symbol: 'BNB',
-  },
-  rpcUrls: {
-    public: 'https://bsc-dataseed.binance.org/',
-    default: 'https://bsc-dataseed.binance.org/',
-  },
-  blockExplorers: {
-    default: { name: 'BscScan', url: 'https://bscscan.com' },
-  },
-  testnet: true,
-};
+const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
 
-const { chains, provider } = configureChains(
-  [binanceSmartChain],
-  [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-    publicProvider()
-  ]
+const { chains, publicClient } = configureChains(
+    [bscTestnet], // Use the imported chain object
+    [
+        publicProvider()
+    ]
 );
 
-const connectors = connectorsForWallets([
-  {
-    groupName: 'Recommended',
-    wallets: [
-      metaMaskWallet({ chains }),
-      ledgerWallet({ chains }),
-      trustWallet({ chains }),
-      
-    ],
-  },
-  {
-    groupName: 'Others',
-    wallets: [
-      coinbaseWallet({ chains, appName: 'Presale Dapp' }),
-      walletConnectWallet({ chains }),
-      rainbowWallet({ chains }),
-    ],
-  },
-]);
+const { connectors } = getDefaultWallets({
+    appName: 'Presale Dapp',
+    projectId: projectId!,
+    chains
+});
 
-const wagmiClient = createClient({
-  autoConnect: false,
-  connectors,
-  provider
+const wagmiConfig = createConfig({
+    autoConnect: true,
+    connectors,
+    publicClient
 })
 
-import '../styles/globals.css'
-import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
-import type { AppProps } from 'next/app'
+function MyApp({ Component, pageProps }: AppProps) {
+    const [mounted, setMounted] = useState(false)
 
-export default function App({ Component, pageProps }: AppProps)
-{
+    // useEffect only runs on the client
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
-  return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider coolMode chains={chains} theme={darkTheme(
-        {
-          accentColor: '#E02424',
-          accentColorForeground: 'white',
-          borderRadius: 'large',
-          fontStack: 'system',
-        }
-      )}>
-        <Component {...pageProps} />
-        <Analytics />
-      </RainbowKitProvider>
-    </WagmiConfig>
-  );
+    if (!mounted) return null;
+
+    return (
+        <WagmiConfig config={wagmiConfig}>
+            <RainbowKitProvider chains={chains} theme={darkTheme(
+                {
+                    accentColor: '#E02424',
+                    accentColorForeground: 'white',
+                    borderRadius: 'large',
+                    fontStack: 'system',
+                }
+            )}>
+                <Component {...pageProps} />
+                <Analytics />
+            </RainbowKitProvider>
+        </WagmiConfig>
+    );
 }
+
+export default MyApp;
