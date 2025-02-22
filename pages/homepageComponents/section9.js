@@ -1,18 +1,22 @@
 import Typewriter from 'typewriter-effect';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faCircle } from "@fortawesome/free-solid-svg-icons"; // Import check and circle icons
 
 export default function Section9() {
     return (
         <>
-            <section id="section9" className="flex items-center justify-center min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/15.jpg')] relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-                <div className="text-center relative z-10">
-                    <div className="box-cont h-fit w-fit max-w-[90%] mx-auto px-8 sm:px-14 py-8 shadow-lg bg-gradient-to-r from-neutral-900/90 to-neutral-800/90 rounded-xl border border-neutral-700">
+            <section id="section9" className="flex items-center justify-center min-h-screen h-fit bg-white relative">
+                {/* Removed background and overlay */}
+
+                <div className="text-center relative z-10 w-full max-w-4xl"> {/* Added max-w-4xl */}
+                    {/* Glassmorphic Card */}
+                    <div className="bg-white/50 backdrop-blur-md rounded-3xl shadow-xl border border-purple-400/50 p-8 md:p-12">
 
                         {/* Title & Typewriter Effect */}
-                        <h2 className="text-white font-bold text-3xl md:text-4xl mb-4">
+                        <h2 className="text-red-500 font-bold text-3xl md:text-4xl mb-4">
                             Pioneering the Future of Blockchain & AI
                         </h2>
-                        <h4 className="text-white font-bold text-xl md:text-2xl mb-6">
+                        <h4 className="text-black font-bold text-xl md:text-2xl mb-6">
                             <Typewriter
                                 options={{
                                     strings: ["Aigos Roadmap 2025/2026"],
@@ -23,9 +27,11 @@ export default function Section9() {
                             />
                         </h4>
 
-                        {/* Roadmap Timeline */}
-                        <div className="container mx-auto w-fit">
-                            <ol className="relative border-l border-gray-200 dark:border-gray-700">
+                        {/* Roadmap Timeline - Redesigned */}
+                        <div className="container mx-auto w-full">
+                            <div className="relative">
+                                {/* Vertical Line */}
+                                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full border-l-2 border-purple-400/50"></div>
 
                                 {/* Roadmap Items */}
                                 {[
@@ -37,24 +43,34 @@ export default function Section9() {
                                     { quarter: "Q4 2025", points: ["Public Testing of Aigos Omnichain Games", "Expansion Across Multiple Blockchains"], completed: false },
                                     { quarter: "Q4 2025", points: ["Launch of Aigos Omnichain Games Mainnet", "Strategic Partnerships & Ecosystem Growth", "New Features & Announcements"], completed: false }
                                 ].map((item, index) => (
-                                    <li key={index} className="mb-10 ml-4">
-                                        <div className="absolute w-6 h-6 -left-3 rounded-full border-2 flex items-center justify-center"
-                                            style={{
-                                                backgroundColor: item.completed ? '#22c55e' : '#d1d5db',
-                                                borderColor: item.completed ? '#22c55e' : '#6b7280'
-                                            }}>
+                                    <div key={index} className={`relative mb-8 pl-12 md:pl-0 ${index % 2 === 0 ? 'md:text-left md:pr-6' : 'md:text-right md:pl-6'}`}
+                                         style={{ marginLeft: index % 2 === 0 ? '0' : '3rem' }}>  {/* Adjusted for icon and spacing */}
+                                        {/* Icon - Check or Circle */}
+                                        <div className="absolute left-0 md:left-auto md:right-auto top-1/2 -translate-y-1/2  w-8 h-8 rounded-full  flex items-center justify-center"
+                                             style={{
+                                                 left: index % 2 === 0 ? '-1rem' : '',   // Position left for even,
+                                                 right: index % 2 !== 0 ? 'calc(100% - 2.2rem)' : '',  // Position right for odd, adjust as needed.
+                                             }}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={item.completed ? faCheckCircle : faCircle}
+                                                className={`text-2xl ${item.completed ? 'text-green-500' : 'text-purple-400'}`} // Larger icon
+                                            />
                                         </div>
-                                        <time className="text-white text-lg font-semibold block mb-2">{item.quarter}</time>
-                                        {item.points.map((point, i) => (
-                                            <p key={i} className="text-white mb-1 text-base font-normal pl-6">
-                                                {point}
-                                            </p>
-                                        ))}
-                                    </li>
-                                ))}
-                            </ol>
-                        </div>
 
+                                        {/* Content */}
+                                       <div className={`bg-white/70 backdrop-blur-md rounded-2xl p-4 shadow-md border ${item.completed? 'border-green-300' : 'border-purple-400/30'}`}>
+                                          <time className="text-red-500 text-lg font-semibold block mb-2">{item.quarter}</time>
+                                            {item.points.map((point, i) => (
+                                                <p key={i} className="text-gray-700 mb-1 text-base font-normal">
+                                                    {point}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

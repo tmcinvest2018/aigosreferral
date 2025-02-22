@@ -1,6 +1,7 @@
 import Typewriter from 'typewriter-effect';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import Link from 'next/link';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -37,14 +38,16 @@ const data = {
 export default function Section7() {
     return (
         <>
-            <section id="section7" className="flex items-center justify-center min-h-screen h-fit bg-fixed bg-center bg-cover bg-[url('/images/bg/23.jpg')] relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-                <div className="text-center relative z-10">
-                    <div className="box-cont h-fit w-fit max-w-[90%] mx-auto px-8 sm:px-14 py-8 shadow-lg bg-gradient-to-r from-neutral-900/90 to-neutral-800/90 rounded-xl border border-neutral-700">
-                        <h2 className="text-white font-bold text-3xl md:text-4xl mb-4">
+            <section id="section7" className="flex items-center justify-center min-h-screen h-fit bg-white relative">
+                {/* Removed background image and overlay */}
+
+                <div className="text-center relative z-10 w-full max-w-4xl"> {/* Added max-w-4xl */}
+                    {/* Glassmorphic Card */}
+                    <div className="bg-white/50 backdrop-blur-md rounded-3xl shadow-xl border border-purple-400/50 p-8 md:p-12">
+                        <h2 className="text-red-500 font-bold text-3xl md:text-4xl mb-4">
                             Transparent Overview
                         </h2>
-                        <h4 className="text-white font-bold text-xl md:text-2xl mb-6">
+                        <h4 className="text-black font-bold text-xl md:text-2xl mb-6">
                             <Typewriter
                                 options={{
                                     strings: ["TOKEN DISTRIBUTION"],
@@ -54,20 +57,20 @@ export default function Section7() {
                                 }}
                             />
                         </h4>
-                        <p className="text-white text-sm md:text-base mb-8 max-w-[600px] mx-auto">
+                        <p className="text-gray-700 text-sm md:text-base mb-8 max-w-[600px] mx-auto">
                             For a more comprehensive description of Aigos tokenomics<br />
                             please read our whitepaper and other documentation.
                         </p>
-                        <a 
-  href="https://app.gitbook.com/o/yqUbOel7cKSc7nG27CmG/s/3yVxGJYkHQNdFGrgrg4y/tokenomics" 
-  target="_blank" 
-  rel="noopener noreferrer"
->
-  <h5 className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mb-6">
-    Tokenomics
-  </h5>
-</a>
-                        <h5 className="uppercase text-red-300 font-bold text-lg md:text-xl mb-8">
+                        {/* Corrected Link (External) - Keeping <a> for external link */}
+                        <a
+                            href="https://app.gitbook.com/o/yqUbOel7cKSc7nG27CmG/s/3yVxGJYkHQNdFGrgrg4y/tokenomics"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block bg-gradient-to-r from-red-500 to-purple-600 text-white font-bold uppercase text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mb-6"
+                        >
+                            Tokenomics
+                        </a>
+                        <h5 className="uppercase text-red-500 font-bold text-lg md:text-xl mb-8">
                             Total supply: 1,000,000,000
                         </h5>
                         <div className="tokenomicsDiv">
@@ -81,7 +84,7 @@ export default function Section7() {
                                         legend: {
                                             position: 'top',
                                             labels: {
-                                                color: 'rgb(255, 255, 255)',
+                                                color: 'rgb(0, 0, 0)', // Changed legend text color to black
                                                 font: {
                                                     size: 14,
                                                     family: "'Poppins', sans-serif"
@@ -92,9 +95,9 @@ export default function Section7() {
                                 }}
                             />
                         </div>
-                        
+
                         {/* Displaying percentages below the pie chart */}
-                        <div className="mt-6 text-white">
+                        <div className="mt-6 text-black"> {/* Changed text color to black */}
                             <div className="flex justify-between text-sm md:text-base">
                                 <div className="flex items-center gap-2">
                                     <div className="w-4 h-4 rounded-full" style={{ backgroundColor: 'rgba(54, 162, 235)' }}></div>
